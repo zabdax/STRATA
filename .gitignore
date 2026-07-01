@@ -1,0 +1,49 @@
+# SJWP 2026 — Bioremediation Genetic Circuit Modeling
+# .gitignore — keep the repo clean
+
+# Virtual environment (never commit this)
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Generated outputs (optional — remove lines below if you want to track results)
+simulations/results/*.png
+*.pdf
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project-specific: early-draft working files and unused diagram folders
+# (kept locally for reference, not part of the submission)
+prev/
+Diagrams/
+
+# Local personal toolchain files (not part of the SJWP project)
+.agents/
+lint_tex.py
+Chromium_Bioremediation_Research_Paper.md
