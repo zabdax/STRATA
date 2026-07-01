@@ -1,13 +1,10 @@
 # In Silico Design and Computational Validation of a Tri-Modular Genetic Circuit for Autonomous Detection and Bioremediation of Hexavalent Chromium in Closed-System Microcosms
 
-**Zubayer Hasan Shaad¹**, **Humayra Afia²**
+**Zubayer Hasan Shaad¹**
 
 ¹ Govt. Tolaram College, Narayanganj, Bangladesh
-² British Standard School, Bangladesh
 
-**Mentor:** Zabeer Zareef
-
-**Corresponding author:** Zubayer Hasan Shaad
+**Corresponding author:** Zubayer Hasan Shaad (mdzubayerhasanshaad99@gmail.com)
 
 ---
 
