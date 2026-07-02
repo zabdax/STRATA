@@ -97,86 +97,54 @@
   \end{center}
   \vspace{-0.3em}
   \noindent
-  Hexavalent chromium [Cr(VI)], a Group~1 IARC carcinogen, has been
-  measured at concentrations up to 3.54~mg/L in Bangladesh's Buriganga
-  River -- approximately 35-fold above the US~EPA surface-water limit -- 
-  primarily as a consequence of unregulated leather-tannery effluent
-  discharge. While existing remediation technologies address contamination
-  passively, none integrate real-time sensing, dose-responsive enzymatic
-  treatment, and autonomous post-treatment self-termination. Prior
-  proposals deploying engineered microorganisms in open rivers carry
-  catastrophic ecological risks that remain computationally unquantified.
+  Hexavalent chromium [Cr(VI)], a Group~1 IARC carcinogen, reaches up to
+  3.54~mg/L in Bangladesh's Buriganga River (35-fold above the US~EPA 
+  limit) due to unregulated tannery effluent. Existing remediation is passive, 
+  lacking real-time sensing, dose-responsive treatment, and self-termination. 
+  Furthermore, deploying engineered microorganisms in open rivers poses 
+  unquantified ecological risks.
 
   \medskip\noindent
   Here, we present a fully computational design and validation of a
-  tri-modular synthetic genetic circuit expressed in a double-auxotrophic
-  \textit{Escherichia coli} chassis, exclusively deployed within a
-  closed-system microcosm (bioreactor or sealed pond). The three modules,
-  each encoded on an orthogonal compatibility-verified plasmid backbone,
-  function as follows: \textbf{(1)}~a ChrB-sfGFP biosensor module
-  (pChrB-sfGFP, pUC19) provides Cr(VI) detection at nanomolar sensitivity
-  via a de-repression logic gate; \textbf{(2)}~a NemA chromate reductase
-  module (pNemA-His, pET-28a), driven by the identical \textit{P}\textsubscript{chrB}
-  promoter, ensures coordinately regulated, dose-responsive enzymatic
-  Cr(VI)\,$\rightarrow$\,Cr(III) reduction; \textbf{(3)}~a dual-trigger
-  holin-endolysin ``Deadman'' kill switch (pKillSwitch-DT, pACYC184)
-  enforces programmed cell death via AND-gate logic integrating chromate
-  depletion sensing and a constitutive CI434-SsrA timer repressor with a
-  24-hour protein half-life.
+  tri-modular synthetic genetic circuit in a double-auxotrophic
+  \textit{Escherichia coli} chassis for closed-system microcosms. The
+  orthogonal modules include: \textbf{(1)}~a ChrB-sfGFP biosensor (pUC19)
+  for nanomolar Cr(VI) detection; \textbf{(2)}~a NemA chromate reductase
+  (pET-28a), driven by the identical \textit{P}\textsubscript{chrB} promoter, for
+  dose-responsive Cr(VI)\,$\rightarrow$\,Cr(III) reduction; \textbf{(3)}~a 
+  dual-trigger holin-endolysin ``Deadman'' kill switch (pACYC184) enforcing 
+  programmed cell death via AND-gate logic, combining chromate depletion 
+  sensing with a 24-hour CI434-SsrA timer repressor.
 
   \medskip\noindent
-  The computational validation framework spans five orthogonal
-  methodologies: \textbf{(i)}~Ordinary Differential Equation (ODE)
-  systems modeling of gene-expression dynamics across all three modules
-  over 96~hours; \textbf{(ii)}~comparative Michaelis-Menten modeling of a
-  NemA$^{*2+}$ catalytic variant whose kinetic parameters
-  ($K_m^* = 16\;\mu$M, $k_{cat}^* = 37.2\;\text{h}^{-1}$) are
-  \textbf{scenario-analysis assumptions} extrapolated from OYE-family
-  active-site mutagenesis precedent~\cite{mowafy2010}, not derived from a
-  structural modeling pipeline executed in this study;
-  \textbf{(iii)}~a structural evaluation pipeline (PDB~8BPQ, 2.30~\AA{}
-  X-ray) using a dimensionless contact-disruption score to rank candidate
-  second-shell mutations in the FMN pocket and a SciPy-based geometric
-  placement of CrO$_4^{2-}$ to evaluate substrate positioning relative to
-  FMN -- this pipeline is a \textit{consistency check} on the
-  NemA$^{*2+}$ engineering hypothesis, not a kinetic prediction;
-  \textbf{(iv)}~a ribosome-allocation genome-scale metabolic model
-  demonstrating that the circuit's $\sim$4.5\% proteome burden is
-  metabolically sustainable at environmentally relevant chromium
-  concentrations; and \textbf{(v)}~Luria-Delbr\"{u}ck fluctuation
-  analysis showing that, under the assumed input parameters, the layered
-  containment architecture (genetic kill switch + double auxotrophy
-  $\Delta$thyA $\Delta$dapA) yields a 30-day probability of a viable
-  escapee in a 1{,}000-liter closed system of
-  $P_{\text{escape}} \approx 6 \times 10^{-17}$, below an
-  acceptable-risk threshold of $10^{-15}$.
+  Validation employs five methodologies: \textbf{(i)}~96-hour ODE modeling of
+  module dynamics; \textbf{(ii)}~comparative Michaelis-Menten modeling of a
+  hypothetical NemA$^{*2+}$ catalytic variant, using kinetic parameters
+  extrapolated from OYE-family precedent~\cite{mowafy2010}; \textbf{(iii)}~structural
+  evaluation (PDB~8BPQ) via a contact-disruption score and geometric
+  substrate placement, providing a \textit{consistency check} for the NemA$^{*2+}$ 
+  hypothesis; \textbf{(iv)}~a ribosome-allocation metabolic model demonstrating
+  sustainability of the circuit's $\sim$4.5\% proteome burden; and
+  \textbf{(v)}~Luria-Delbr\"{u}ck fluctuation analysis of the layered biocontainment.
+  Under assumed parameters, this yields a 30-day viable escapee probability
+  ($P_{\text{escape}} \approx 6 \times 10^{-17}$) in a 1{,}000-liter system,
+  safely below the $10^{-15}$ threshold.
 
   \medskip\noindent
-  A one-factor-at-a-time sensitivity sweep (Pillar~4b) shows this
-  headline figure is robust to a $10\times$ error in the assumed per-bp
-  mutation rate and to a $10\times$ scale-up of the deployment reactor,
-  but is not robust to a $100\times$ error in $\mu_{bp}$, at which point
-  $P_{\text{escape}}$ rises to $6 \times 10^{-15}$, above the threshold.
-  A global Latin Hypercube Sampling analysis (Pillar~4c, $N = 10{,}000$)
-  over 8 input parameters drawn from literature-bounded ranges finds a
-  median $P_{\text{escape}} = 1.7 \times 10^{-17}$ with 95\%~CI
-  $[2.1 \times 10^{-21},\; 1.4 \times 10^{-13}]$, and that
-  \textbf{20.6\% of the 10{,}000 LHS samples exceed the $10^{-15}$
-  threshold} under plausible joint-tail combinations of the input
-  parameters. All simulations were executed in Python (SciPy, NumPy,
-  Matplotlib).
+  Sensitivity analysis reveals this safety margin is robust to a $10\times$
+  error in mutation rate or a $10\times$ reactor scale-up, but fails at a
+  $100\times$ mutation rate error ($P_{\text{escape}} = 6 \times 10^{-15}$).
+  Global Latin Hypercube Sampling ($N = 10{,}000$) across 8 parameters yields a
+  median $P_{\text{escape}} = 1.7 \times 10^{-17}$, though \textbf{20.6\% of samples
+  exceed the $10^{-15}$ threshold} under plausible joint-tail combinations.
 
   \medskip\noindent
-  This work demonstrates that, under its modeling assumptions, the
-  proposed tri-modular system can reduce 100~$\mu$M Cr(VI) by
-  ${>}99\%$ within 48~hours under closed-system conditions. We argue that
-  this computational framework -- which mathematically quantifies both
-  remediation performance and mutation-driven failure modes, and which
-  explicitly reports the sensitivity of its safety claim to its key input
-  assumption -- establishes a transparent \textit{in silico} biosafety
-  validation template for BMO-based heavy-metal remediation in
-  resource-constrained settings. The work is entirely computational; no
-  wet-lab validation has been performed.
+  This system computationally achieves ${>}99\%$ reduction of 100~$\mu$M
+  Cr(VI) within 48~hours. Ultimately, this framework establishes a transparent
+  \textit{in silico} biosafety validation template for heavy-metal
+  bioremediation, mathematically quantifying both performance and
+  mutation-driven failure modes. All work is computational; no wet-lab
+  validation was performed.
 
   \vspace{0.5em}
   \begin{center}
