@@ -1,543 +1,1775 @@
+%% ============================================================
+%%  Journal_Manuscript_2026.tex
+%%  In Silico Design of a Tri-Modular Genetic Circuit for
+%%  Hexavalent Chromium Bioremediation
+%%  Author: Zubayer Hasan Shaad  |  July 2026
+%% ============================================================
+
 \documentclass[10pt,twocolumn,letterpaper]{article}
 
+%% ---- Encoding & Fonts ----------------------------------------
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{microtype}          % greatly improves line-breaking & spacing
+
+%% ---- Mathematics ---------------------------------------------
 \usepackage{amsmath,amssymb}
+
+%% ---- Graphics & Tables ---------------------------------------
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage[margin=1in]{geometry}
-\usepackage{authblk}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{float}
-\usepackage{cite}
+\usepackage{array}              % richer column types in tabular
 \usepackage{caption}
-\usepackage{placeins}
+\usepackage[labelfont=bf,
+            font=small,
+            skip=4pt]{caption}
 
-\title{\Large \textbf{In Silico Design and Computational Validation of a Tri-Modular Genetic Circuit for Autonomous Detection and Bioremediation of Hexavalent Chromium in Closed-System Microcosms}}
+%% ---- Page Layout ---------------------------------------------
+\usepackage[top=1in, bottom=1in,
+            left=0.75in, right=0.75in,
+            columnsep=18pt]{geometry}
 
-\author{Zubayer Hasan Shaad\thanks{Corresponding author: Zubayer Hasan Shaad, Govt. Tolaram College, Narayanganj, Bangladesh. Email: mdzubayerhasanshaad99@gmail.com}}
-\affil{Govt. Tolaram College, Narayanganj, Bangladesh}
+%% ---- Float Control -------------------------------------------
+\usepackage{float}
+\usepackage{placeins}           % \FloatBarrier
+\usepackage{stfloats}           % allows figure* on same page as text (two-col)
+
+%% ---- Authors & Affiliations ----------------------------------
+\usepackage{authblk}
+
+%% ---- References & Hyperlinks ---------------------------------
+\usepackage{cite}
+\usepackage[colorlinks=true,
+            linkcolor=blue!70!black,
+            citecolor=blue!70!black,
+            urlcolor=blue!70!black]{hyperref}
+\usepackage{url}
+
+%% ---- Widow / Orphan Penalties --------------------------------
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+
+%% ---- Miscellaneous -------------------------------------------
+\usepackage{xspace}
+\emergencystretch=2em           % last-resort line-break loosening
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+
+%% ---- Float-placement tuning ----------------------------------
+%% Allow up to 90 % of a page to be floats, up to 4 floats per page.
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.7}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{6}
+
+%% ============================================================
+%%  TITLE / AUTHORS
+%% ============================================================
+
+\title{\Large\bfseries
+  In Silico Design and Computational Validation of a
+  Tri-Modular Genetic Circuit for Autonomous Detection
+  and Bioremediation of Hexavalent Chromium in
+  Closed-System Microcosms}
+
+\author{Zubayer Hasan Shaad%
+  \thanks{Corresponding author. Email:
+    \texttt{mdzubayerhasanshaad99@gmail.com}}}
+\affil{Govt.\ Tolaram College, Narayanganj, Bangladesh}
 \date{July 2026}
 
+%% ============================================================
 \begin{document}
+%% ============================================================
 
-\twocolumn[
+%% ---- One-column title block in a twocolumn document ---------
+\twocolumn[%
   \maketitle
+  \vspace{-0.6em}
   \begin{center}
-  \large\textbf{Abstract}
+    \large\bfseries Abstract
   \end{center}
+  \vspace{-0.3em}
   \noindent
-  Hexavalent chromium [Cr(VI)], a Group 1 IARC carcinogen, has been measured at concentrations up to 3.54 mg/L in Bangladesh's Buriganga River, approximately 35-fold above the US EPA surface water limit, primarily as a consequence of unregulated leather tannery effluent discharge. While existing remediation technologies address contamination passively, none integrate real-time sensing, dose-responsive enzymatic treatment, and autonomous post-treatment self-termination. More critically, prior proposals deploying engineered microorganisms in open rivers carry catastrophic ecological risks that remain computationally unquantified.
+  Hexavalent chromium [Cr(VI)], a Group~1 IARC carcinogen, has been
+  measured at concentrations up to 3.54~mg/L in Bangladesh's Buriganga
+  River -- approximately 35-fold above the US~EPA surface-water limit -- 
+  primarily as a consequence of unregulated leather-tannery effluent
+  discharge. While existing remediation technologies address contamination
+  passively, none integrate real-time sensing, dose-responsive enzymatic
+  treatment, and autonomous post-treatment self-termination. Prior
+  proposals deploying engineered microorganisms in open rivers carry
+  catastrophic ecological risks that remain computationally unquantified.
 
-  \noindent
-  Here, we present a fully computational design and validation of a tri-modular synthetic genetic circuit expressed in a double-auxotrophic \textit{Escherichia coli} chassis, exclusively deployed within a closed-system microcosm (bioreactor or sealed pond). The three modules, each encoded on an orthogonal compatibility-verified plasmid backbone, function as follows: \textbf{(1)} a ChrB-sfGFP biosensor module (pChrB-sfGFP, pUC19) provides Cr(VI) detection at nanomolar sensitivity via a de-repression logic gate; \textbf{(2)} a NemA chromate reductase module (pNemA-His, pET-28a), driven by the identical PchrB promoter, ensures \textit{coordinately regulated}, dose-responsive enzymatic Cr(VI) $\rightarrow$ Cr(III) reduction; \textbf{(3)} a dual-trigger holin-endolysin 'Deadman' kill switch (pKillSwitch-DT, pACYC184) enforces programmed cell death via AND-gate logic integrating chromate depletion sensing and a constitutive CI434-SsrA timer repressor with a 24-hour protein half-life.
+  \medskip\noindent
+  Here, we present a fully computational design and validation of a
+  tri-modular synthetic genetic circuit expressed in a double-auxotrophic
+  \textit{Escherichia coli} chassis, exclusively deployed within a
+  closed-system microcosm (bioreactor or sealed pond). The three modules,
+  each encoded on an orthogonal compatibility-verified plasmid backbone,
+  function as follows: \textbf{(1)}~a ChrB-sfGFP biosensor module
+  (pChrB-sfGFP, pUC19) provides Cr(VI) detection at nanomolar sensitivity
+  via a de-repression logic gate; \textbf{(2)}~a NemA chromate reductase
+  module (pNemA-His, pET-28a), driven by the identical \textit{P}\textsubscript{chrB}
+  promoter, ensures coordinately regulated, dose-responsive enzymatic
+  Cr(VI)\,$\rightarrow$\,Cr(III) reduction; \textbf{(3)}~a dual-trigger
+  holin-endolysin ``Deadman'' kill switch (pKillSwitch-DT, pACYC184)
+  enforces programmed cell death via AND-gate logic integrating chromate
+  depletion sensing and a constitutive CI434-SsrA timer repressor with a
+  24-hour protein half-life.
 
-  \noindent
-  The computational validation framework spans five orthogonal methodologies: \textbf{(i)} Ordinary Differential Equation (ODE) systems modeling of the gene expression dynamics across all three modules over 96 hours; \textbf{(ii)} comparative Michaelis-Menten modeling of a NemA$^{*2+}$ catalytic variant whose kinetic parameters ($K_m^* = 16\ \mu$M, $k_{cat}^* = 37.2\ \text{h}^{-1}$) are \textbf{scenario-analysis assumptions} extrapolated from OYE-family active-site mutagenesis precedent \cite{mowafy2010}, not derived from a structural modeling pipeline executed in this study; \textbf{(iii)} a structural evaluation pipeline (PDB 8BPQ, 2.30 \AA\ X-ray) that uses a dimensionless contact-disruption score to rank candidate second-shell mutations in the FMN pocket and a scipy-based geometric placement of CrO$_4^{2-}$ to evaluate substrate positioning relative to FMN --- this structural pipeline is a \textit{consistency check} on the NemA$^{*2+}$ engineering hypothesis, not a kinetic prediction; \textbf{(iv)} a ribosome-allocation genome-scale metabolic model demonstrating that the circuit's $\sim$4.5\% proteome burden is metabolically sustainable at environmentally relevant chromium concentrations; and \textbf{(v)} Luria-Delbr\"uck fluctuation analysis showing that, under the assumed input parameters, the layered containment architecture (genetic kill switch + double auxotrophy $\Delta$thyA $\Delta$dapA) yields a 30-day probability of a viable escapee in a 1,000-liter closed system of $P_{\text{escape}} \approx 6 \times 10^{-17}$, below an acceptable-risk threshold of $10^{-15}$. A one-factor-at-a-time sensitivity sweep (Pillar 4b) shows this headline figure is robust to a 10$\times$ error in the assumed per-bp mutation rate and to a 10$\times$ scale-up of the deployment reactor, but is not robust to a 100$\times$ error in $\mu_{bp}$, at which point $P_{\text{escape}}$ rises to $6 \times 10^{-15}$, above the threshold. A global Latin Hypercube Sampling analysis (Pillar 4c, N = 10,000) over 8 input parameters drawn from literature-bounded ranges finds a median $P_{\text{escape}} = 1.7 \times 10^{-17}$ with 95\% CI $[2.1 \times 10^{-21},\ 1.4 \times 10^{-13}]$, and that \textbf{20.6\% of the 10,000 LHS samples exceed the $10^{-15}$ threshold} under plausible joint-tail combinations of the input parameters. All simulations were executed in Python (SciPy, NumPy, Matplotlib).
+  \medskip\noindent
+  The computational validation framework spans five orthogonal
+  methodologies: \textbf{(i)}~Ordinary Differential Equation (ODE)
+  systems modeling of gene-expression dynamics across all three modules
+  over 96~hours; \textbf{(ii)}~comparative Michaelis-Menten modeling of a
+  NemA$^{*2+}$ catalytic variant whose kinetic parameters
+  ($K_m^* = 16\;\mu$M, $k_{cat}^* = 37.2\;\text{h}^{-1}$) are
+  \textbf{scenario-analysis assumptions} extrapolated from OYE-family
+  active-site mutagenesis precedent~\cite{mowafy2010}, not derived from a
+  structural modeling pipeline executed in this study;
+  \textbf{(iii)}~a structural evaluation pipeline (PDB~8BPQ, 2.30~\AA{}
+  X-ray) using a dimensionless contact-disruption score to rank candidate
+  second-shell mutations in the FMN pocket and a SciPy-based geometric
+  placement of CrO$_4^{2-}$ to evaluate substrate positioning relative to
+  FMN -- this pipeline is a \textit{consistency check} on the
+  NemA$^{*2+}$ engineering hypothesis, not a kinetic prediction;
+  \textbf{(iv)}~a ribosome-allocation genome-scale metabolic model
+  demonstrating that the circuit's $\sim$4.5\% proteome burden is
+  metabolically sustainable at environmentally relevant chromium
+  concentrations; and \textbf{(v)}~Luria-Delbr\"{u}ck fluctuation
+  analysis showing that, under the assumed input parameters, the layered
+  containment architecture (genetic kill switch + double auxotrophy
+  $\Delta$thyA $\Delta$dapA) yields a 30-day probability of a viable
+  escapee in a 1{,}000-liter closed system of
+  $P_{\text{escape}} \approx 6 \times 10^{-17}$, below an
+  acceptable-risk threshold of $10^{-15}$.
 
-  \noindent
-  This work demonstrates that, under its modeling assumptions, the proposed tri-modular system can reduce 100 $\mu$M Cr(VI) by $>$99\% within 48 hours under closed-system conditions. We argue that this computational framework, which mathematically quantifies both remediation performance and mutation-driven failure modes, and which explicitly reports the sensitivity of its safety claim to its key input assumption, establishes a transparent in silico biosafety validation template for BMO-based heavy metal remediation in resource-constrained settings. The work is entirely computational; no wet-lab validation has been performed.
+  \medskip\noindent
+  A one-factor-at-a-time sensitivity sweep (Pillar~4b) shows this
+  headline figure is robust to a $10\times$ error in the assumed per-bp
+  mutation rate and to a $10\times$ scale-up of the deployment reactor,
+  but is not robust to a $100\times$ error in $\mu_{bp}$, at which point
+  $P_{\text{escape}}$ rises to $6 \times 10^{-15}$, above the threshold.
+  A global Latin Hypercube Sampling analysis (Pillar~4c, $N = 10{,}000$)
+  over 8 input parameters drawn from literature-bounded ranges finds a
+  median $P_{\text{escape}} = 1.7 \times 10^{-17}$ with 95\%~CI
+  $[2.1 \times 10^{-21},\; 1.4 \times 10^{-13}]$, and that
+  \textbf{20.6\% of the 10{,}000 LHS samples exceed the $10^{-15}$
+  threshold} under plausible joint-tail combinations of the input
+  parameters. All simulations were executed in Python (SciPy, NumPy,
+  Matplotlib).
 
-  \vspace{0.5cm}
+  \medskip\noindent
+  This work demonstrates that, under its modeling assumptions, the
+  proposed tri-modular system can reduce 100~$\mu$M Cr(VI) by
+  ${>}99\%$ within 48~hours under closed-system conditions. We argue that
+  this computational framework -- which mathematically quantifies both
+  remediation performance and mutation-driven failure modes, and which
+  explicitly reports the sensitivity of its safety claim to its key input
+  assumption -- establishes a transparent \textit{in silico} biosafety
+  validation template for BMO-based heavy-metal remediation in
+  resource-constrained settings. The work is entirely computational; no
+  wet-lab validation has been performed.
+
+  \vspace{0.5em}
   \begin{center}
-  \textbf{Keywords:} synthetic biology $\cdot$ hexavalent chromium $\cdot$ genetic kill switch $\cdot$ ChrB biosensor $\cdot$ NemA reductase $\cdot$ bioremediation $\cdot$ Luria-Delbr\"uck mutation model $\cdot$ plasmid architecture $\cdot$ BMO biosafety $\cdot$ Bangladesh tannery pollution
+    \textbf{Keywords:}
+    synthetic biology $\cdot$ hexavalent chromium $\cdot$
+    genetic kill switch $\cdot$ ChrB biosensor $\cdot$
+    NemA reductase $\cdot$ bioremediation $\cdot$
+    Luria-Delbr\"{u}ck mutation model $\cdot$
+    plasmid architecture $\cdot$ BMO biosafety $\cdot$
+    Bangladesh tannery pollution
   \end{center}
+  \vspace{1em}
 ]
 
+%% ============================================================
 \section{Introduction}
+%% ============================================================
 
 \subsection{The Hexavalent Chromium Crisis in Bangladesh}
-Hexavalent chromium [Cr(VI)] is a highly soluble, mobile, and persistent environmental contaminant classified by the International Agency for Research on Cancer (IARC) as a definitive Group 1 human carcinogen \cite{iarc1990}. At the molecular level, Cr(VI) enters cells through nonspecific anion transport channels (sharing uptake pathways with sulfate and phosphate), where it undergoes intracellular reduction to Cr(III) and Cr(V) intermediates. These intermediates generate reactive oxygen species (ROS) that form DNA adducts, strand breaks, and protein-DNA crosslinks, mechanisms directly linked to lung carcinoma, nasal septal perforation, and renal tubular necrosis upon chronic exposure \cite{eastmond2008}.
 
-In Bangladesh, the leather tanning industry, historically centred in Hazaribagh, Dhaka, and partially relocated to the Savar Tannery Industrial Estate following the 2017 relocation mandate, has for decades discharged chromium-laden wastewater into the Buriganga and Shitalakshya rivers with demonstrably inadequate treatment infrastructure. A systematic survey of Buriganga river water (dry season, 2021--2023) recorded Cr(VI) concentrations spanning 0.01--3.54 mg/L (mean: 0.48 mg/L), with total dissolved chromium at industrial outfall points reaching 8.42 mg/L \cite{rahman2021,ahmed2022}. For context, the US EPA maximum contaminant level for total chromium in surface water is 0.1 mg/L; the WHO guideline for drinking water is 0.05 mg/L. In the Shitalakshya River (Narayanganj), which flows past Govt. Tolaram College, Cr(VI) concentrations range from 0.037 to 0.102 mg/L, with bioaccumulation in local fish tissue measured at 0.5--2 mg/kg dry weight \cite{islam2020,doem2022}. Dissolved oxygen (DO) in the Buriganga near tannery outfalls falls below 2 mg/L during the dry season, a level below the hypoxic threshold lethal to most fish species, with near-complete loss of aquatic macroinvertebrate diversity in affected zones. Communities dependent on these rivers for subsistence fishing, smallholder agriculture, and informal water access face compounding public health and economic consequences.
+Hexavalent chromium [Cr(VI)] is a highly soluble, mobile, and persistent
+environmental contaminant classified by the International Agency for
+Research on Cancer (IARC) as a definitive Group~1 human
+carcinogen~\cite{iarc1990}. At the molecular level, Cr(VI) enters cells
+through nonspecific anion transport channels (sharing uptake pathways with
+sulfate and phosphate), where it undergoes intracellular reduction to
+Cr(III) and Cr(V) intermediates. These intermediates generate reactive
+oxygen species (ROS) that form DNA adducts, strand breaks, and
+protein-DNA crosslinks -- mechanisms directly linked to lung carcinoma,
+nasal septal perforation, and renal tubular necrosis upon chronic
+exposure~\cite{eastmond2008}.
+
+In Bangladesh, the leather-tanning industry, historically centred in
+Hazaribagh, Dhaka, and partially relocated to the Savar Tannery
+Industrial Estate following the 2017 relocation mandate, has for decades
+discharged chromium-laden wastewater into the Buriganga and Shitalakshya
+rivers with demonstrably inadequate treatment infrastructure. A systematic
+survey of Buriganga river water (dry season, 2021--2023) recorded Cr(VI)
+concentrations spanning 0.01--3.54~mg/L (mean: 0.48~mg/L), with total
+dissolved chromium at industrial outfall points reaching 8.42~mg/L
+\cite{rahman2021,ahmed2022}. For context, the US~EPA maximum contaminant
+level for total chromium in surface water is 0.1~mg/L; the WHO guideline
+for drinking water is 0.05~mg/L. In the Shitalakshya River (Narayanganj),
+which flows past Govt.\ Tolaram College, Cr(VI) concentrations range from
+0.037 to 0.102~mg/L, with bioaccumulation in local fish tissue measured
+at 0.5--2~mg/kg dry weight~\cite{islam2020,doem2022}. Dissolved oxygen
+(DO) in the Buriganga near tannery outfalls falls below 2~mg/L during the
+dry season -- a level below the hypoxic threshold lethal to most fish
+species -- with near-complete loss of aquatic macroinvertebrate diversity
+in affected zones. Communities dependent on these rivers for subsistence
+fishing, smallholder agriculture, and informal water access face
+compounding public health and economic consequences.
 
 \subsection{Limitations of Existing Remediation Approaches}
-Conventional Cr(VI) remediation methodologies each carry fundamental limitations that prevent their adoption as scalable, adaptive, and cost-effective solutions in low-resource settings. Chemical precipitation (reduction to Cr(III) using sodium bisulfite or ferrous sulfate at pH 2--3, followed by lime-induced Cr(OH)$_3$ precipitation) generates large volumes of hazardous chromium-hydroxide sludge requiring further processing, operates in narrow pH windows incompatible with river conditions, and exhibits no ability to modulate treatment intensity in response to fluctuating Cr(VI) concentrations \cite{sharma2017}. Electrocoagulation, the approach taken by a prior Bangladesh SJWP entry in 2022, requires continuous electrical input (30--50 W/m$^3$), is economically prohibitive for remote or rural deployment, and applies equal treatment intensity regardless of actual contamination levels \cite{heidmann2008}. Phytoremediation (hyperaccumulating plants such as \textit{Thlaspi caerulescens}) operates on timescales of months to years and is constrained by seasonal biomass availability \cite{ali2013}. Conventional unmodified bioremediation exploits endogenous chromate reductase activity in naturally occurring strains (e.g., \textit{Bacillus subtilis}, \textit{Lysinibacillus fusiformis}), but these organisms cannot report chromium presence, cannot be programmed to self-terminate after remediation, and lack containment guarantees for open-water environments \cite{viti2003}.
 
-Most critically: \textit{none of these approaches operate as integrated sensing-acting-self-terminating systems}. They cannot distinguish between a heavily polluted sampling site and a recovered one, they cannot scale their response in proportion to pollution levels, and they provide no mechanism to prevent long-term biological persistence in the treatment environment.
+Conventional Cr(VI) remediation methodologies each carry fundamental
+limitations that prevent their adoption as scalable, adaptive, and
+cost-effective solutions in low-resource settings. Chemical precipitation
+(reduction to Cr(III) using sodium bisulfite or ferrous sulfate at
+pH~2--3, followed by lime-induced Cr(OH)$_3$ precipitation) generates
+large volumes of hazardous chromium-hydroxide sludge requiring further
+processing, operates in narrow pH windows incompatible with river
+conditions, and exhibits no ability to modulate treatment intensity in
+response to fluctuating Cr(VI) concentrations~\cite{sharma2017}.
+Electrocoagulation, the approach taken by a prior Bangladesh SJWP entry
+in 2022, requires continuous electrical input (30--50~W/m$^3$), is
+economically prohibitive for remote or rural deployment, and applies equal
+treatment intensity regardless of actual contamination
+levels~\cite{heidmann2008}. Phytoremediation (hyperaccumulating plants
+such as \textit{Thlaspi caerulescens}) operates on timescales of months
+to years and is constrained by seasonal biomass
+availability~\cite{ali2013}. Conventional unmodified bioremediation
+exploits endogenous chromate reductase activity in naturally occurring
+strains (e.g., \textit{Bacillus subtilis}, \textit{Lysinibacillus
+fusiformis}), but these organisms cannot report chromium presence, cannot
+be programmed to self-terminate after remediation, and lack containment
+guarantees for open-water environments~\cite{viti2003}.
+
+Most critically: \textit{none of these approaches operate as integrated
+sensing-acting-self-terminating systems}. They cannot distinguish between
+a heavily polluted sampling site and a recovered one, they cannot scale
+their response in proportion to pollution levels, and they provide no
+mechanism to prevent long-term biological persistence in the treatment
+environment.
 
 \subsection{Synthetic Biology as a Remediation Paradigm}
-Synthetic biology offers a categorically different framework. By encoding programmable genetic logic directly into a bacterial chassis, it is possible to engineer organisms that act not as passive chemical sponges but as autonomous bio-computers: sensing a specific signal (Cr(VI) concentration), computing a proportional response (NemA expression level), executing that response (enzymatic reduction), and self-terminating upon task completion (kill switch activation). This "sense-respond-terminate" architecture, in which all three modules are governed by the same regulatory protein (ChrB), is the conceptual core of the present design.
 
-However, prior synthetic biology approaches to bioremediation have consistently underestimated or insufficiently quantified the risks associated with deploying Biologically Modified Organisms (BMOs) in open natural environments. Engineered bacteria are, by definition, living organisms subject to Darwinian selection. Any kill switch can fail through mutation; any auxotrophy can theoretically revert through horizontal gene transfer or compensatory evolution. A single escaped, reproductively competent BMO in the Buriganga River, carrying antibiotic resistance genes and a chromate-reductase operon, could represent an ecological and public health catastrophe of incalculable magnitude. \textbf{The first and most important design decision of this project is therefore absolute: we do not propose open-water deployment.} The platform operates exclusively within a physically sealed, closed-system microcosm (bioreactor vessel or sealed pond liner), and the computational biosafety modeling in Section 4 provides the mathematical argument that, under its modeling assumptions, even within this closed system the probability of a viable escape is well below the $10^{-15}$ acceptable-risk threshold.
+Synthetic biology offers a categorically different framework. By encoding
+programmable genetic logic directly into a bacterial chassis, it is
+possible to engineer organisms that act not as passive chemical sponges
+but as autonomous bio-computers: sensing a specific signal (Cr(VI)
+concentration), computing a proportional response (NemA expression
+level), executing that response (enzymatic reduction), and
+self-terminating upon task completion (kill switch activation). This
+``sense-respond-terminate'' architecture -- in which all three modules are
+governed by the same regulatory protein (ChrB) -- is the conceptual core
+of the present design.
+
+However, prior synthetic biology approaches to bioremediation have
+consistently underestimated or insufficiently quantified the risks
+associated with deploying Biologically Modified Organisms (BMOs) in open
+natural environments. Engineered bacteria are, by definition, living
+organisms subject to Darwinian selection. Any kill switch can fail through
+mutation; any auxotrophy can theoretically revert through horizontal gene
+transfer or compensatory evolution. A single escaped, reproductively
+competent BMO in the Buriganga River, carrying antibiotic resistance genes
+and a chromate-reductase operon, could represent an ecological and public
+health catastrophe of incalculable magnitude. \textbf{The first and most
+important design decision of this project is therefore absolute: we do not
+propose open-water deployment.} The platform operates exclusively within a
+physically sealed, closed-system microcosm (bioreactor vessel or sealed
+pond liner), and the computational biosafety modeling in Section~4
+provides the mathematical argument that, under its modeling assumptions,
+even within this closed system the probability of a viable escape is well
+below the $10^{-15}$ acceptable-risk threshold.
 
 \subsection{Novelty and Research Hypothesis}
-The novelty of this work is not the individual components (ChrB biosensors \cite{branco2013}, NemA reductases \cite{williams2003}, and holin-endolysin kill switches \cite{chan2016} have each been independently described in the literature), but rather: \textbf{(i)} their integration into a single, three-plasmid, tri-modular system governed by a unified regulatory signal; \textbf{(ii)} the proposal, by analogy to OYE-family active-site mutagenesis precedent \cite{mowafy2010}, of a hypothetical NemA catalytic variant (NemA$^{*2+}$) with substantially improved kinetics, presented here as a hypothesis-by-analogy rather than a designed variant; and \textbf{(iii)} to our knowledge, the first application of Luria-Delbr\"uck fluctuation theory to rigorously quantify the evolutionary failure probability of a layered BMO containment architecture in a heavy-metal bioremediation BMO under Bangladesh-specific closed-system deployment parameters. We do not claim priority over Luria-Delbr\"uck fluctuation analysis in general synthetic-biology biocontainment, where related applications exist \cite{lee2012,stirling2017,rottinghaus2022}; the scoping claim is the specific application to heavy-metal bioremediation in Bangladesh tannery-effluent parameters.
 
-\textbf{Central hypothesis:} A tri-modular synthetic biology platform integrating a ChrB-sfGFP biosensor, a NemA chromate reductase (including a hypothesized mutant variant), and a dual-trigger holin-endolysin kill switch, expressed in a double-auxotrophic \textit{E. coli} DH5$\alpha$ $\Delta$thyA $\Delta$dapA chassis within a closed-system microcosm, can, under its modeling assumptions, achieve: (1) $\geq$99\% Cr(VI) removal from 100 $\mu$M starting concentration within 48 hours; (2) $\geq$99\% programmed cell death within 72 hours of chromate depletion; and (3) a mathematical probability of containment breach below $10^{-15}$ over a 30-day closed-system deployment, as validated by ODE systems modeling, metabolic burden analysis, and Luria-Delbr\"uck evolutionary biosafety modeling with explicit sensitivity analysis of the mutation-rate input.
+The novelty of this work is not the individual components (ChrB
+biosensors~\cite{branco2013}, NemA reductases~\cite{williams2003}, and
+holin-endolysin kill switches~\cite{chan2016} have each been independently
+described in the literature), but rather: \textbf{(i)}~their integration
+into a single, three-plasmid, tri-modular system governed by a unified
+regulatory signal; \textbf{(ii)}~the proposal, by analogy to OYE-family
+active-site mutagenesis precedent~\cite{mowafy2010}, of a hypothetical
+NemA catalytic variant (NemA$^{*2+}$) with substantially improved
+kinetics, presented here as a hypothesis-by-analogy rather than a
+designed variant; and \textbf{(iii)}~to our knowledge, the first
+application of Luria-Delbr\"{u}ck fluctuation theory to rigorously
+quantify the evolutionary failure probability of a layered BMO
+containment architecture in a heavy-metal bioremediation BMO under
+Bangladesh-specific closed-system deployment parameters. We do not claim
+priority over Luria-Delbr\"{u}ck fluctuation analysis in general
+synthetic-biology biocontainment, where related applications
+exist~\cite{lee2012,stirling2017,rottinghaus2022}; the scoping claim is
+the specific application to heavy-metal bioremediation in Bangladesh
+tannery-effluent parameters.
 
+\medskip
+\textbf{Central hypothesis:} A tri-modular synthetic biology platform
+integrating a ChrB-sfGFP biosensor, a NemA chromate reductase (including
+a hypothesized mutant variant), and a dual-trigger holin-endolysin kill
+switch, expressed in a double-auxotrophic \textit{E.~coli} DH5$\alpha$
+$\Delta$thyA $\Delta$dapA chassis within a closed-system microcosm, can,
+under its modeling assumptions, achieve: (1)~${\geq}99\%$ Cr(VI) removal
+from 100~$\mu$M starting concentration within 48~hours; (2)~${\geq}99\%$
+programmed cell death within 72~hours of chromate depletion; and
+(3)~a mathematical probability of containment breach below $10^{-15}$
+over a 30-day closed-system deployment, as validated by ODE systems
+modeling, metabolic burden analysis, and Luria-Delbr\"{u}ck evolutionary
+biosafety modeling with explicit sensitivity analysis of the
+mutation-rate input.
+
+%% ============================================================
 \section{Genetic Circuit Architecture and Plasmid Design}
+%% ============================================================
 
 \subsection{System Overview: Tri-Modular Design Philosophy}
-The central engineering challenge of whole-cell bioremediation is achieving \textit{coherent signal integration across functional modules}. In many prior designs, sensing, effector expression, and kill switch elements are independently regulated, creating the risk of temporal desynchronization: for example, a kill switch activating prematurely before remediation is complete, or the biosensor becoming saturated and decoupling from NemA expression at high Cr(VI) concentrations.
 
-Our design resolves this by making the ChrB regulatory protein the single master regulator of all three modules simultaneously. The ChrB protein, a transcriptional repressor from \textit{Pseudomonas aeruginosa} that binds the PchrB operator sequence in the apo (chromate-free) state and releases it upon Cr(VI) binding, governs:
+The central engineering challenge of whole-cell bioremediation is
+achieving \textit{coherent signal integration across functional modules}.
+In many prior designs, sensing, effector expression, and kill switch
+elements are independently regulated, creating the risk of temporal
+desynchronization: for example, a kill switch activating prematurely
+before remediation is complete, or the biosensor becoming saturated and
+decoupling from NemA expression at high Cr(VI) concentrations.
+
+Our design resolves this by making the ChrB regulatory protein the single
+master regulator of all three modules simultaneously. The ChrB protein, a
+transcriptional repressor from \textit{Pseudomonas aeruginosa} that binds
+the \textit{P}\textsubscript{chrB} operator sequence in the apo
+(chromate-free) state and releases it upon Cr(VI) binding, governs:
+
 \begin{itemize}
-    \item \textbf{Module 1:} De-repression of PchrB $\rightarrow$ sfGFP (biosensor output)
-    \item \textbf{Module 2:} De-repression of PchrB $\rightarrow$ NemA (remediation output)
-    \item \textbf{Module 3:} Repression of the \textit{inverted} PchrB $\rightarrow$ holin/endolysin (kill switch \textit{suppression} during active chromate sensing)
+  \item \textbf{Module~1:} De-repression of
+        \textit{P}\textsubscript{chrB}~$\rightarrow$ sfGFP
+        (biosensor output).
+  \item \textbf{Module~2:} De-repression of
+        \textit{P}\textsubscript{chrB}~$\rightarrow$ NemA
+        (remediation output).
+  \item \textbf{Module~3:} Repression of the \textit{inverted}
+        \textit{P}\textsubscript{chrB}~$\rightarrow$
+        holin/endolysin (kill-switch \textit{suppression} during
+        active chromate sensing).
 \end{itemize}
 
-This architecture ensures that (a) biosensing and remediation are always co-activated in proportion to Cr(VI) concentration; (b) the kill switch is actively suppressed \textit{only} during periods when Cr(VI) is above the PchrB threshold (i.e., when remediation is needed); and (c) the kill switch is released \textit{automatically} when chromate is depleted, the biochemical signal that treatment is complete. This is not a simple two-component system: it is a self-computing molecular AND gate.
+This architecture ensures that (a)~biosensing and remediation are always
+co-activated in proportion to Cr(VI) concentration; (b)~the kill switch
+is actively suppressed \textit{only} during periods when Cr(VI) is above
+the \textit{P}\textsubscript{chrB} threshold (i.e., when remediation is
+needed); and (c)~the kill switch is released \textit{automatically} when
+chromate is depleted -- the biochemical signal that treatment is complete.
+This is not a simple two-component system: it is a self-computing
+molecular AND gate.
 
+%% -- Plasmid table (two-column spanning) ----------------------
 \begin{table*}[!t]
 \centering
-\caption{Plasmid Design and Origins of Replication}
+\caption{Plasmid design and origins of replication for the
+  tri-modular circuit.}
+\label{tab:plasmids}
+\small
 \begin{tabular}{@{}llllll@{}}
 \toprule
-\textbf{Plasmid} & \textbf{Module} & \textbf{Backbone} & \textbf{Origin} & \textbf{Marker} & \textbf{Copy No.} \\ \midrule
-pChrB-sfGFP & Biosensor & pUC19 & pMB1 & AmpR & High ($\sim$500) \\
-pNemA-His & Reductase & pET-28a & pBR322 & KanR & Med ($\sim$40) \\
-pKillSwitch-DT & Kill Switch & pACYC184 & p15A & CmR & Low ($\sim$15) \\ \bottomrule
+\textbf{Plasmid} & \textbf{Module} & \textbf{Backbone} &
+\textbf{Origin} & \textbf{Marker} & \textbf{Copy No.} \\
+\midrule
+pChrB-sfGFP     & Biosensor   & pUC19     & pMB1   & AmpR & High ($\sim$500) \\
+pNemA-His       & Reductase   & pET-28a   & pBR322 & KanR & Medium ($\sim$40) \\
+pKillSwitch-DT  & Kill Switch & pACYC184  & p15A   & CmR  & Low ($\sim$15) \\
+\bottomrule
 \end{tabular}
 \end{table*}
 
-The three plasmid backbones were specifically selected for mutual compatibility: pMB1 (pUC19) and pBR322 (pET-28a) are derived from the same ColE1 lineage but are incompatible with each other in high- versus medium-copy configurations; p15A (pACYC184) belongs to a completely orthogonal incompatibility group \cite{velappan2021}, allowing stable co-existence of all three plasmids in the same cell. The three antibiotic markers (AmpR, KanR, CmR) are also fully orthogonal. The copy number differential across the three plasmids is intentional and is what \textit{coordinately regulates} the relative per-cell expression of the three modules: the biosensor ($\sim$500 copies/cell on pUC19) produces a robust sfGFP signal even at low Cr(VI) concentrations; the reductase ($\sim$40 copies/cell on pET-28a) balances NemA production against metabolic burden; the kill switch ($\sim$15 copies/cell on pACYC184) prevents constitutive Holin leakage from overwhelming the CI434 repressor. We note explicitly that this is \textit{coordinate transcriptional regulation through shared promoter logic and chosen RBS strengths}, not strict stoichiometric coupling; the $\sim$12-fold pUC19:pET-28a copy-number gap is the intended design lever, and we have not yet demonstrated experimentally that it produces the predicted per-cell sfGFP:NemA ratio.
+The three plasmid backbones were specifically selected for mutual
+compatibility: pMB1 (pUC19) and pBR322 (pET-28a) are derived from the
+same ColE1 lineage but are incompatible with each other in high- versus
+medium-copy configurations; p15A (pACYC184) belongs to a completely
+orthogonal incompatibility group~\cite{velappan2021}, allowing stable
+co-existence of all three plasmids in the same cell. The three antibiotic
+markers (AmpR, KanR, CmR) are also fully orthogonal. The copy-number
+differential across the three plasmids is intentional and is what
+\textit{coordinately regulates} the relative per-cell expression of the
+three modules: the biosensor ($\sim$500~copies/cell on pUC19) produces a
+robust sfGFP signal even at low Cr(VI) concentrations; the reductase
+($\sim$40~copies/cell on pET-28a) balances NemA production against
+metabolic burden; the kill switch ($\sim$15~copies/cell on pACYC184)
+prevents constitutive Holin leakage from overwhelming the CI434
+repressor. We note explicitly that this is \textit{coordinate
+transcriptional regulation through shared promoter logic and chosen RBS
+strengths}, not strict stoichiometric coupling; the $\sim$12-fold
+pUC19\,:\,pET-28a copy-number gap is the intended design lever, and we
+have not yet demonstrated experimentally that it produces the predicted
+per-cell sfGFP\,:\,NemA ratio.
 
-\subsection{Module 1: ChrB-sfGFP Chromium Biosensor}
+%% ----
+\subsection{Module~1: ChrB-sfGFP Chromium Biosensor}
+
 \subsubsection{Molecular Mechanism of ChrB-Based Sensing}
-The ChrB protein is a member of the LysR-type transcriptional regulator (LTTR) superfamily, originally characterized in \textit{Pseudomonas aeruginosa} PAO1 \cite{branco2013}. In the absence of chromate, the ChrB dimer binds the PchrB operator sequence (a 23-bp palindromic motif) upstream of the \textit{chrBCA} operon and sterically blocks RNA polymerase progression. Upon binding of chromate anion (CrO$_4^{2-}$) to the co-inducer binding domain of ChrB, the protein undergoes an allosteric conformational shift that dramatically reduces its operator affinity, releasing the PchrB promoter and permitting transcriptional read-through \cite{igem2013}. Published characterization data for the BBa\_K1149051 BioBrick part (ChrB + PchrB promoter) indicate a Hill coefficient of $n \approx 2.0$--$2.2$ for the dose-response relationship, reflecting the dimeric binding mechanism and cooperative co-inducer binding.
+
+The ChrB protein is a member of the LysR-type transcriptional regulator
+(LTTR) superfamily, originally characterized in \textit{Pseudomonas
+aeruginosa} PAO1~\cite{branco2013}. In the absence of chromate, the ChrB
+dimer binds the \textit{P}\textsubscript{chrB} operator sequence (a
+23-bp palindromic motif) upstream of the \textit{chrBCA} operon and
+sterically blocks RNA polymerase progression. Upon binding of chromate
+anion (CrO$_4^{2-}$) to the co-inducer binding domain of ChrB, the
+protein undergoes an allosteric conformational shift that dramatically
+reduces its operator affinity, releasing the promoter and permitting
+transcriptional read-through~\cite{igem2013}. Published characterization
+data for the BBa\_K1149051 BioBrick part indicate a Hill coefficient of
+$n \approx 2.0$--$2.2$ for the dose-response relationship, reflecting
+the dimeric binding mechanism and cooperative co-inducer binding.
 
 \begin{figure}[!t]
-    \centering
-    \includegraphics[width=\linewidth]{simulations/results/plasmid_module1.png}
-    \caption{Module 1 Architecture: High-copy pUC19 backbone carrying the PchrB-sfGFP biosensor cassette.}
+  \centering
+  \includegraphics[width=\linewidth]%
+    {simulations/results/plasmid_module1.png}
+  \caption{Module~1 architecture: high-copy pUC19 backbone carrying
+    the \textit{P}\textsubscript{chrB}-sfGFP biosensor cassette.}
+  \label{fig:module1}
 \end{figure}
 
-The predicted limit of detection (LOD) is $\sim$80 nM Cr(VI). Fold-induction at 100 $\mu$M Cr(VI) is predicted at 8.2$\times$, and response time to 90\% of maximum signal is $\sim$3 hours post-exposure.
+The predicted limit of detection (LOD) is $\sim$80~nM Cr(VI).
+Fold-induction at 100~$\mu$M Cr(VI) is predicted at $8.2\times$, and
+response time to 90\% of maximum signal is $\sim$3~hours post-exposure.
 
-\subsection{Module 2: NemA Chromate Reductase}
+%% ----
+\subsection{Module~2: NemA Chromate Reductase}
+
 \subsubsection{The NemA Enzyme: Structure and Mechanism}
-NemA (N-ethylmaleimide reductase) is a native \textit{E. coli} NADH-dependent flavoprotein belonging to the Old Yellow Enzyme (OYE) superfamily \cite{williams2003}. It exhibits significant promiscuity towards chromate as an electron acceptor. The catalytic mechanism proceeds through a ping-pong bi-bi mechanism:
+
+NemA (\textit{N}-ethylmaleimide reductase) is a native \textit{E.~coli}
+NADH-dependent flavoprotein belonging to the Old Yellow Enzyme (OYE)
+superfamily~\cite{williams2003}. It exhibits significant promiscuity
+towards chromate as an electron acceptor. The catalytic mechanism
+proceeds through a ping-pong bi-bi mechanism:
 \begin{equation}
-\text{Cr(VI)} + \text{NADH} + \text{H}^+ \xrightarrow{\text{NemA/FMN}} \text{Cr(III)} + \text{NAD}^+
+  \text{Cr(VI)} + \text{NADH} + \text{H}^+ \xrightarrow{\text{NemA/FMN}}
+  \text{Cr(III)} + \text{NAD}^+
 \end{equation}
 
-Published kinetic parameters for wild-type NemA on Cr(VI) substrate: $K_m$ = 48 $\mu$M, $k_{cat}$ = 0.39 s$^{-1}$ (1,404 h$^{-1}$), $k_{cat}/K_m$ = $1.1 \times 10^5$ M$^{-1}$s$^{-1}$ \cite{williams2003}.
+Published kinetic parameters for wild-type NemA on Cr(VI) substrate:
+$K_m = 48\;\mu$M, $k_{cat} = 0.39\;\text{s}^{-1}$
+($1{,}404\;\text{h}^{-1}$),
+$k_{cat}/K_m = 1.1 \times 10^5\;\text{M}^{-1}\text{s}^{-1}$
+\cite{williams2003}.
 
 \begin{figure}[!t]
-    \centering
-    \includegraphics[width=\linewidth]{simulations/results/plasmid_module2.png}
-    \caption{Module 2 Architecture: Medium-copy pET-28a backbone carrying the PchrB-NemA remediation cassette.}
+  \centering
+  \includegraphics[width=\linewidth]%
+    {simulations/results/plasmid_module2.png}
+  \caption{Module~2 architecture: medium-copy pET-28a backbone
+    carrying the \textit{P}\textsubscript{chrB}-NemA remediation
+    cassette.}
+  \label{fig:module2}
 \end{figure}
 
 \subsubsection{Computationally Evaluated NemA$^{*2+}$ Variant}
-To further maximize remediation efficiency, we \textit{hypothesize} a NemA catalytic variant (NemA$^{*2+}$) based on structural analogy to characterized OYE-family engineering. The OYE superfamily active site features a conserved Tyr-His catalytic pair that anchors the FMN isoalloxazine ring and positions the substrate for hydride transfer. A second shell of hydrophobic residues (Trp, Phe, Ile, Tyr, Leu, Met) flanks the substrate-binding pocket and governs the geometry of substrate approach, directly influencing $K_m$. Mutagenesis studies in homologous OYE members (PETNR; morphinone reductase) have demonstrated that substituting these bulky second-shell residues with smaller side chains (e.g., Trp$\rightarrow$Ala, Phe$\rightarrow$Gly) is consistent with an expanded substrate-binding pocket and reduced steric hindrance for non-canonical electron acceptors like chromate \cite{mowafy2010}.
 
-\textbf{Note on parameter provenance and structural evaluation role.} The specific NemA$^{*2+}$ kinetic parameters used in the comparative systems model ($K_m^* = 16\ \mu$M, $k_{cat}^* = 37.2\ \text{h}^{-1}$) are \textbf{scenario-analysis assumptions} extrapolated from the OYE-family active-site mutagenesis precedent \cite{mowafy2010}. They are \textit{not} the output of the structural evaluation pipeline described in this paper; the structural pipeline is a \textit{consistency check} on the engineering hypothesis motivating NemA$^{*2+}$, not a kinetic prediction.
+To further maximize remediation efficiency, we \textit{hypothesize} a
+NemA catalytic variant (NemA$^{*2+}$) based on structural analogy to
+characterized OYE-family engineering. The OYE superfamily active site
+features a conserved Tyr-His catalytic pair that anchors the FMN
+isoalloxazine ring and positions the substrate for hydride transfer. A
+second shell of hydrophobic residues (Trp, Phe, Ile, Tyr, Leu, Met)
+flanks the substrate-binding pocket and governs the geometry of substrate
+approach, directly influencing $K_m$. Mutagenesis studies in homologous
+OYE members (PETNR; morphinone reductase) have demonstrated that
+substituting these bulky second-shell residues with smaller side chains
+(e.g., Trp$\rightarrow$Ala, Phe$\rightarrow$Gly) is consistent with an
+expanded substrate-binding pocket and reduced steric hindrance for
+non-canonical electron acceptors like chromate~\cite{mowafy2010}.
 
-The structural evaluation pipeline (detailed in \S\ref{sec:pillar2b} and \S\ref{sec:structresults}) uses the 2.30 \AA\ X-ray crystal structure of NemA (PDB 8BPQ, UniProt P77258) to: (a) identify the FMN binding pocket and rank candidate second-shell mutations by a dimensionless contact-disruption score (\S\ref{sec:pillar2b}), and (b) evaluate CrO$_4^{2-}$ positioning relative to FMN via a geometric-placement analysis (\S\ref{sec:pillar2b}). The projected kinetic improvement, were the hypothesized mutant to be realized, would be a 3-fold reduction in $K_m$ and a 2-fold increase in $k_{cat}$ (in the operational units used by the circuit model), yielding a projected 6-fold improvement in $k_{cat}/K_m$ catalytic efficiency. The structural evaluation results (\S\ref{sec:structresults}) are reported as geometric observables only (Cr-FMN distances, H-bond donor counts, steric clash counts); they are not interpreted as evidence of catalytic improvement.
+\medskip
+\textbf{Note on parameter provenance and structural evaluation role.}
+The specific NemA$^{*2+}$ kinetic parameters used in the comparative
+systems model ($K_m^* = 16\;\mu$M, $k_{cat}^* = 37.2\;\text{h}^{-1}$)
+are \textbf{scenario-analysis assumptions} extrapolated from the
+OYE-family active-site mutagenesis precedent~\cite{mowafy2010}. They are
+\textit{not} the output of the structural evaluation pipeline described
+in this paper; the structural pipeline is a \textit{consistency check}
+on the engineering hypothesis motivating NemA$^{*2+}$, not a kinetic
+prediction.
 
-\subsection{Module 3: Dual-Trigger Holin-Endolysin Kill Switch}
-Our design utilizes two independent triggering mechanisms combined in an AND-gate logic to trigger cell death via Holin-Endolysin \cite{chan2016}:
+The structural evaluation pipeline (detailed in
+Sections~\ref{sec:pillar2b} and~\ref{sec:structresults}) uses the
+2.30~\AA{} X-ray crystal structure of NemA (PDB~8BPQ, UniProt~P77258)
+to: (a)~identify the FMN binding pocket and rank candidate second-shell
+mutations by a dimensionless contact-disruption score
+(\S\ref{sec:pillar2b}), and (b)~evaluate CrO$_4^{2-}$ positioning
+relative to FMN via a geometric-placement analysis
+(\S\ref{sec:pillar2b}). The projected kinetic improvement, were the
+hypothesized mutant to be realized, would be a 3-fold reduction in $K_m$
+and a 2-fold increase in $k_{cat}$ (in the operational units used by the
+circuit model), yielding a projected 6-fold improvement in
+$k_{cat}/K_m$ catalytic efficiency. The structural evaluation results
+(\S\ref{sec:structresults}) are reported as geometric observables only
+(Cr-FMN distances, H-bond donor counts, steric clash counts); they are
+not interpreted as evidence of catalytic improvement.
+
+%% ----
+\subsection{Module~3: Dual-Trigger Holin-Endolysin Kill Switch}
+
+Our design utilizes two independent triggering mechanisms combined in an
+AND-gate logic to trigger cell death via
+holin-endolysin~\cite{chan2016}:
 \begin{itemize}
-    \item \textbf{Trigger 1 (Biochemical state sensor):} Chromate depletion de-represses the inverted PchrB promoter, activating holin-endolysin transcription.
-    \item \textbf{Trigger 2 (Temporal timer):} A constitutive CI434-SsrA repressor provides an absolute time limit.
+  \item \textbf{Trigger~1 (Biochemical state sensor):} Chromate
+        depletion de-represses the inverted
+        \textit{P}\textsubscript{chrB} promoter, activating
+        holin-endolysin transcription.
+  \item \textbf{Trigger~2 (Temporal timer):} A constitutive
+        CI434-SsrA repressor provides an absolute time limit.
 \end{itemize}
 
 \begin{figure}[!t]
-    \centering
-    \includegraphics[width=\linewidth]{simulations/results/plasmid_module3.png}
-    \caption{Module 3 Architecture: Low-copy pACYC184 backbone carrying the dual-trigger Holin-Endolysin kill switch.}
+  \centering
+  \includegraphics[width=\linewidth]%
+    {simulations/results/plasmid_module3.png}
+  \caption{Module~3 architecture: low-copy pACYC184 backbone
+    carrying the dual-trigger holin-endolysin kill switch.}
+  \label{fig:module3}
 \end{figure}
 
-The 24-hour protein half-life of CI434 is enforced by fusing the SsrA degradation tag to its C-terminus. By 72 hours post-inoculation, CI434-SsrA has decayed to $e^{-3\ln 2} = 12.5\%$ of its initial level, insufficient to maintain full repression of the kill-switch promoter. Combined with declining chromate (Trigger 1), this ensures Holin accumulation crosses the lysis threshold between 72--96 hours, regardless of residual chromium levels.
+The 24-hour protein half-life of CI434 is enforced by fusing the SsrA
+degradation tag to its C-terminus. By 72~hours post-inoculation,
+CI434-SsrA has decayed to $e^{-3\ln 2} = 12.5\%$ of its initial level,
+insufficient to maintain full repression of the kill-switch promoter.
+Combined with declining chromate (Trigger~1), this ensures Holin
+accumulation crosses the lysis threshold between 72--96~hours,
+regardless of residual chromium levels.
 
-\subsection{The Chassis: \textit{E. coli} DH5$\alpha$ $\Delta$thyA $\Delta$dapA}
-The chassis serves as an independent biocontainment layer via two full gene deletions. $\Delta$thyA requires exogenous thymine supplementation (50 $\mu$g/mL), and $\Delta$dapA requires diaminopimelic acid (DAP, 100 $\mu$M) for peptidoglycan cross-linking, preventing survival in natural freshwater, soil, or sediment environments. Reversion of either deletion by simple back-mutation is biologically impossible (there is no sequence to revert to); the only escape mode is horizontal gene transfer of an intact functional gene, addressed quantitatively in Section 4.
+%% ----
+\subsection{The Chassis: \textit{E.~coli} DH5$\alpha$
+            $\Delta$thyA $\Delta$dapA}
 
+The chassis serves as an independent biocontainment layer via two full
+gene deletions. $\Delta$thyA requires exogenous thymine supplementation
+(50~$\mu$g/mL), and $\Delta$dapA requires diaminopimelic acid (DAP,
+100~$\mu$M) for peptidoglycan cross-linking, preventing survival in
+natural freshwater, soil, or sediment environments. Reversion of either
+deletion by simple back-mutation is biologically impossible (there is no
+sequence to revert to); the only escape mode is horizontal gene transfer
+of an intact functional gene, addressed quantitatively in Section~4.
+
+%% ============================================================
 \section{Computational Methods}
+%% ============================================================
 
-All simulation code is implemented in Python 3.11 using NumPy, SciPy, and Matplotlib, and is available in the \texttt{simulations/} directory of the project repository. Every numerical constant used in any of the four pillar models is centralized in \texttt{simulations/parameters.py}, where each constant is tagged with its provenance: \texttt{source: [N]} (a specific reference from the manuscript bibliography), \texttt{ASSUMED} (an estimated/chosen value with an inline justification), or \texttt{PREDICTED} (an output of one of our own models, not an input). Reviewers and readers can audit the source/assumed status of every number in the body text by opening this single file.
+All simulation code is implemented in Python~3.11 using NumPy, SciPy,
+and Matplotlib, and is available in the \texttt{simulations/} directory
+of the project repository. Every numerical constant used in any of the
+four pillar models is centralized in \texttt{simulations/parameters.py},
+where each constant is tagged with its provenance: \texttt{source:~[N]}
+(a specific reference from the manuscript bibliography),
+\texttt{ASSUMED} (an estimated/chosen value with an inline
+justification), or \texttt{PREDICTED} (an output of one of our own
+models, not an input). Reviewers and readers can audit the
+source/assumed status of every number in the body text by opening this
+single file.
 
-\subsection{Pillar 1: ODE Systems Biology Model (\texttt{circuit\_ode\_model.py})}
-The dynamic behavior of the tri-modular circuit was modeled as a coupled ODE system implemented in \texttt{circuit\_ode\_model.py} and integrated with \texttt{scipy.integrate.solve\_ivp} using the implicit \textbf{Radau} solver for stiff systems (relative tolerance $r_{tol} = 10^{-6}$, absolute tolerance $a_{tol} = 10^{-9}$). Six state variables were tracked over a 96-hour simulation window:
+%% ----
+\subsection{Pillar~1: ODE Systems Biology Model}
 
+The dynamic behavior of the tri-modular circuit was modeled as a coupled
+ODE system implemented in \texttt{circuit\_ode\_model.py} and integrated
+with \texttt{scipy.integrate.solve\_ivp} using the implicit \textbf{Radau}
+solver for stiff systems (relative tolerance $r_{tol} = 10^{-6}$,
+absolute tolerance $a_{tol} = 10^{-9}$). Six state variables were
+tracked over a 96-hour simulation window:
 \begin{equation}
-\mathbf{y} = [\text{Cr}_{ext},\ \text{NemA},\ \text{sfGFP},\ \text{CI434},\ \text{Holin},\ \text{Cells}]
+  \mathbf{y} = \bigl[\text{Cr}_{ext},\;
+                     \text{NemA},\;
+                     \text{sfGFP},\;
+                     \text{CI434},\;
+                     \text{Holin},\;
+                     \text{Cells}\bigr]
 \end{equation}
 
-The right-hand side is given by the following coupled ODEs. \textbf{Chromate reduction} (NemA, Module 2):
+The right-hand side is given by the following coupled ODEs.
+
+\medskip
+\noindent\textbf{Chromate reduction} (NemA, Module~2):
 \begin{equation}
-\frac{d[\text{Cr}_{ext}]}{dt} = -\frac{k_{cat}^{\text{op}} \cdot [\text{NemA}] \cdot [\text{Cr}_{ext}]}{K_m^{\text{op}} + [\text{Cr}_{ext}]}
+  \frac{d[\text{Cr}_{ext}]}{dt}
+  = -\frac{k_{cat}^{\text{op}} \cdot [\text{NemA}] \cdot [\text{Cr}_{ext}]}
+          {K_m^{\text{op}} + [\text{Cr}_{ext}]}
 \end{equation}
 
-\textbf{ChrB-driven protein production} (Modules 1 and 2):
+\medskip
+\noindent\textbf{ChrB-driven protein production} (Modules~1 and~2):
 \begin{equation}
-\frac{d[\text{NemA}]}{dt} = k_{NemA} \cdot \frac{[\text{Cr}_{ext}]^n}{K_d^n + [\text{Cr}_{ext}]^n} - \delta_{NemA} \cdot [\text{NemA}]
+  \frac{d[\text{NemA}]}{dt}
+  = k_{NemA} \cdot
+    \frac{[\text{Cr}_{ext}]^n}{K_d^n + [\text{Cr}_{ext}]^n}
+  - \delta_{NemA} \cdot [\text{NemA}]
 \end{equation}
 \begin{equation}
-\frac{d[\text{sfGFP}]}{dt} = k_{GFP} \cdot \frac{[\text{Cr}_{ext}]^n}{K_d^n + [\text{Cr}_{ext}]^n} - \delta_{GFP} \cdot [\text{sfGFP}]
+  \frac{d[\text{sfGFP}]}{dt}
+  = k_{GFP} \cdot
+    \frac{[\text{Cr}_{ext}]^n}{K_d^n + [\text{Cr}_{ext}]^n}
+  - \delta_{GFP} \cdot [\text{sfGFP}]
 \end{equation}
 
-\textbf{CI434-SsrA timer decay} (Module 3):
+\medskip
+\noindent\textbf{CI434-SsrA timer decay} (Module~3):
 \begin{equation}
-\frac{d[\text{CI434}]}{dt} = -\lambda_{CI434} \cdot [\text{CI434}], \quad \lambda_{CI434} = \frac{\ln 2}{t_{1/2}^{CI434}}
+  \frac{d[\text{CI434}]}{dt}
+  = -\lambda_{CI434} \cdot [\text{CI434}],
+  \quad
+  \lambda_{CI434} = \frac{\ln 2}{t_{1/2}^{CI434}}
 \end{equation}
 
-\textbf{Kill switch Holin accumulation} (AND-gate logic, Module 3):
+\medskip
+\noindent\textbf{Kill-switch Holin accumulation}
+(AND-gate logic, Module~3):
 \begin{equation}
-\frac{d[\text{Holin}]}{dt} = k_{Holin} \cdot \underbrace{\frac{K_d^n}{K_d^n + [\text{Cr}_{ext}]^n}}_{\text{Trigger 1: low Cr}} \cdot \underbrace{\frac{K_{CI}^2}{K_{CI}^2 + [\text{CI434}]^2}}_{\text{Trigger 2: low CI434}}
+  \frac{d[\text{Holin}]}{dt}
+  = k_{Holin}
+    \cdot \underbrace{
+      \frac{K_d^n}{K_d^n + [\text{Cr}_{ext}]^n}
+    }_{\text{Trigger~1: low Cr}}
+    \cdot \underbrace{
+      \frac{K_{CI}^2}{K_{CI}^2 + [\text{CI434}]^2}
+    }_{\text{Trigger~2: low CI434}}
 \end{equation}
 
-\textbf{Cell population dynamics} (logistic growth + lysis):
+\medskip
+\noindent\textbf{Cell population dynamics}
+(logistic growth + lysis):
 \begin{equation}
-\frac{d[\text{Cells}]}{dt} = \mu_{max} \cdot [\text{Cells}] \cdot \left(1 - \frac{[\text{Cells}]}{K_{carry}}\right) - k_{lysis} \cdot [\text{Cells}] \cdot \mathbb{1}_{[\text{Holin}] > \theta_{lysis}}
+  \frac{d[\text{Cells}]}{dt}
+  = \mu_{max} \cdot [\text{Cells}]
+    \cdot \!\left(1 - \frac{[\text{Cells}]}{K_{carry}}\right)
+  - k_{lysis} \cdot [\text{Cells}]
+    \cdot \mathbb{1}_{[\text{Holin}] > \theta_{lysis}}
 \end{equation}
 
-\textbf{Important methodological note on the operational vs.\ published NemA $k_{cat}$.} The Michaelis-Menten reduction equation above uses an \textit{operational} per-cell rate constant $k_{cat}^{\text{op}} = 18.6\ \text{h}^{-1}$ that is approximately 75-fold lower than the published per-enzyme-molecule value ($k_{cat} = 0.39\ \text{s}^{-1} \approx 1404\ \text{h}^{-1}$) reported by Williams et al.\ 2003 \cite{williams2003}. The operational value is a reduced effective rate that, when combined with the \textit{also} operational cellular NemA concentration unit, reproduces the qualitative 96-hour dynamics of the tri-modular circuit. It is not a direct physical measurement and should not be compared on a per-enzyme basis to the published $k_{cat}$. The Pillar 2 comparative model (Section~\ref{sec:pillar2}) uses the same operational convention for wild-type and mutant, so the relative comparison there is meaningful on its own terms.
+\medskip
+\textbf{Important methodological note on the operational vs.\ published
+NemA $k_{cat}$.} The Michaelis-Menten reduction equation above uses an
+\textit{operational} per-cell rate constant
+$k_{cat}^{\text{op}} = 18.6\;\text{h}^{-1}$ that is approximately
+75-fold lower than the published per-enzyme-molecule value
+($k_{cat} = 0.39\;\text{s}^{-1} \approx 1{,}404\;\text{h}^{-1}$)
+reported by Williams et al.\ 2003~\cite{williams2003}. The operational
+value is a reduced effective rate that, when combined with the also
+operational cellular NemA concentration unit, reproduces the qualitative
+96-hour dynamics of the tri-modular circuit. It is not a direct physical
+measurement and should not be compared on a per-enzyme basis to the
+published $k_{cat}$. The Pillar~2 comparative model
+(Section~\ref{sec:pillar2}) uses the same operational convention for
+wild-type and mutant, so the relative comparison there is meaningful on
+its own terms.
 
-\subsection{Pillar 2: NemA vs.\ NemA$^{*2+}$ Kinetic Comparison (\texttt{nemA\_mutant\_kinetics.py})}
+%% ----
+\subsection{Pillar~2: NemA vs.\ NemA$^{*2+}$ Kinetic Comparison}
 \label{sec:pillar2}
-Wild-type NemA and the hypothesized NemA$^{*2+}$ variant were compared by integrating the substrate-only Michaelis-Menten ODE over a 24-hour window starting from $[\text{Cr(VI)}]_0 = 100\ \mu$M and with total enzyme $E_{total} = 5\ \mu$M. The Radau solver was used with the same tolerances as Pillar 1. Wild-type operational parameters: $k_{cat}^{WT} = 18.6\ \text{h}^{-1}$, $K_m^{WT} = 48\ \mu$M. Hypothesized NemA$^{*2+}$ parameters: $k_{cat}^{*} = 37.2\ \text{h}^{-1}$, $K_m^{*} = 16\ \mu$M. The mutant values are \textbf{assumed}, extrapolated from active-site pocket mutagenesis precedent in OYE-family enzymes \cite{mowafy2010} (see Section 2.3.3 for the full caveat on provenance). The script also computes and plots the velocity vs.\ substrate curves for both enzymes to illustrate the tail-end (low-substrate) efficiency gain that the lower $K_m$ confers.
 
-\subsection{Pillar 2b: Structural Evaluation of NemA$^{*2+}$ (\texttt{structural\_pipeline/})}
+Wild-type NemA and the hypothesized NemA$^{*2+}$ variant were compared
+by integrating the substrate-only Michaelis-Menten ODE over a 24-hour
+window starting from $[\text{Cr(VI)}]_0 = 100\;\mu$M with total enzyme
+$E_{total} = 5\;\mu$M. The Radau solver was used with the same tolerances
+as Pillar~1. Wild-type operational parameters: $k_{cat}^{WT} = 18.6\;\text{h}^{-1}$,
+$K_m^{WT} = 48\;\mu$M. Hypothesized NemA$^{*2+}$ parameters:
+$k_{cat}^{*} = 37.2\;\text{h}^{-1}$, $K_m^{*} = 16\;\mu$M. The mutant
+values are \textbf{assumed}, extrapolated from active-site pocket
+mutagenesis precedent in OYE-family enzymes~\cite{mowafy2010} (see
+Section~2.3.3 for the full caveat on provenance). The script also
+computes and plots the velocity vs.\ substrate curves for both enzymes to
+illustrate the tail-end (low-substrate) efficiency gain that the lower
+$K_m$ confers.
+
+%% ----
+\subsection{Pillar~2b: Structural Evaluation of NemA$^{*2+}$}
 \label{sec:pillar2b}
-The structural evaluation pipeline uses the 2.30 \AA\ X-ray crystal structure of \textit{E. coli} NemA (PDB 8BPQ, UniProt P77258 \cite{uniprotP77258}) to evaluate whether the proposed second-shell pocket-enlargement mutations (Mowafy \cite{mowafy2010} precedent) are \textit{structurally consistent} with reduced steric hindrance in the FMN pocket. The pipeline is a \textbf{structural consistency check}, not a kinetic prediction: it does not compute catalytic constants, does not perform molecular dynamics, and does not simulate the dynamic NADH-bound holoenzyme. Where the geometric observables are reported, they are reported as geometric facts about the optimized placement, not as evidence of catalytic improvement.
 
-\textbf{Source structure and provenance.} PDB 8BPQ is the 2.30 \AA\ X-ray structure of E. coli NemA (UniProt P77258, 365 residues) with bound FMN cofactor, deposited in the PDB in 2023. The full machine-readable provenance record (RCSB source, fetch date, chain A residue count, cofactor inventory, and the Vina-fallback rationale) is in \texttt{results/structure\_provenance.json}.
+The structural evaluation pipeline uses the 2.30~\AA{} X-ray crystal
+structure of \textit{E.~coli} NemA (PDB~8BPQ, UniProt~P77258
+\cite{uniprotP77258}) to evaluate whether the proposed second-shell
+pocket-enlargement mutations (Mowafy~\cite{mowafy2010} precedent) are
+\textit{structurally consistent} with reduced steric hindrance in the
+FMN pocket. The pipeline is a \textbf{structural consistency check}, not
+a kinetic prediction: it does not compute catalytic constants, does not
+perform molecular dynamics, and does not simulate the dynamic NADH-bound
+holoenzyme. Where the geometric observables are reported, they are
+reported as geometric facts about the optimized placement, not as
+evidence of catalytic improvement.
 
-\textbf{Step 1: Active-site identification and pocket analysis.} The FMN cofactor is located in chain A; the binding pocket is defined as all residues with any heavy atom within 5.0 \AA\ of any FMN heavy atom. First-shell residues are those within 3.5 \AA\ of FMN (direct contacts). Second-shell candidates are aromatic/hydrophobic residues (Trp, Phe, Tyr, Ile, Leu, Met) within 3.5--5.0 \AA\ of FMN that are not direct contacts. The candidate set is the engineering target for the Mowafy second-shell pocket-enlargement hypothesis. \texttt{analyze\_active\_site.py} performs this analysis; output is \texttt{results/nema\_active\_site.json} and \texttt{results/nema\_active\_site.png}.
+\medskip
+\textbf{Source structure and provenance.} PDB~8BPQ is the 2.30~\AA{}
+X-ray structure of \textit{E.~coli} NemA (UniProt~P77258, 365~residues)
+with bound FMN cofactor, deposited in the PDB in 2023. The full
+machine-readable provenance record (RCSB source, fetch date, chain~A
+residue count, cofactor inventory, and the Vina-fallback rationale) is
+in \texttt{results/structure\_provenance.json}.
 
-\textbf{Step 2: Dimensionless contact-disruption score.} For each second-shell candidate residue $X$, a \textbf{contact-disruption score} is computed as the fraction of heavy-atom contacts lost when $X$ is in-silico truncated to alanine:
+\medskip
+\textbf{Step~1: Active-site identification and pocket analysis.}
+The FMN cofactor is located in chain~A; the binding pocket is defined as
+all residues with any heavy atom within 5.0~\AA{} of any FMN heavy
+atom. First-shell residues are those within 3.5~\AA{} of FMN (direct
+contacts). Second-shell candidates are aromatic/hydrophobic residues
+(Trp, Phe, Tyr, Ile, Leu, Met) within 3.5--5.0~\AA{} of FMN that are
+not direct contacts. The candidate set is the engineering target for the
+Mowafy second-shell pocket-enlargement hypothesis.
+\texttt{analyze\_active\_site.py} performs this analysis; output is
+\texttt{results/nema\_active\_site.json} and
+\texttt{results/nema\_active\_site.png}.
+
+\medskip
+\textbf{Step~2: Dimensionless contact-disruption score.}
+For each second-shell candidate residue $X$, a
+\textbf{contact-disruption score} is computed as the fraction of
+heavy-atom contacts lost when $X$ is in-silico truncated to alanine:
 \begin{equation}
-\mathrm{score}_X = \frac{C_X^{\mathrm{WT}} - C_X^{\mathrm{Ala}}}{C_X^{\mathrm{WT}}}
+  \mathrm{score}_X
+  = \frac{C_X^{\mathrm{WT}} - C_X^{\mathrm{Ala}}}{C_X^{\mathrm{WT}}}
 \end{equation}
-where $C_X^{\mathrm{WT}}$ is the count of protein heavy atoms within 5.0 \AA\ of any $X$ heavy atom (excluding $X$'s own atoms), and $C_X^{\mathrm{Ala}}$ is the same count with $X$ trimmed to its alanine-like form (backbone N, CA, C, O + CB). The score is \textbf{dimensionless} (0--1), \textbf{not} a kcal/mol $\Delta\Delta G$ calculation. Score $< 0.3$ indicates a residue tolerant of $\rightarrow$ Ala substitution; $> 0.6$ indicates high structural cost. Methodological basis: contact-cutoff analysis as in Kannan \& Vishveshwara (J Mol Biol 292(2):441--464, 1999 \cite{kannan1999}) and the Rosetta community hotspot-residue screening. \texttt{scan\_contact\_disruption.py} performs this analysis; output is \texttt{results/nema\_contact\_disruption.csv} and \texttt{results/nema\_contact\_disruption.png}.
+where $C_X^{\mathrm{WT}}$ is the count of protein heavy atoms within
+5.0~\AA{} of any $X$ heavy atom (excluding $X$'s own atoms), and
+$C_X^{\mathrm{Ala}}$ is the same count with $X$ trimmed to its
+alanine-like form (backbone N, C$\alpha$, C, O + C$\beta$). The score
+is \textbf{dimensionless} (0--1), \textbf{not} a kcal/mol
+$\Delta\Delta G$ calculation. Score~$< 0.3$ indicates a residue tolerant
+of $\rightarrow$ Ala substitution; ${>} 0.6$ indicates high structural
+cost. The methodological basis is the contact-cutoff analysis of Kannan
+\& Vishveshwara~\cite{kannan1999} and the Rosetta community
+hotspot-residue screening. \texttt{scan\_contact\_disruption.py}
+performs this analysis; output is
+\texttt{results/nema\_contact\_disruption.csv} and
+\texttt{results/nema\_contact\_disruption.png}.
 
-\textbf{Step 3: Pre-docking literature sanity check.} Before any substrate positioning analysis, \texttt{literature\_check.py} queries PubMed (NCBI E-utilities) to verify two preconditions for the structural evaluation: (Q1) whether docking chromate/Cr(VI) into an FMN-containing flavoprotein active site has published precedent, and (Q2) whether the mechanism of Cr(VI) reduction by NemA / OYE-family flavoproteins is reported as direct FMN hydride transfer or as indirect (e.g., ROS-mediated). The decision rule outputs either \texttt{structural\_compatibility} (literature supports the docking approach, Vina scores may be reported in the main text) or \texttt{exploratory\_positioning} (literature does not strongly support the approach, Vina scores go to supplementary). The 2026-07-01 run of this check returned \texttt{exploratory\_positioning} (0 docking-precedent papers in Q1; 0 direct-FMN-hydride papers in Q2; 2 ROS/Fenton-like mechanism papers in Q2). Output: \texttt{results/literature\_check.md} and \texttt{results/literature\_check.json}.
+\medskip
+\textbf{Step~3: Pre-docking literature sanity check.}
+Before any substrate positioning analysis,
+\texttt{literature\_check.py} queries PubMed (NCBI~E-utilities) to
+verify two preconditions for the structural evaluation: (Q1)~whether
+docking chromate/Cr(VI) into an FMN-containing flavoprotein active site
+has published precedent, and (Q2)~whether the mechanism of Cr(VI)
+reduction by NemA / OYE-family flavoproteins is reported as direct FMN
+hydride transfer or as indirect (e.g., ROS-mediated). The decision rule
+outputs either \texttt{structural\_compatibility} (literature supports
+the docking approach, Vina scores may be reported in the main text) or
+\texttt{exploratory\_positioning} (literature does not strongly support
+the approach, Vina scores go to supplementary). The 2026-07-01 run of
+this check returned \texttt{exploratory\_positioning} (0~docking-precedent
+papers in~Q1; 0~direct-FMN-hydride papers in~Q2; 2~ROS/Fenton-like
+mechanism papers in~Q2). Output: \texttt{results/literature\_check.md}
+and \texttt{results/literature\_check.json}.
 
-\textbf{Step 4: Geometric placement of CrO$_4^{2-}$.} AutoDock Vina 1.2.5 was attempted but rejected by Vina with \texttt{Atom type Cr is not a valid AutoDock type} (Vina's atom type set is C, A, N, O, P, S, H, F, I, NA, OA, SA, HD, plus a few metals: Mg, Mn, Zn, Ca, Fe, Cl, Br; Cr is not in this list). The fallback is \texttt{scipy.optimize.minimize}-based rigid-body geometric placement of CrO$_4^{2-}$ (Cr-O bond = 1.62 \AA, tetrahedral) with multi-start initialization ($N = 32$, seed = 42). The objective penalizes steric clashes (heavy-atom contacts $< 2.0$ \AA) and rewards H-bond-donor-like contacts (polar protein atoms within 3.5 \AA\ of any chromate O, with a Gaussian bonus centered at 2.8 \AA). The reported observables (Cr-FMN C4a distance, Cr-FMN N5 distance, H-bond donor count, steric clash count) are exact for the optimized placement; the placement itself is a heuristic. \texttt{geometric\_placement.py} performs this analysis; output is \texttt{results/nema\_docking\_results.csv}, \texttt{results/nema\_docking\_overlay.png}, and \texttt{results/structure\_provenance.json}.
+\medskip
+\textbf{Step~4: Geometric placement of CrO$_4^{2-}$.}
+AutoDock Vina~1.2.5 was attempted but rejected by Vina with
+\texttt{Atom type Cr is not a valid AutoDock type} (Vina's atom-type
+set does not include Cr). The fallback is a
+\texttt{scipy.optimize.minimize}-based rigid-body geometric placement of
+CrO$_4^{2-}$ (Cr--O bond = 1.62~\AA{}, tetrahedral) with multi-start
+initialization ($N = 32$, seed~= 42). The objective penalizes steric
+clashes (heavy-atom contacts ${<}2.0$~\AA{}) and rewards
+H-bond-donor-like contacts (polar protein atoms within 3.5~\AA{} of any
+chromate~O, with a Gaussian bonus centered at 2.8~\AA{}). The reported
+observables (Cr-FMN C4a distance, Cr-FMN N5 distance, H-bond donor
+count, steric clash count) are exact for the optimized placement; the
+placement itself is a heuristic. \texttt{geometric\_placement.py}
+performs this analysis; output is
+\texttt{results/nema\_docking\_results.csv},
+\texttt{results/nema\_docking\_overlay.png}, and
+\texttt{results/structure\_provenance.json}.
 
-\subsection{Pillar 3: Ribosome Allocation Metabolic Burden Model (\texttt{metabolic\_burden\_model.py})}
-Cellular growth rate under circuit expression and Cr(VI) stress was computed using the ribosome-allocation framework of Scott et al.\ 2010 \cite{scott2010}. The instantaneous specific growth rate is:
+%% ----
+\subsection{Pillar~3: Ribosome Allocation Metabolic Burden Model}
+
+Cellular growth rate under circuit expression and Cr(VI) stress was
+computed using the ribosome-allocation framework of Scott et
+al.~2010~\cite{scott2010}. The instantaneous specific growth rate is:
 \begin{equation}
-\mu = \left(\phi_{max} - \phi_q - \phi_s\right) \cdot \kappa_t^{stressed}
+  \mu = \bigl(\phi_{max} - \phi_q - \phi_s\bigr)
+        \cdot \kappa_t^{stressed}
 \end{equation}
-where $\phi_{max}$ is the maximum mass fraction of the proteome that can be ribosomes (0.55), $\phi_q$ is the housekeeping protein fraction (0.40, adjusted upward from the typical $\sim$0.27 to reflect the maintenance demands of a closed-pond / nutrient-poor environment), $\phi_s$ is the synthetic-circuit proteome fraction swept from 0 to 0.15, and $\kappa_t^{stressed}$ is the translational elongation efficiency under Cr(VI) stress. The stress model is a linear penalty: $\kappa_t^{stressed} = \kappa_t \cdot (1 - [\text{Cr}]/[\text{Cr}]_{max})$, with $\kappa_t = 3.5\ \text{h}^{-1}$ (a nutrient-poor pond value, lower than the $\sim$6--8 h$^{-1}$ of Scott et al.\ 2010's standard laboratory condition) and $[\text{Cr}]_{max} = 250\ \mu$M.
+where $\phi_{max}$ is the maximum mass fraction of the proteome that can
+be ribosomes (0.55), $\phi_q$ is the housekeeping protein fraction
+(0.40, adjusted upward from the typical $\sim$0.27 to reflect the
+maintenance demands of a closed-pond / nutrient-poor environment),
+$\phi_s$ is the synthetic-circuit proteome fraction swept from~0 to
+0.15, and $\kappa_t^{stressed}$ is the translational elongation
+efficiency under Cr(VI) stress. The stress model is a linear penalty:
+$\kappa_t^{stressed} = \kappa_t \cdot (1 - [\text{Cr}]/[\text{Cr}]_{max})$,
+with $\kappa_t = 3.5\;\text{h}^{-1}$ (a nutrient-poor pond value, lower
+than the $\sim$6--8~h$^{-1}$ of Scott et al.~2010's standard laboratory
+condition) and $[\text{Cr}]_{max} = 250\;\mu$M.
 
-\subsection{Pillar 4: Luria-Delbr\"uck Evolutionary Biosafety Model (\texttt{biosafety\_mutation\_model.py})}
-Evolutionary containment failure probability was computed using the Poisson approximation to Luria-Delbr\"uck fluctuation statistics. The probability of at least one escape mutant appearing in a population of $N$ total cells over $G$ generations, given per-cell-per-generation failure probability $p$:
+%% ----
+\subsection{Pillar~4: Luria-Delbr\"{u}ck Evolutionary Biosafety Model}
+
+Evolutionary containment failure probability was computed using the
+Poisson approximation to Luria-Delbr\"{u}ck fluctuation statistics. The
+probability of at least one escape mutant appearing in a population of
+$N$ total cells over $G$ generations, given per-cell-per-generation
+failure probability $p$:
 \begin{equation}
-P_{\text{escape}} = 1 - e^{-N \cdot G \cdot p}
+  P_{\text{escape}} = 1 - e^{-N \cdot G \cdot p}
 \end{equation}
 
-For the combined kill-switch + double-auxotrophy containment layers, the per-division failure probability is the product of three independent failure modes (a cell must simultaneously fail all three to escape):
+For the combined kill-switch + double-auxotrophy containment layers, the
+per-division failure probability is the product of three independent
+failure modes (a cell must simultaneously fail all three to escape):
 \begin{equation}
-p_{\text{combined}} = p_{KS\,fail} \times p_{\Delta thyA\,HGT} \times p_{\Delta dapA\,HGT}
+  p_{\text{combined}}
+  = p_{KS\,fail} \times p_{\Delta thyA\,HGT}
+    \times p_{\Delta dapA\,HGT}
 \end{equation}
-where $p_{KS\,fail} = \mu_{bp} \cdot L_{target}$ (per-bp mutation rate $\times$ kill-switch target size), and $p_{\Delta thyA\,HGT}$, $p_{\Delta dapA\,HGT}$ are horizontal gene transfer probabilities for intact functional \textit{thyA} and \textit{dapA} genes from environmental donors. The script produces two output figures: a 365-day long-run view and a 30-day deployment-window view cropped to the deployment window that the hypothesis explicitly targets. The latter is the figure referenced in Section 4.
+where $p_{KS\,fail} = \mu_{bp} \cdot L_{target}$ (per-bp mutation rate
+$\times$ kill-switch target size), and $p_{\Delta thyA\,HGT}$,
+$p_{\Delta dapA\,HGT}$ are horizontal gene transfer probabilities for
+intact functional \textit{thyA} and \textit{dapA} genes from
+environmental donors. The script produces two output figures: a 365-day
+long-run view and a 30-day deployment-window view that the hypothesis
+explicitly targets.
 
-\subsection{Pillar 4b: Biosafety Sensitivity Analysis (\texttt{biosafety\_sensitivity.py})}
-The strongest claim in the manuscript (that $P_{\text{escape}}$ remains below an acceptable-risk threshold of $10^{-15}$) is sensitive to the assumed spontaneous mutation rate $\mu_{bp}$, which the literature places anywhere in the range $10^{-10}$ to $10^{-9}$ per bp per generation. \texttt{biosafety\_sensitivity.py} sweeps $\mu_{bp}$ over scaling factors $\times$0.01, $\times$0.1, $\times$1 (baseline), $\times$10, $\times$100, holding the deployment scale fixed at the 1,000 L / $10^{12}$ cell baseline, and reports $P_{\text{escape}}$ at the 30-day window for each scaling. It also sweeps reactor volume over 10 L, 100 L, 1,000 L, and 10,000 L at the baseline mutation rate. The results are reported in Section~\ref{sec:sens}.
+%% ----
+\subsection{Pillar~4b: Biosafety Sensitivity Analysis}
 
-\subsection{Pillar 4c: Global Uncertainty Quantification via Latin Hypercube Sampling (\texttt{biosafety\_lhs.py})}
+The strongest claim in the manuscript (that $P_{\text{escape}}$ remains
+below an acceptable-risk threshold of $10^{-15}$) is sensitive to the
+assumed spontaneous mutation rate $\mu_{bp}$, which the literature places
+anywhere in the range $10^{-10}$--$10^{-9}$ per bp per
+generation~\cite{drake1991,lee2012}. \texttt{biosafety\_sensitivity.py}
+sweeps $\mu_{bp}$ over scaling factors $\times$0.01, $\times$0.1,
+$\times$1 (baseline), $\times$10, and $\times$100, holding the
+deployment scale fixed at the 1{,}000~L / $10^{12}$~cell baseline, and
+reports $P_{\text{escape}}$ at the 30-day window for each scaling. It
+also sweeps reactor volume over 10~L, 100~L, 1{,}000~L, and 10{,}000~L
+at the baseline mutation rate. The results are reported in
+Section~\ref{sec:sens}.
+
+%% ----
+\subsection{Pillar~4c: Global Uncertainty Quantification via
+            Latin Hypercube Sampling}
 \label{sec:pillar4c}
-A one-factor-at-a-time sensitivity sweep does not capture joint-tail sensitivity: a parameter can be within its acceptable local range and still fail in combination with other uncertain parameters. Pillar 4c replaces the local sweep with a global Latin Hypercube Sampling (LHS) analysis over 8 input parameters drawn log-uniformly from literature-bounded ranges, with $N = 10{,}000$ samples (seed = 42, via \texttt{scipy.stats.qmc.LatinHypercube}).
 
-The 8 sampled parameters and their literature-bounded log-uniform ranges (defined in \texttt{parameters.py}) are: per-bp per-generation mutation rate $\mu_{bp}$ \cite{drake1991,lee2012}, HGT intact-gene transfer probability for $\Delta thyA$ reversion, the same for $\Delta dapA$ \cite{dahlberg1998,muela1994,licht1999}, reactor volume $V$, maximum cell density $\rho_{\max}$, generations per day $g$, deployment window $T$ (the hypothesis states 30 days \cite{hypothesis}), and kill-switch target size $L_{\text{target}}$ \cite{chan2016}. The full bounds are reported in \texttt{parameters.py} and tabulated in the supplementary parameter table.
+A one-factor-at-a-time sensitivity sweep does not capture joint-tail
+sensitivity: a parameter can be within its acceptable local range and
+still fail in combination with other uncertain parameters. Pillar~4c
+replaces the local sweep with a global Latin Hypercube Sampling (LHS)
+analysis over 8~input parameters drawn log-uniformly from
+literature-bounded ranges, with $N = 10{,}000$ samples (seed~= 42, via
+\texttt{scipy.stats.qmc.LatinHypercube}).
 
-For each sample, the per-division combined failure probability is the product $p_{\text{combined}} = \mu_{bp} \cdot L_{\text{target}} \cdot p_{\text{HGT, thyA}} \cdot p_{\text{HGT, dapA}}$ (as in Pillar 4), the total cell count is $N = V \cdot \rho_{\max}$, the total generations is $G = g \cdot T$, and the 30-day escape probability is the exact Poisson form
+The 8~sampled parameters and their literature-bounded log-uniform ranges
+(defined in \texttt{parameters.py}) are: per-bp per-generation mutation
+rate $\mu_{bp}$~\cite{drake1991,lee2012}, HGT intact-gene transfer
+probability for $\Delta thyA$ reversion, the same for $\Delta dapA$
+\cite{dahlberg1998,muela1994,licht1999}, reactor volume~$V$, maximum
+cell density $\rho_{\max}$, generations per day~$g$, deployment window
+$T$ (the hypothesis states 30~days~\cite{hypothesis}), and kill-switch
+target size $L_{\text{target}}$~\cite{chan2016}. The full bounds are
+reported in \texttt{parameters.py} and tabulated in the supplementary
+parameter table.
+
+For each sample, the per-division combined failure probability is the
+product
+$p_{\text{combined}} = \mu_{bp} \cdot L_{\text{target}} \cdot
+p_{\text{HGT, thyA}} \cdot p_{\text{HGT, dapA}}$
+(as in Pillar~4), the total cell count is $N = V \cdot \rho_{\max}$,
+the total generations is $G = g \cdot T$, and the 30-day escape
+probability is the exact Poisson form
 \begin{equation}
-P_{\text{escape}}^{30d} = 1 - e^{-N \cdot G \cdot p_{\text{combined}}}
+  P_{\text{escape}}^{30d} = 1 - e^{-N \cdot G \cdot p_{\text{combined}}}
 \end{equation}
-evaluated with the IEEE-754-safe \texttt{scipy.special.expm1} function (which computes $\exp(x) - 1$ with full precision even for $|x| \sim 10^{-17}$, replacing the manual Taylor-approximation branch used in \texttt{biosafety\_mutation\_model.py}). The full sample is written to \texttt{results/biosafety\_lhs.csv}; a 3-panel figure (CDF, log-binned histogram, Spearman rank-correlation heatmap) is written to \texttt{results/biosafety\_lhs.png}.
+evaluated with the IEEE-754-safe \texttt{scipy.special.expm1} function
+(which computes $\exp(x) - 1$ with full precision even for
+$|x| \sim 10^{-17}$, replacing the manual Taylor-approximation branch
+used in \texttt{biosafety\_mutation\_model.py}). The full sample is
+written to \texttt{results/biosafety\_lhs.csv}; a three-panel figure
+(CDF, log-binned histogram, Spearman rank-correlation heatmap) is
+written to \texttt{results/biosafety\_lhs.png}.
 
-This global analysis provides three diagnostics the local sweep cannot: (a) the median $P_{\text{escape}}$ under the joint uncertainty; (b) a 95\% confidence interval; (c) the fraction of samples that exceed the $10^{-15}$ de-minimis threshold under plausible joint-tail combinations of the inputs.
+This global analysis provides three diagnostics the local sweep cannot:
+(a)~the median $P_{\text{escape}}$ under the joint uncertainty;
+(b)~a 95\% confidence interval; (c)~the fraction of samples that exceed
+the $10^{-15}$ de-minimis threshold under plausible joint-tail
+combinations of the inputs.
 
+%% ----
 \subsection{Parameter Table}
+
 \begin{table*}[!t]
 \centering
-\caption{Centralized parameter set for all four computational pillars. Full provenance and per-constant inline justification are in \texttt{simulations/parameters.py}.}
+\caption{Centralized parameter set for all four computational pillars.
+  Full provenance and per-constant inline justification are in
+  \texttt{simulations/parameters.py}.}
 \label{tab:params}
 \small
 \begin{tabular}{@{}lllll@{}}
 \toprule
-\textbf{Symbol} & \textbf{Value} & \textbf{Units} & \textbf{Provenance} & \textbf{Used by} \\ \midrule
-$K_d$ (PchrB) & 0.1 (100 nM) & $\mu$M & source: \cite{igem2013} & Pillar 1 \\
-$n$ (Hill coeff.) & 2 & --- & source: \cite{igem2013} & Pillar 1 \\
-$K_m^{WT}$ (operational) & 48 & $\mu$M & source: \cite{williams2003} & Pillars 1, 2 \\
-$k_{cat}^{WT}$ (operational) & 18.6 & h$^{-1}$ & ASSUMED (operational rate) & Pillars 1, 2 \\
-$k_{cat}^{WT}$ (per-enzyme) & 0.39 / 1404 & s$^{-1}$ / h$^{-1}$ & source: \cite{williams2003} & Pillar 2 (ref.) \\
-$K_m^{*}$ (NemA$^{*2+}$) & 16 & $\mu$M & ASSUMED (extrapolated from \cite{mowafy2010}) & Pillar 2 \\
-$k_{cat}^{*}$ (NemA$^{*2+}$) & 37.2 & h$^{-1}$ & ASSUMED (extrapolated from \cite{mowafy2010}) & Pillars 1, 2 \\
-$t_{1/2}^{CI434}$ & 24 & h & source: SsrA degron literature & Pillar 1 \\
-$\phi_{max}$ & 0.55 & --- & source: \cite{scott2010} & Pillar 3 \\
-$\phi_q$ & 0.40 & --- & ASSUMED (nutrient-poor pond) & Pillar 3 \\
-$\kappa_t$ & 3.5 & h$^{-1}$ & ASSUMED (nutrient-poor pond) & Pillar 3 \\
-$[\text{Cr}]_{max}$ & 250 & $\mu$M & ASSUMED & Pillar 3 \\
-$\mu_{bp}$ & $10^{-9}$ & per bp per gen & ASSUMED (Drake \cite{drake1991} range) & Pillar 4 \\
-$L_{target}$ (kill switch) & 500 & bp & ASSUMED (per \cite{chan2016} arch.) & Pillar 4 \\
-$p_{\Delta thyA\,HGT}$ & $10^{-12}$ & per division & ASSUMED (no single primary citation) & Pillar 4 \\
-$p_{\Delta dapA\,HGT}$ & $10^{-12}$ & per division & ASSUMED (no single primary citation) & Pillar 4 \\
-$V$ (deployment volume) & 1000 & L & source: Sec.~4 & Pillar 4 \\
-Max cell density & $10^9$ & cells/L & source: Sec.~4 & Pillar 4 \\
-Generations/day & 4 & gen/day & ASSUMED (nutrient-poor pond) & Pillar 4 \\
-Deployment window & 30 & days & source: Sec.~1.4 (hypothesis) & Pillar 4 \\
-De minimis risk threshold & $10^{-15}$ & --- & source: Sec.~4 & Pillar 4 \\
+\textbf{Symbol} & \textbf{Value} & \textbf{Units} &
+\textbf{Provenance} & \textbf{Used by} \\
+\midrule
+$K_d$ (PchrB)            & 0.1 (100 nM)       & $\mu$M              & source: \cite{igem2013}                      & Pillar~1 \\
+$n$ (Hill coeff.)         & 2                  & --                 & source: \cite{igem2013}                      & Pillar~1 \\
+$K_m^{WT}$ (operational)  & 48                 & $\mu$M              & source: \cite{williams2003}                  & Pillars~1, 2 \\
+$k_{cat}^{WT}$ (oper.)    & 18.6               & h$^{-1}$            & ASSUMED (operational rate)                   & Pillars~1, 2 \\
+$k_{cat}^{WT}$ (per-enz.) & 0.39 / 1{,}404    & s$^{-1}$ / h$^{-1}$& source: \cite{williams2003}                  & Pillar~2 (ref.) \\
+$K_m^{*}$ (NemA$^{*2+}$) & 16                 & $\mu$M              & ASSUMED (extrap.\ from \cite{mowafy2010})    & Pillar~2 \\
+$k_{cat}^{*}$ (NemA$^{*2+}$) & 37.2           & h$^{-1}$            & ASSUMED (extrap.\ from \cite{mowafy2010})    & Pillars~1, 2 \\
+$t_{1/2}^{CI434}$         & 24                 & h                   & source: SsrA degron literature               & Pillar~1 \\
+$\phi_{max}$              & 0.55               & --                 & source: \cite{scott2010}                     & Pillar~3 \\
+$\phi_q$                  & 0.40               & --                 & ASSUMED (nutrient-poor pond)                 & Pillar~3 \\
+$\kappa_t$                & 3.5                & h$^{-1}$            & ASSUMED (nutrient-poor pond)                 & Pillar~3 \\
+$[\text{Cr}]_{max}$       & 250                & $\mu$M              & ASSUMED                                      & Pillar~3 \\
+$\mu_{bp}$                & $10^{-9}$          & per bp per gen      & ASSUMED (Drake \cite{drake1991} range)       & Pillar~4 \\
+$L_{target}$ (kill switch)& 500                & bp                  & ASSUMED (per \cite{chan2016} arch.)           & Pillar~4 \\
+$p_{\Delta thyA\,HGT}$    & $10^{-12}$         & per division        & ASSUMED (no single primary citation)         & Pillar~4 \\
+$p_{\Delta dapA\,HGT}$    & $10^{-12}$         & per division        & ASSUMED (no single primary citation)         & Pillar~4 \\
+$V$ (deployment volume)   & 1{,}000            & L                   & source: Sec.~4                               & Pillar~4 \\
+Max cell density          & $10^9$             & cells/L             & source: Sec.~4                               & Pillar~4 \\
+Generations/day           & 4                  & gen/day             & ASSUMED (nutrient-poor pond)                 & Pillar~4 \\
+Deployment window         & 30                 & days                & source: Sec.~1.4 (hypothesis)               & Pillar~4 \\
+De minimis risk threshold & $10^{-15}$         & --                 & source: Sec.~4                               & Pillar~4 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
+%% ----
 \subsection{Claim--Evidence Provenance Table}
-To make the provenance of every numerical value in this manuscript traceable, Table~\ref{tab:provenance} lists each claim class, the evidence type, and the source file or citation. Claims are partitioned into: (i) \textbf{L}iterature-only --- values taken directly from prior published work; (ii) \textbf{Scenario assumptions} --- values chosen for the systems model that are not predicted by any structural pipeline in this study; (iii) \textbf{PREDICTED} --- outputs of the present study's computational models, with the responsible script.
+
+To make the provenance of every numerical value in this manuscript
+traceable, Table~\ref{tab:provenance} lists each claim class, the
+evidence type, and the source file or citation. Claims are partitioned
+into: \textbf{(L)}~Literature-only -- values taken directly from prior
+published work; \textbf{(S)}~Scenario assumptions -- values chosen for
+the systems model that are not predicted by any structural pipeline in
+this study; \textbf{(P)}~PREDICTED -- outputs of the present study's
+computational models, with the responsible script.
 
 \begin{table*}[!t]
 \centering
-\caption{Claim--evidence provenance for every numerical value in the manuscript. The split is intended to make the provenance of each value traceable to a single source file or citation. The NemA$^{*2+}$ kinetic row is explicitly tagged as a scenario assumption; the structural pipeline rows are tagged as geometric / structural observables, not kinetic predictions.}
+\caption{Claim--evidence provenance for every numerical value in the
+  manuscript. The NemA$^{*2+}$ kinetic row is explicitly tagged as a
+  scenario assumption; the structural pipeline rows are tagged as
+  geometric / structural observables, not kinetic predictions.}
 \label{tab:provenance}
 \small
-\begin{tabular}{@{}p{4.5cm}p{3.5cm}p{8cm}@{}}
+\begin{tabular}{@{}p{4.5cm} p{3.2cm} p{8.0cm}@{}}
 \toprule
 \textbf{Claim} & \textbf{Evidence type} & \textbf{Source} \\
 \midrule
-Cr(VI) carcinogenicity and Bangladesh river concentrations & Literature & \cite{iarc1990}, \cite{rahman2021}, \cite{ahmed2022}, \cite{islam2020}, \cite{doem2022} \\
-ChrB-sfGFP biosensor dose-response and LOD & Literature + this study's ODE & \cite{igem2013} + \texttt{circuit\_ode\_model.py} \\
-Wild-type NemA kinetics on Cr(VI) ($K_m$, $k_{cat}$) & Literature & \cite{williams2003} \\
-\textbf{NemA$^{*2+}$ kinetic parameters ($K_m^*$, $k_{cat}^*$)} & \textbf{Scenario assumption (NOT predicted by the structural pipeline)} & Assumed by OYE-family analogy \cite{mowafy2010}; see \S2.3.3 \\
-NemA$^{*2+}$ candidate second-shell mutations (specific Trp/Phe/Ile/Tyr positions) & Structural pipeline (this study) & \texttt{structural\_pipeline/analyze\_active\_site.py} + \texttt{scan\_contact\_disruption.py} \\
-Contact-disruption scores for second-shell candidates (dimensionless, 0--1) & Structural pipeline (this study) & \texttt{scan\_contact\_disruption.py}; methodological basis \cite{kannan1999} \\
-CrO$_4^{2-}$ geometric positioning relative to FMN C4a & Structural pipeline (this study) & \texttt{geometric\_placement.py}; see \S3.5 and \S4.2 \\
-Circuit burden 4.5\%, growth reduction 33\% & This study's ribosome-allocation model & \texttt{metabolic\_burden\_model.py} \\
-96-hour Cr(VI) depletion dynamics & This study's ODE & \texttt{circuit\_ode\_model.py} \\
-30-day $P_{\text{escape}}$ point estimate & Luria-Delbr\"uck Poisson + this study's parameters & \texttt{biosafety\_mutation\_model.py} \\
-30-day $P_{\text{escape}}$ local sensitivity (Pillar 4b) & This study's one-factor sweep & \texttt{biosafety\_sensitivity.py} \\
-30-day $P_{\text{escape}}$ global uncertainty (Pillar 4c) & This study's LHS (N = 10,000) & \texttt{biosafety\_lhs.py} \\
+Cr(VI) carcinogenicity and Bangladesh river concentrations
+  & Literature
+  & \cite{iarc1990,rahman2021,ahmed2022,islam2020,doem2022} \\[2pt]
+ChrB-sfGFP biosensor dose-response and LOD
+  & Literature + ODE model
+  & \cite{igem2013} + \texttt{circuit\_ode\_model.py} \\[2pt]
+Wild-type NemA kinetics on Cr(VI)
+  & Literature
+  & \cite{williams2003} \\[2pt]
+\textbf{NemA$^{*2+}$ kinetic parameters ($K_m^*$, $k_{cat}^*$)}
+  & \textbf{Scenario assumption}
+  & Assumed by OYE-family analogy \cite{mowafy2010}; see \S2.3.3 \\[2pt]
+NemA$^{*2+}$ candidate second-shell mutations
+  & Structural pipeline (this study)
+  & \texttt{analyze\_active\_site.py} +
+    \texttt{scan\_contact\_disruption.py} \\[2pt]
+Contact-disruption scores (dimensionless, 0--1)
+  & Structural pipeline (this study)
+  & \texttt{scan\_contact\_disruption.py}; basis \cite{kannan1999} \\[2pt]
+CrO$_4^{2-}$ geometric positioning relative to FMN C4a
+  & Structural pipeline (this study)
+  & \texttt{geometric\_placement.py}; see \S\ref{sec:pillar2b} \\[2pt]
+Circuit burden 4.5\%, growth reduction 33\%
+  & Ribosome-allocation model
+  & \texttt{metabolic\_burden\_model.py} \\[2pt]
+96-hour Cr(VI) depletion dynamics
+  & ODE model (this study)
+  & \texttt{circuit\_ode\_model.py} \\[2pt]
+30-day $P_{\text{escape}}$ point estimate
+  & Luria-Delbr\"{u}ck + this study's parameters
+  & \texttt{biosafety\_mutation\_model.py} \\[2pt]
+30-day $P_{\text{escape}}$ local sensitivity (Pillar~4b)
+  & One-factor sweep (this study)
+  & \texttt{biosafety\_sensitivity.py} \\[2pt]
+30-day $P_{\text{escape}}$ global uncertainty (Pillar~4c)
+  & LHS ($N = 10{,}000$, this study)
+  & \texttt{biosafety\_lhs.py} \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
 \FloatBarrier
 
+%% ============================================================
 \section{Results}
+%% ============================================================
 
 \subsection{Circuit Systems Dynamics: 96-Hour ODE Simulation}
 
 \begin{figure*}[!t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{simulations/results/integrated_96h_simulation.png}
-    \caption{96-hour ODE simulation of tri-modular circuit dynamics. (Top-left) Cr(VI) depletion by NemA-catalyzed reduction; (top-right) sfGFP biosensor fluorescence as a function of time; (bottom-left) CI434-SsrA timer decay and Holin accumulation crossing the lysis threshold $\theta_{lysis}=5$ (red dashed line); (bottom-right) live-cell density on a logarithmic scale. Generated by \texttt{circuit\_ode\_model.py}.}
-    \label{fig:ode}
+  \centering
+  \includegraphics[width=0.85\textwidth]%
+    {simulations/results/integrated_96h_simulation.png}
+  \caption{96-hour ODE simulation of tri-modular circuit dynamics.
+    \textit{Top-left:} Cr(VI) depletion by NemA-catalyzed reduction.
+    \textit{Top-right:} sfGFP biosensor fluorescence as a function of
+    time. \textit{Bottom-left:} CI434-SsrA timer decay and Holin
+    accumulation crossing the lysis threshold $\theta_{lysis} = 5$
+    (red dashed line). \textit{Bottom-right:} live-cell density on a
+    logarithmic scale. Generated by \texttt{circuit\_ode\_model.py}.}
+  \label{fig:ode}
 \end{figure*}
 
-The 96-hour coupled-ODE simulation (Fig.~\ref{fig:ode}) reveals precise temporal coordination across all three modules. Starting from an initial condition of 100 $\mu$M Cr(VI) and $1 \times 10^7$ CFU/mL, the system executes the remediation protocol in three distinct phases. \textbf{Phase 1 (0--8 h):} sfGFP fluorescence rises rapidly as ChrB releases the PchrB operator; the kill switch is held quiescent. \textbf{Phase 2 (8--44 h):} NemA reaches steady-state concentration; Cr(VI) decreases approximately linearly at $\sim$2.3 $\mu$M/h, falling below 100 nM by $t = 44$ h. \textbf{Phase 3 (44--96 h):} The kill-switch AND-gate fires; Holin crosses $\theta_{lysis} = 5$ at $t \approx 72$ h, and live-cell density drops by $>$4 orders of magnitude by 96 h.
+The 96-hour coupled-ODE simulation (Fig.~\ref{fig:ode}) reveals precise
+temporal coordination across all three modules. Starting from an initial
+condition of 100~$\mu$M Cr(VI) and $1 \times 10^7$~CFU/mL, the system
+executes the remediation protocol in three distinct phases.
+\textbf{Phase~1 (0--8~h):} sfGFP fluorescence rises rapidly as ChrB
+releases the \textit{P}\textsubscript{chrB} operator; the kill switch is
+held quiescent. \textbf{Phase~2 (8--44~h):} NemA reaches
+steady-state concentration; Cr(VI) decreases approximately linearly at
+$\sim$2.3~$\mu$M/h, falling below 100~nM by $t = 44$~h.
+\textbf{Phase~3 (44--96~h):} The kill-switch AND-gate fires; Holin
+crosses $\theta_{lysis} = 5$ at $t \approx 72$~h, and live-cell density
+drops by ${>}4$~orders of magnitude by 96~h.
 
+%% ----
 \subsection{NemA vs.\ NemA$^{*2+}$ Kinetic Comparison (Hypothesized)}
 
 \begin{figure*}[!t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{simulations/results/nemA_mutant_kinetics.png}
-    \caption{Comparative Michaelis-Menten kinetics of wild-type NemA and the hypothesized NemA$^{*2+}$ variant (parameters assumed by analogy to OYE-family active-site mutagenesis precedent \cite{mowafy2010}; see Section 2.3.3). (Left) Time-course depletion of 100 $\mu$M Cr(VI); (right) initial reaction velocity as a function of substrate concentration, showing the $\sim$3-fold decrease in apparent $K_m$. Generated by \texttt{nemA\_mutant\_kinetics.py}.}
-    \label{fig:kinetics}
+  \centering
+  \includegraphics[width=0.85\textwidth]%
+    {simulations/results/nemA_mutant_kinetics.png}
+  \caption{Comparative Michaelis-Menten kinetics of wild-type NemA and
+    the hypothesized NemA$^{*2+}$ variant (parameters assumed by
+    analogy to OYE-family active-site mutagenesis precedent
+    \cite{mowafy2010}; see Section~2.3.3). \textit{Left:} Time-course
+    depletion of 100~$\mu$M Cr(VI). \textit{Right:} Initial reaction
+    velocity as a function of substrate concentration, showing the
+    $\sim$3-fold decrease in apparent $K_m$. Generated by
+    \texttt{nemA\_mutant\_kinetics.py}.}
+  \label{fig:kinetics}
 \end{figure*}
 
-The kinetic comparison between wild-type NemA and the hypothesized NemA$^{*2+}$ variant (parameters assumed by analogy to OYE-family active-site mutagenesis precedent \cite{mowafy2010}; see Section 2.3.3) shows the projected performance difference (Fig.~\ref{fig:kinetics}). Under the model's assumptions, wild-type NemA reduces 100 $\mu$M Cr(VI) to below the US EPA surface water limit (0.1 mg/L $\approx$ 1.9 $\mu$M) in approximately 43 h. The hypothesized NemA$^{*2+}$ variant, with its three-fold lower $K_m$ and doubled $k_{cat}$ (in the operational units used by the circuit model), achieves the same endpoint in $\sim$11 h, a four-fold reduction in \textit{predicted} treatment time. This 4-fold figure is \textbf{conditional on the caveat} in Section 2.3.3: the kinetic parameters are assumed, not derived from a structural modeling pipeline executed in this study.
+The kinetic comparison between wild-type NemA and the hypothesized
+NemA$^{*2+}$ variant (Fig.~\ref{fig:kinetics}) shows the projected
+performance difference under the model's assumptions. Wild-type NemA
+reduces 100~$\mu$M Cr(VI) to below the US~EPA surface-water limit
+(0.1~mg/L $\approx$ 1.9~$\mu$M) in approximately 43~h. The hypothesized
+NemA$^{*2+}$ variant, with its three-fold lower $K_m$ and doubled
+$k_{cat}$ (in the operational units used by the circuit model), achieves
+the same endpoint in $\sim$11~h -- a four-fold reduction in
+\textit{predicted} treatment time. This 4-fold figure is \textbf{conditional
+on the caveat} in Section~2.3.3: the kinetic parameters are assumed, not
+derived from a structural modeling pipeline executed in this study.
 
-At environmentally relevant Cr(VI) concentrations (1--10 $\mu$M, characteristic of moderately polluted reaches of the Buriganga and Shitalakshya), the hypothesized mutant operates at $\sim$40--75\% of $V_{max}$, whereas the wild-type operates at only $\sim$2--17\%. This differential becomes decisive in low-concentration field scenarios where most of the reaction time is spent in the $S \ll K_m$ regime.
+At environmentally relevant Cr(VI) concentrations (1--10~$\mu$M,
+characteristic of moderately polluted reaches of the Buriganga and
+Shitalakshya), the hypothesized mutant operates at $\sim$40--75\% of
+$V_{max}$, whereas the wild-type operates at only $\sim$2--17\%. This
+differential becomes decisive in low-concentration field scenarios where
+most of the reaction time is spent in the $S \ll K_m$ regime.
 
+%% ----
 \subsection{Structural Evaluation of NemA$^{*2+}$}
 \label{sec:structresults}
-The structural evaluation pipeline (\S\ref{sec:pillar2b}) was executed end-to-end against PDB 8BPQ chain A. The complete machine-readable results are in \texttt{results/nema\_active\_site.json}, \texttt{results/nema\_contact\_disruption.csv}, \texttt{results/nema\_docking\_results.csv}, and \texttt{results/structure\_provenance.json}; the supporting figures are in \texttt{results/nema\_active\_site.png}, \texttt{results/nema\_contact\_disruption.png}, and \texttt{results/nema\_docking\_overlay.png}.
 
-\textbf{Active-site composition.} The FMN binding pocket of NemA contains \textbf{26 residues within 5.0 \AA\ of FMN}, of which \textbf{13 are direct FMN contacts (within 3.5 \AA)} and \textbf{6 are second-shell aromatic/hydrophobic candidates} (Trp, Phe, Ile, Tyr with side chains in the 3.5--5.0 \AA\ shell). The 6 second-shell candidates ranked by minimum heavy-atom distance to FMN are: TRP 276 (3.59 \AA), PHE 323 (3.66 \AA), ILE 328 (3.97 \AA), PHE 351 (4.11 \AA), TYR 304 (4.50 \AA), and TRP 103 (4.95 \AA). Of these, ILE 328 is the most plausible target for the Mowafy second-shell pocket-enlargement hypothesis, as it is large (4-carbon branched side chain), peripheral (3.97 \AA), and not a direct FMN contact.
+The structural evaluation pipeline (\S\ref{sec:pillar2b}) was executed
+end-to-end against PDB~8BPQ chain~A. The complete machine-readable
+results are in \texttt{results/nema\_active\_site.json},
+\texttt{results/nema\_contact\_disruption.csv},
+\texttt{results/nema\_docking\_results.csv}, and
+\texttt{results/structure\_provenance.json}; the supporting figures are
+in \texttt{results/nema\_active\_site.png},
+\texttt{results/nema\_contact\_disruption.png}, and
+\texttt{results/nema\_docking\_overlay.png}.
 
-\textbf{Contact-disruption scores (dimensionless, 0--1, NOT kcal/mol).} The contact-disruption score for the 6 candidates is:
+\medskip
+\textbf{Active-site composition.} The FMN binding pocket of NemA
+contains \textbf{26~residues within 5.0~\AA{} of FMN}, of which
+\textbf{13 are direct FMN contacts (within 3.5~\AA{})} and \textbf{6
+are second-shell aromatic/hydrophobic candidates} (Trp, Phe, Ile, Tyr
+with side chains in the 3.5--5.0~\AA{} shell). The 6~second-shell
+candidates ranked by minimum heavy-atom distance to FMN are:
+TRP~276 (3.59~\AA{}), PHE~323 (3.66~\AA{}), ILE~328 (3.97~\AA{}),
+PHE~351 (4.11~\AA{}), TYR~304 (4.50~\AA{}), and TRP~103 (4.95~\AA{}).
+Of these, ILE~328 is the most plausible target for the Mowafy
+second-shell pocket-enlargement hypothesis, as it is large
+(4-carbon branched side chain), peripheral (3.97~\AA{}), and not a
+direct FMN contact.
+
+\medskip
+\textbf{Contact-disruption scores (dimensionless, 0--1, NOT
+kcal/mol).}
 
 \begin{center}
 \small
-\begin{tabular}{lcccc}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-Residue & $C_X^{WT}$ & $C_X^{Ala}$ & Score & Band \\
+Residue  & $C_X^{WT}$ & $C_X^{Ala}$ & Score & Band \\
 \midrule
-ILE 328 & 41 & 26 & 0.369 & intermediate \\
-PHE 351 & 38 & 23 & 0.396 & intermediate \\
-PHE 323 & 31 & 19 & 0.406 & intermediate \\
-TRP 276 & 47 & 25 & 0.468 & intermediate \\
-TRP 103 & 39 & 17 & 0.564 & intermediate \\
-TYR 304 & 34 & 12 & 0.647 & \textbf{costly} \\
+ILE~328  & 41 & 26 & 0.369 & intermediate \\
+PHE~351  & 38 & 23 & 0.396 & intermediate \\
+PHE~323  & 31 & 19 & 0.406 & intermediate \\
+TRP~276  & 47 & 25 & 0.468 & intermediate \\
+TRP~103  & 39 & 17 & 0.564 & intermediate \\
+TYR~304  & 34 & 12 & 0.647 & \textbf{costly} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\textbf{Interpretation.} \textbf{No candidate scores in the "tolerant" band ($< 0.3$)}; all 6 fall in the intermediate band (0.3--0.6) or, in the case of TYR 304, the costly band ($> 0.6$). This is a \textbf{negative-to-mixed result} for the second-shell engineering hypothesis: the NemA FMN pocket does not contain a large hydrophobic residue whose substitution to Ala would be unambiguously tolerated by the contact-disruption criterion. \textbf{ILE 328} is the best candidate (lowest disruption at 0.369), but the score indicates that the mutation would involve measurable local structural rearrangement, not silent substitution. \textbf{TYR 304} is in the costly band and is the worst candidate. The structural pipeline does \textit{not} independently support the kinetic improvement hypothesized in the systems model; it is consistent with, but does not validate, the OYE active-site engineering precedent as applied to NemA's specific active-site geometry.
+\textbf{Interpretation.} \textbf{No candidate scores in the ``tolerant''
+band ($< 0.3$)}; all~6 fall in the intermediate band (0.3--0.6) or, in
+the case of TYR~304, the costly band (${>}0.6$). This is a
+\textbf{negative-to-mixed result} for the second-shell engineering
+hypothesis: the NemA FMN pocket does not contain a large hydrophobic
+residue whose substitution to Ala would be unambiguously tolerated by
+the contact-disruption criterion. \textbf{ILE~328} is the best
+candidate (lowest disruption at 0.369), but the score indicates that the
+mutation would involve measurable local structural rearrangement, not
+silent substitution. \textbf{TYR~304} is in the costly band and is the
+worst candidate. The structural pipeline does \textit{not} independently
+support the kinetic improvement hypothesized in the systems model; it is
+consistent with, but does not validate, the OYE active-site engineering
+precedent as applied to NemA's specific active-site geometry.
 
-\textbf{Geometric placement of CrO$_4^{2-}$.} AutoDock Vina 1.2.5 was attempted but rejected with \texttt{Atom type Cr is not a valid AutoDock type} (Vina's empirical scoring function does not parameterize the Cr atom; see \texttt{results/structure\_provenance.json} for the full rationale). The fallback is a \texttt{scipy.optimize.minimize}-based rigid-body geometric placement of CrO$_4^{2-}$ (multi-start $N = 32$, seed = 42) for both wild-type and the in-silico ILE328ALA mutant. The optimized placement positions Cr at \textbf{$2.89 \pm 0.00$ \AA\ from FMN C4a} and \textbf{$3.44 \pm 0.00$ \AA\ from FMN N5}, with \textbf{7 H-bond donor contacts} (PRO 25, LEU 26, THR 27, SER 57, GLU 58, ALA 59, GLN 101) and \textbf{1 steric clash} (within 2.0 \AA).
+\medskip
+\textbf{Geometric placement of CrO$_4^{2-}$.} AutoDock Vina~1.2.5 was
+attempted but rejected with \texttt{Atom type Cr is not a valid AutoDock
+type} (Vina's empirical scoring function does not parameterize the Cr
+atom; see \texttt{results/structure\_provenance.json} for the full
+rationale). The fallback is a
+\texttt{scipy.optimize.minimize}-based rigid-body geometric placement of
+CrO$_4^{2-}$ (multi-start $N = 32$, seed~= 42) for both wild-type and
+the in-silico ILE328ALA mutant. The optimized placement positions Cr at
+\textbf{$2.89 \pm 0.00$~\AA{} from FMN~C4a} and
+\textbf{$3.44 \pm 0.00$~\AA{} from FMN~N5}, with \textbf{7~H-bond
+donor contacts} (PRO~25, LEU~26, THR~27, SER~57, GLU~58, ALA~59,
+GLN~101) and \textbf{1~steric clash} (within 2.0~\AA{}).
 
-\textbf{Honest observation.} The geometric placement analysis is \textbf{not sensitive} to the ILE328ALA mutation: WT and ILE328ALA produce identical observables. This is expected, because ILE 328 is 3.97 \AA\ from FMN (per the active-site analysis), which is far enough that removing 3 side-chain carbon atoms (CG1, CG2, CD1) does not affect the steric-clash or H-bond-donor profile near the FMN C4a. The geometric-placement analysis as formulated is sensitive to \textit{first-shell} mutations (residues within $\sim$3 \AA\ of FMN) but not to peripheral second-shell mutations. This is a methodological scope note, not a negative result on the engineering hypothesis; the contact-disruption score (above) is the appropriate tool for ranking peripheral mutations.
+\medskip
+\textbf{Honest observation.} The geometric placement analysis is
+\textbf{not sensitive} to the ILE328ALA mutation: WT and ILE328ALA
+produce identical observables. This is expected, because ILE~328 is
+3.97~\AA{} from FMN -- far enough that removing 3~side-chain carbon
+atoms (CG1, CG2, CD1) does not affect the steric-clash or H-bond-donor
+profile near the FMN~C4a. The geometric-placement analysis as formulated
+is sensitive to \textit{first-shell} mutations (residues within
+$\sim$3~\AA{} of FMN) but not to peripheral second-shell mutations.
+This is a methodological scope note, not a negative result on the
+engineering hypothesis; the contact-disruption score (above) is the
+appropriate tool for ranking peripheral mutations.
 
-\textbf{Literature check (gate).} The pre-docking literature check (\texttt{results/literature\_check.md}) returned the decision \texttt{exploratory\_positioning}: 0 published papers were found that report docking chromate/Cr(VI) into an FMN-containing flavoprotein active site, 0 abstracts explicitly supported direct FMN hydride transfer, and 2 abstracts mention ROS/Fenton-like mechanisms. The structural analysis is therefore framed as an \textbf{exploratory structural-positioning} analysis, not a binding prediction. No Vina score is reported in the main text. The Cr--FMN distance and H-bond donor count are reported as geometric observables for the optimized placement only.
+\medskip
+\textbf{Literature check (gate).} The pre-docking literature check
+(\texttt{results/literature\_check.md}) returned the decision
+\texttt{exploratory\_positioning}: 0~published papers were found that
+report docking chromate/Cr(VI) into an FMN-containing flavoprotein
+active site, 0~abstracts explicitly supported direct FMN hydride
+transfer, and 2~abstracts mention ROS/Fenton-like mechanisms. The
+structural analysis is therefore framed as an \textbf{exploratory
+structural-positioning} analysis, not a binding prediction. No Vina
+score is reported in the main text. The Cr--FMN distance and H-bond
+donor count are reported as geometric observables for the optimized
+placement only.
 
+%% ----
 \subsection{Metabolic Feasibility: Circuit Burden Analysis}
 
 \begin{figure*}[!t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{simulations/results/metabolic_burden_model.png}
-    \caption{Ribosome-allocation metabolic burden model. Growth rate $\mu$ (h$^{-1}$) is plotted against synthetic-circuit expression level (\% of total proteome) at four environmental Cr(VI) concentrations. The dashed vertical line marks the predicted 4.5\% burden of our circuit at full induction. Generated by \texttt{metabolic\_burden\_model.py}.}
-    \label{fig:burden}
+  \centering
+  \includegraphics[width=0.85\textwidth]%
+    {simulations/results/metabolic_burden_model.png}
+  \caption{Ribosome-allocation metabolic burden model. Growth rate
+    $\mu$ (h$^{-1}$) is plotted against synthetic-circuit expression
+    level (\% of total proteome) at four environmental Cr(VI)
+    concentrations. The dashed vertical line marks the predicted 4.5\%
+    burden of our circuit at full induction. Generated by
+    \texttt{metabolic\_burden\_model.py}.}
+  \label{fig:burden}
 \end{figure*}
 
-The ribosome-allocation metabolic model (Fig.~\ref{fig:burden}) demonstrates that, under its assumptions, the proposed circuit is metabolically sustainable under all relevant environmental chromium concentrations. At $\phi_S = 4.5\%$, growth rate is reduced by approximately 33\% relative to the unstressed, unburdened baseline (0.5 h$^{-1}$ $\to$ 0.34 h$^{-1}$ at 0 $\mu$M Cr(VI)). Growth remains positive under all four stress conditions tested (0, 20, 50, 100 $\mu$M Cr(VI)), indicating that the chassis continues to replicate and remediate.
+The ribosome-allocation metabolic model (Fig.~\ref{fig:burden})
+demonstrates that, under its assumptions, the proposed circuit is
+metabolically sustainable under all relevant environmental chromium
+concentrations. At $\phi_S = 4.5\%$, growth rate is reduced by
+approximately 33\% relative to the unstressed, unburdened baseline
+($0.5\;\text{h}^{-1} \to 0.34\;\text{h}^{-1}$ at 0~$\mu$M Cr(VI)).
+Growth remains positive under all four stress conditions tested
+(0, 20, 50, 100~$\mu$M Cr(VI)), indicating that the chassis continues
+to replicate and remediate.
 
-\subsection{Evolutionary Biosafety: Luria-Delbr\"uck Containment Analysis}
+%% ----
+\subsection{Evolutionary Biosafety: Luria-Delbr\"{u}ck
+            Containment Analysis}
 
 \begin{figure*}[!t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{simulations/results/biosafety_mutation_30day.png}
-    \caption{Luria-Delbr\"uck evolutionary biosafety analysis over the 30-day deployment window. Probability of containment failure is plotted for two scenarios: kill-switch-only containment (red dashed) and the full 5-layer containment including double auxotrophy (solid green). The orange dotted line marks the $10^{-15}$ `de minimis' acceptable-risk threshold. The full containment curve sits at $P_{\text{escape}} \approx 6 \times 10^{-17}$ (see Eq.~12 and surrounding text for the IEEE-754 arithmetic note). A 365-day long-run supplementary view is provided in Fig.~\ref{fig:biosafety-long} below. Generated by \texttt{biosafety\_mutation\_model.py}.}
-    \label{fig:biosafety}
+  \centering
+  \includegraphics[width=0.85\textwidth]%
+    {simulations/results/biosafety_mutation_30day.png}
+  \caption{Luria-Delbr\"{u}ck evolutionary biosafety analysis over the
+    30-day deployment window. Probability of containment failure is
+    plotted for two scenarios: kill-switch-only containment (red
+    dashed) and the full 5-layer containment including double
+    auxotrophy (solid green). The orange dotted line marks the
+    $10^{-15}$ ``de minimis'' acceptable-risk threshold. The full
+    containment curve sits at
+    $P_{\text{escape}} \approx 6 \times 10^{-17}$. A 365-day long-run
+    supplementary view is provided in Fig.~\ref{fig:biosafety-long}.
+    Generated by \texttt{biosafety\_mutation\_model.py}.}
+  \label{fig:biosafety}
 \end{figure*}
 
 \begin{figure*}[!t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{simulations/results/biosafety_mutation_model.png}
-    \caption{Luria-Delbr\"uck evolutionary biosafety analysis --- 365-day long-run supplementary view. Same model as Fig.~\ref{fig:biosafety}, plotted out to 365 days to show the kill-switch-only curve crossing the $10^{-15}$ `de minimis' threshold at approximately day 80. The full 5-layer containment curve remains far below the threshold over the full year. This long-run view is supplementary; the headline 30-day result is reported in Fig.~\ref{fig:biosafety} and Eq.~12.}
-    \label{fig:biosafety-long}
+  \centering
+  \includegraphics[width=0.85\textwidth]%
+    {simulations/results/biosafety_mutation_model.png}
+  \caption{Luria-Delbr\"{u}ck evolutionary biosafety -- 365-day
+    long-run supplementary view. Same model as
+    Fig.~\ref{fig:biosafety}, plotted out to 365~days to show the
+    kill-switch-only curve crossing the $10^{-15}$ ``de minimis''
+    threshold at approximately day~80. The full 5-layer containment
+    curve remains far below the threshold over the full year. Generated
+    by \texttt{biosafety\_mutation\_model.py}.}
+  \label{fig:biosafety-long}
 \end{figure*}
 
-The Luria-Delbr\"uck biosafety analysis (Fig.~\ref{fig:biosafety}) provides the quantitative argument for the layered containment architecture. We model a 1,000-liter closed pond at carrying capacity ($1 \times 10^9$ cells/L, total $1 \times 10^{12}$ cells), with 4 generations/day and 30 days of operation ($1.2 \times 10^{14}$ total cell divisions). Per-division failure probabilities:
+The Luria-Delbr\"{u}ck biosafety analysis (Fig.~\ref{fig:biosafety})
+provides the quantitative argument for the layered containment
+architecture. We model a 1{,}000-liter closed pond at carrying capacity
+($1 \times 10^9$~cells/L, total $1 \times 10^{12}$~cells), with
+4~generations/day and 30~days of operation ($1.2 \times 10^{14}$ total
+cell divisions). Per-division failure probabilities:
 \begin{itemize}
-    \item \textbf{Kill-switch loss-of-function:} $P_{ks} = \mu_{bp} \times L_{target} = 10^{-9} \times 500 = 5 \times 10^{-7}$ per division, where $\mu_{bp} = 10^{-9}$ per bp per generation and $L_{target} = 500$ bp.
-    \item \textbf{Auxotrophy reversion (HGT):} $P_{rev} = 10^{-12}$ per division per locus (theoretical lower bound for HGT-driven reconstitution).
-    \item \textbf{Combined per-division escape:} $P_{\text{escape/gen}} = 5 \times 10^{-7} \times 10^{-12} \times 10^{-12} = 5 \times 10^{-31}$.
+  \item \textbf{Kill-switch loss-of-function:}
+        $P_{ks} = \mu_{bp} \times L_{target}
+                = 10^{-9} \times 500 = 5 \times 10^{-7}$ per division,
+        where $\mu_{bp} = 10^{-9}$~per bp per generation and
+        $L_{target} = 500$~bp.
+  \item \textbf{Auxotrophy reversion (HGT):}
+        $P_{rev} = 10^{-12}$~per division per locus (theoretical lower
+        bound for HGT-driven reconstitution).
+  \item \textbf{Combined per-division escape:}
+        $P_{\text{escape/gen}}
+         = 5 \times 10^{-7} \times 10^{-12} \times 10^{-12}
+         = 5 \times 10^{-31}$.
 \end{itemize}
 
 The 30-day integrated probability:
 \begin{equation}
-P_{\text{escape}}^{30d} = 1 - e^{-N_{total} \cdot P_{\text{escape/gen}}} = 1 - e^{-1.2 \times 10^{14} \times 5 \times 10^{-31}} = 1 - e^{-6 \times 10^{-17}} \approx 6 \times 10^{-17}
+  P_{\text{escape}}^{30d}
+  = 1 - e^{-N_{total} \cdot P_{\text{escape/gen}}}
+  = 1 - e^{-1.2 \times 10^{14} \times 5 \times 10^{-31}}
+  = 1 - e^{-6 \times 10^{-17}}
+  \approx 6 \times 10^{-17}
+  \label{eq:pescape30d}
 \end{equation}
 
-\textbf{Numerical implementation note.} For arguments this small, evaluating $1 - e^{-x}$ directly in IEEE-754 double precision suffers from catastrophic cancellation (the $\exp(-6 \times 10^{-17})$ result is dominated by roundoff in the leading `1', and a naive Python/NumPy evaluation returns $\approx 1.11 \times 10^{-16}$ rather than the analytically correct $6 \times 10^{-17}$). The simulation scripts (\texttt{biosafety\_mutation\_model.py}, \texttt{biosafety\_sensitivity.py}) therefore use the first-order Taylor expansion $1 - e^{-x} \approx x$ for $x < 10^{-10}$, which agrees with the algebra shown in Eq.~12 to all displayed significant figures. This is a numerical-analysis detail, not a physics choice, and would be invisible in any practical deployment-safety argument.
+\textbf{Numerical implementation note.} For arguments this small,
+evaluating $1 - e^{-x}$ directly in IEEE-754 double precision suffers
+from catastrophic cancellation. The simulation scripts therefore use the
+first-order Taylor expansion $1 - e^{-x} \approx x$ for $x < 10^{-10}$,
+which agrees with the algebra shown in Eq.~\eqref{eq:pescape30d} to all
+displayed significant figures. This is a numerical-analysis detail, not a
+physics choice.
 
-This is approximately \textbf{17 orders of magnitude} below the $10^{-15}$ `de minimis' threshold. The kill-switch-only curve, when extrapolated to the long-run view in Fig.~\ref{fig:biosafety-long} (\texttt{results/biosafety\_mutation\_model.png}, the 365-day supplementary plot), crosses the threshold at approximately day 80; this is not visible in the cropped 30-day Fig.~\ref{fig:biosafety} shown here, but the relevant long-run data is included in the supplementary figure for completeness. The double auxotrophy thus provides an essential second-tier failsafe.
+This is approximately \textbf{17~orders of magnitude} below the
+$10^{-15}$ ``de minimis'' threshold. The kill-switch-only curve, when
+extrapolated to the long-run view in Fig.~\ref{fig:biosafety-long},
+crosses the threshold at approximately day~80; the double auxotrophy
+thus provides an essential second-tier failsafe.
 
-\subsubsection{Sensitivity of the Containment Claim to Mutation-Rate and Deployment-Scale Assumptions}
+%% ----
+\subsubsection{Sensitivity of the Containment Claim to Mutation-Rate
+               and Deployment-Scale Assumptions}
 \label{sec:sens}
-The headline $P_{\text{escape}} < 10^{-15}$ claim depends on the specific value of the per-bp spontaneous mutation rate ($\mu_{bp} = 10^{-9}$), which the literature places in a range spanning $10^{-10}$ to $10^{-9}$ \cite{drake1991,lee2012}. To test the robustness of the claim, we re-ran the biosafety calculation with $\mu_{bp}$ scaled by $\times$0.01, $\times$0.1, $\times$1 (baseline), $\times$10, and $\times$100, and swept reactor volume across 10 L, 100 L, 1,000 L (baseline), and 10,000 L. Results are in Fig.~\ref{fig:sens} and \texttt{results/sensitivity\_analysis.csv}.
+
+The headline $P_{\text{escape}} < 10^{-15}$ claim depends on the
+specific value of the per-bp spontaneous mutation rate
+($\mu_{bp} = 10^{-9}$), which the literature places in a range spanning
+$10^{-10}$--$10^{-9}$~\cite{drake1991,lee2012}. To test the robustness
+of the claim, we re-ran the biosafety calculation with $\mu_{bp}$ scaled
+by $\times$0.01, $\times$0.1, $\times$1 (baseline), $\times$10, and
+$\times$100, and swept reactor volume across 10~L, 100~L, 1{,}000~L
+(baseline), and 10{,}000~L. Results are in Fig.~\ref{fig:sens} and
+\texttt{results/sensitivity\_analysis.csv}.
 
 \begin{figure*}[!t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{simulations/results/sensitivity_analysis.png}
-    \caption{Sensitivity of the 30-day $P_{\text{escape}}$ to (left) a 0.01$\times$--100$\times$ scaling of the assumed per-bp mutation rate, and (right) a 10 L--10,000 L sweep of the deployment reactor volume. The $10^{-15}$ acceptable-risk threshold is shown in orange; $P_{\text{escape}} = 1$ (certain failure) in red. Generated by \texttt{biosafety\_sensitivity.py}.}
-    \label{fig:sens}
+  \centering
+  \includegraphics[width=0.85\textwidth]%
+    {simulations/results/sensitivity_analysis.png}
+  \caption{Sensitivity of the 30-day $P_{\text{escape}}$ to
+    \textit{(left)} a 0.01$\times$--100$\times$ scaling of the assumed
+    per-bp mutation rate, and \textit{(right)} a 10~L--10{,}000~L
+    sweep of the deployment reactor volume. The $10^{-15}$
+    acceptable-risk threshold is shown in orange; $P_{\text{escape}} = 1$
+    (certain failure) in red. Generated by
+    \texttt{biosafety\_sensitivity.py}.}
+  \label{fig:sens}
 \end{figure*}
 
 \textbf{Key findings (sensitivity sweep, 30-day window):}
 \begin{itemize}
-    \item At baseline ($\mu_{bp} = 10^{-9}$): $P_{\text{escape}} = 6.00 \times 10^{-17}$.
-    \item At $\times$0.1 mutation rate: $P_{\text{escape}} = 6.00 \times 10^{-18}$.
-    \item At $\times$10 mutation rate: $P_{\text{escape}} = 6.00 \times 10^{-16}$, still below $10^{-15}$ by $\sim$1.7$\times$.
-    \item \textbf{At $\times$100 mutation rate: $P_{\text{escape}} = 6.00 \times 10^{-15}$, exactly 6$\times$ above the $10^{-15}$ threshold.}
-    \item Across the reactor volume sweep (10 L--10,000 L) at baseline mutation rate, $P_{\text{escape}}$ remains below $10^{-15}$ for all four volumes.
+  \item At baseline ($\mu_{bp} = 10^{-9}$):
+        $P_{\text{escape}} = 6.00 \times 10^{-17}$.
+  \item At $\times$0.1 mutation rate:
+        $P_{\text{escape}} = 6.00 \times 10^{-18}$.
+  \item At $\times$10 mutation rate:
+        $P_{\text{escape}} = 6.00 \times 10^{-16}$,
+        still below $10^{-15}$ by $\sim$$1.7\times$.
+  \item \textbf{At $\times$100 mutation rate:
+        $P_{\text{escape}} = 6.00 \times 10^{-15}$,
+        exactly $6\times$ above the $10^{-15}$ threshold.}
+  \item Across the reactor-volume sweep (10~L--10{,}000~L) at baseline
+        mutation rate, $P_{\text{escape}}$ remains below $10^{-15}$
+        for all four volumes.
 \end{itemize}
 
-\textbf{Interpretation.} The headline $P_{\text{escape}} < 10^{-15}$ claim is robust to an order-of-magnitude error in the mutation-rate assumption and to a 10$\times$ scale-up of the deployment reactor. It is \textbf{not} robust to a two-order-of-magnitude error in $\mu_{bp}$: under that scenario the model places $P_{\text{escape}}$ at $6.00 \times 10^{-15}$, which is \textit{above} the $10^{-15}$ threshold and is therefore, by the model's own logic, a containment failure. This is not a finding to be smoothed over --- it is the \textit{useful} finding, because it shows the analysis was not tuned to produce reassuring numbers. The sensitivity analysis directly motivates the most important experimental follow-up: \textbf{the headline containment claim is contingent on a direct measurement of the actual per-bp mutation rate in the deployed strain under the deployed growth conditions} (closed-pond, burdened, with the tri-modular plasmid set in place). Until that measurement exists, the $10^{-15}$ risk threshold should be read as the boundary the model sits at under its current assumption, not as a margin of safety; a future in-vitro mutation-rate assay (e.g., a Luria-Delbr\"uck fluctuation test on the deployed strain, or a mutation-accumulation whole-genome sequencing line) is the single experiment that would convert the headline from a model output to a validated claim. See Section 5.3 (Limitation 5) for the related HGT-probability caveat.
+\textbf{Interpretation.} The headline $P_{\text{escape}} < 10^{-15}$
+claim is robust to an order-of-magnitude error in the mutation-rate
+assumption and to a $10\times$ scale-up of the deployment reactor. It
+is \textbf{not} robust to a two-order-of-magnitude error in $\mu_{bp}$:
+under that scenario the model places $P_{\text{escape}}$ at
+$6.00 \times 10^{-15}$, which is \textit{above} the $10^{-15}$
+threshold -- a containment failure by the model's own logic. This is not
+a finding to be smoothed over; it is the \textit{useful} finding,
+because it shows the analysis was not tuned to produce reassuring
+numbers. The sensitivity analysis directly motivates the most important
+experimental follow-up: \textbf{the headline containment claim is
+contingent on a direct measurement of the actual per-bp mutation rate in
+the deployed strain under the deployed growth conditions.} Until that
+measurement exists, the $10^{-15}$ risk threshold should be read as the
+boundary the model sits at under its current assumption, not as a margin
+of safety.
 
-\subsubsection{Global Uncertainty Quantification: Latin Hypercube Sampling (Pillar 4c)}
+%% ----
+\subsubsection{Global Uncertainty Quantification: Latin Hypercube
+               Sampling (Pillar~4c)}
 \label{sec:lhs}
-The local one-factor-at-a-time sensitivity sweep above is complemented by a global LHS analysis over 8 input parameters drawn log-uniformly from literature-bounded ranges ($N = 10{,}000$ samples, seed = 42, via \texttt{scipy.stats.qmc.LatinHypercube}; see \S\ref{sec:pillar4c} for the method).
+
+The local one-factor-at-a-time sensitivity sweep above is complemented
+by a global LHS analysis over 8~input parameters drawn log-uniformly
+from literature-bounded ranges ($N = 10{,}000$ samples, seed~= 42;
+see \S\ref{sec:pillar4c} for the method).
 
 \begin{figure*}[!t]
-    \centering
-    \includegraphics[width=0.8\textwidth]{simulations/results/biosafety_lhs.png}
-    \caption{Global LHS uncertainty quantification of the 30-day $P_{\text{escape}}$ over 10,000 samples. (a) Cumulative distribution of $P_{\text{escape}}$ on a log-x axis, with the $10^{-15}$ threshold (orange dotted) and median (green dashed). (b) Histogram of $\log_{10}(P_{\text{escape}})$ over all samples. (c) Spearman rank correlation between each log-input and $\log_{10}(P_{\text{escape}})$; red = positive, blue = negative. Generated by \texttt{biosafety\_lhs.py}.}
-    \label{fig:lhs}
+  \centering
+  \includegraphics[width=0.85\textwidth]%
+    {simulations/results/biosafety_lhs.png}
+  \caption{Global LHS uncertainty quantification of the 30-day
+    $P_{\text{escape}}$ over 10{,}000 samples. (a)~Cumulative
+    distribution of $P_{\text{escape}}$ on a log-$x$ axis, with the
+    $10^{-15}$ threshold (orange dotted) and median (green dashed).
+    (b)~Histogram of $\log_{10}(P_{\text{escape}})$ over all samples.
+    (c)~Spearman rank correlation between each log-input and
+    $\log_{10}(P_{\text{escape}})$; red~= positive, blue~= negative.
+    Generated by \texttt{biosafety\_lhs.py}.}
+  \label{fig:lhs}
 \end{figure*}
 
-\textbf{Headline LHS findings (N = 10,000 samples):}
+\textbf{Headline LHS findings ($N = 10{,}000$ samples):}
 \begin{itemize}
-    \item \textbf{Median $P_{\text{escape}}$:} $1.71 \times 10^{-17}$ (within an order of magnitude of the point-estimate baseline of $6.00 \times 10^{-17}$, as expected for a log-uniform LHS centered on the baseline).
-    \item \textbf{95\% confidence interval:} $[2.14 \times 10^{-21},\ 1.41 \times 10^{-13}]$ --- spans $\sim$8 orders of magnitude.
-    \item \textbf{Fraction above the $10^{-15}$ de-minimis threshold:} \textbf{20.6\%}.
-    \item \textbf{Top-3 Spearman rank correlations} (input $\to$ $P_{\text{escape}}$): HGT intact-gene transfer probability for $\Delta thyA$ reversion ($\rho = +0.57$), same for $\Delta dapA$ ($\rho = +0.55$), reactor volume $V$ ($\rho = +0.41$).
+  \item \textbf{Median $P_{\text{escape}}$:} $1.71 \times 10^{-17}$
+        (within an order of magnitude of the point-estimate baseline of
+        $6.00 \times 10^{-17}$, as expected for a log-uniform LHS
+        centered on the baseline).
+  \item \textbf{95\% confidence interval:}
+        $[2.14 \times 10^{-21},\; 1.41 \times 10^{-13}]$ -- spans
+        $\sim$8~orders of magnitude.
+  \item \textbf{Fraction above the $10^{-15}$ de-minimis threshold:}
+        \textbf{20.6\%}.
+  \item \textbf{Top-3 Spearman rank correlations}
+        (input $\to$ $P_{\text{escape}}$): HGT intact-gene transfer
+        probability for $\Delta thyA$ reversion ($\rho = +0.57$),
+        same for $\Delta dapA$ ($\rho = +0.55$), reactor volume~$V$
+        ($\rho = +0.41$).
 \end{itemize}
 
-\textbf{Interpretation.} The global LHS analysis reveals that the headline $P_{\text{escape}} < 10^{-15}$ containment claim is \textbf{not robust to joint-tail combinations of the input parameters}, even though it is robust to local 10$\times$ errors in any single parameter (Pillar 4b). Under plausible combinations of literature-supported input values, \textbf{roughly 1 in 5 LHS samples exceeds the $10^{-15}$ threshold}. This is the most important quantitative finding of the present study: the de-minimis containment claim is a model output at the assumed input parameters, not a deep safety margin. The dominant drivers are the HGT intact-gene transfer probabilities (Spearman $\rho \approx 0.55$), for which the published literature provides bracketing ranges (Dahlberg 1998 reports 2.3$\times$10$^{-6}$ to 2.2$\times$10$^{-4}$ transconjugants per recipient in marine bacterial communities; the LHS bracketing range 10$^{-14}$ to 10$^{-10}$ per cell-division is conservative and acknowledged in \texttt{parameters.py}). The reactor volume and the two mutation-related parameters contribute less.
+\textbf{Interpretation.} The global LHS analysis reveals that the
+headline $P_{\text{escape}} < 10^{-15}$ containment claim is
+\textbf{not robust to joint-tail combinations of the input parameters},
+even though it is robust to local $10\times$ errors in any single
+parameter (Pillar~4b). Under plausible combinations of
+literature-supported input values, \textbf{roughly 1 in 5 LHS samples
+exceeds the $10^{-15}$ threshold}. This is the most important
+quantitative finding of the present study: the de-minimis containment
+claim is a model output at the assumed input parameters, not a deep
+safety margin. The dominant drivers are the HGT intact-gene transfer
+probabilities (Spearman $\rho \approx 0.55$), for which the published
+literature provides bracketing ranges (Dahlberg 1998 reports
+$2.3 \times 10^{-6}$ to $2.2 \times 10^{-4}$ transconjugants per
+recipient in marine bacterial communities; the LHS bracketing range
+$10^{-14}$--$10^{-10}$ per cell-division is conservative and
+acknowledged in \texttt{parameters.py}).
 
-\textbf{Recommendation.} Until a direct measurement of the deployed per-bp mutation rate and the freshwater HGT intact-gene transfer probability is available, the 30-day containment claim should be read as the central estimate of an order-of-magnitude spread, not as a hard floor. A future wet-lab Luria-Delbrück fluctuation test on the deployed strain (Pillar 4b follow-up) and a freshwater HGT assay would convert the LHS from a sensitivity analysis into a validated probability statement.
+\textbf{Recommendation.} Until a direct measurement of the deployed
+per-bp mutation rate and the freshwater HGT intact-gene transfer
+probability is available, the 30-day containment claim should be read
+as the central estimate of an order-of-magnitude spread, not as a hard
+floor. A future wet-lab Luria-Delbr\"{u}ck fluctuation test on the
+deployed strain (Pillar~4b follow-up) and a freshwater HGT assay would
+convert the LHS from a sensitivity analysis into a validated probability
+statement.
 
 \FloatBarrier
 
+%% ============================================================
 \section{Discussion}
+%% ============================================================
 
-\subsection{The Engineering Elegance of a Unified ChrB Regulatory Signal}
-The central design philosophy of this system (making ChrB the single master regulator of all three modules) deserves explicit discussion, as it is the feature that distinguishes this platform from patchwork multi-component approaches. By coupling biosensing, remediation, and kill switch suppression to the same protein-DNA interaction, the system achieves inherent temporal synchronization:
+\subsection{The Engineering Elegance of a Unified ChrB
+            Regulatory Signal}
+
+The central design philosophy of this system -- making ChrB the single
+master regulator of all three modules -- deserves explicit discussion, as
+it is the feature that distinguishes this platform from patchwork
+multi-component approaches. By coupling biosensing, remediation, and
+kill-switch suppression to the same protein-DNA interaction, the system
+achieves inherent temporal synchronization:
 \begin{itemize}
-    \item \textbf{Remediation is active if and only if the biosensor is active.}
-    \item \textbf{Kill switch suppression is active if and only if the biosensor is active.}
-    \item \textbf{The kill switch fires when, and only when, the remediation task is complete.}
+  \item \textbf{Remediation is active if and only if the biosensor
+        is active.}
+  \item \textbf{Kill-switch suppression is active if and only if
+        the biosensor is active.}
+  \item \textbf{The kill switch fires when, and only when, the
+        remediation task is complete.}
 \end{itemize}
-This self-computing architecture minimizes the number of independent regulatory elements that could independently fail, and creates a system where failure in any one module has compensatory consequences in another.
+This self-computing architecture minimizes the number of independent
+regulatory elements that could independently fail, and creates a system
+where failure in any one module has compensatory consequences in
+another.
 
 \subsection{Why Closed-System Deployment Is Non-Negotiable}
-The Luria-Delbr\"uck analysis provides quantitative confirmation of what biosafety intuition already suggests: that releasing a BMO into the Buriganga River is irresponsible. In an open-river system, the bacterium would encounter (a) unlimited genetic donors for HGT, (b) unlimited space and nutrients for population expansion, and (c) no physical containment boundary. The combined effect is that $N_{total} \times G$ in an open water is effectively unbounded, and any finite $p_{\text{combined}}$, however small, yields $P_{\text{escape}} \to 1$ over sufficient time.
+
+The Luria-Delbr\"{u}ck analysis provides quantitative confirmation of
+what biosafety intuition already suggests: that releasing a BMO into the
+Buriganga River is irresponsible. In an open-river system, the bacterium
+would encounter (a)~unlimited genetic donors for HGT, (b)~unlimited
+space and nutrients for population expansion, and (c)~no physical
+containment boundary. The combined effect is that $N_{total} \times G$
+in open water is effectively unbounded, and any finite
+$p_{\text{combined}}$, however small, yields $P_{\text{escape}} \to 1$
+over sufficient time.
 
 \subsection{Limitations}
+
 This study has several important limitations.
 
-(1) \textbf{Purely computational, no wet-lab validation.} No experimental or wet-lab data were generated in this project; all results are derived from the simulation models in \texttt{simulations/}. Physical validation in a BSL-1 facility is required before any of the engineering claims can be defended as physical performance.
+\medskip
+\noindent\textbf{(1) Purely computational, no wet-lab validation.}
+No experimental or wet-lab data were generated in this project; all
+results are derived from the simulation models in \texttt{simulations/}.
+Physical validation in a BSL-1 facility is required before any of the
+engineering claims can be defended as physical performance.
 
-(2) \textbf{NemA$^{*2+}$ kinetic parameters are scenario assumptions; the structural pipeline is a consistency check, not a kinetic prediction.} The kinetic parameters used for the NemA$^{*2+}$ variant ($K_m^* = 16\ \mu$M, $k_{cat}^* = 37.2\ \text{h}^{-1}$) are \textbf{scenario-analysis assumptions} extrapolated by analogy to active-site pocket mutagenesis precedent in the OYE family \cite{mowafy2010}. They are \textit{not} derived from the structural evaluation pipeline (\S\ref{sec:pillar2b}, \S\ref{sec:structresults}). The structural pipeline uses a dimensionless contact-disruption score and a geometric placement of CrO$_4^{2-}$ near the FMN pocket to evaluate whether the proposed second-shell mutations are \textit{structurally consistent} with reduced steric hindrance, but it does not predict or replace the kinetic values. The relationship between the structural evaluation and the systems model is one-way: the systems model uses scenario-analysis kinetic parameters, and the structural evaluation can support, qualify, or contradict the engineering hypothesis behind those parameters. The two are not coupled numerically. The 4-fold treatment-time reduction reported in Section~\ref{sec:structresults} is therefore a \textit{what-if} analysis of an enzyme variant that, according to the structural pipeline, is (or is not) a plausible engineering target --- not a prediction of how a real engineered NemA would behave.
+\medskip
+\noindent\textbf{(2) NemA$^{*2+}$ kinetic parameters are scenario
+assumptions; the structural pipeline is a consistency check, not a
+kinetic prediction.}
+The kinetic parameters used for the NemA$^{*2+}$ variant
+($K_m^* = 16\;\mu$M, $k_{cat}^* = 37.2\;\text{h}^{-1}$) are
+\textbf{scenario-analysis assumptions} extrapolated by analogy to
+active-site pocket mutagenesis precedent in the OYE
+family~\cite{mowafy2010}. They are \textit{not} derived from the
+structural evaluation pipeline (\S\ref{sec:pillar2b},
+\S\ref{sec:structresults}). The structural pipeline uses a dimensionless
+contact-disruption score and a geometric placement of CrO$_4^{2-}$
+near the FMN pocket to evaluate whether the proposed second-shell
+mutations are \textit{structurally consistent} with reduced steric
+hindrance, but it does not predict or replace the kinetic values. The
+relationship between the structural evaluation and the systems model is
+one-way: the systems model uses scenario-analysis kinetic parameters,
+and the structural evaluation can support, qualify, or contradict the
+engineering hypothesis behind those parameters. The two are not coupled
+numerically.
 
-(3) \textbf{Real effluent has co-contaminants not modeled.} Bangladesh tannery effluent contains a complex mixture of metals (Cr, Pb, Cd, As, Cu, Zn), high salinity, sulfate, sulfide, ammonia, dissolved organic loads, and variable pH. Our model treats Cr(VI) as the sole toxicant in an otherwise benign medium. The actual toxicity, growth-rate, and biosensor response in real effluent will differ from the model prediction.
+\medskip
+\noindent\textbf{(3) Real effluent has co-contaminants not modeled.}
+Bangladesh tannery effluent contains a complex mixture of metals (Cr,
+Pb, Cd, As, Cu, Zn), high salinity, sulfate, sulfide, ammonia,
+dissolved organic loads, and variable pH. Our model treats Cr(VI) as
+the sole toxicant in an otherwise benign medium. The actual toxicity,
+growth rate, and biosensor response in real effluent will differ from
+the model prediction.
 
-(4) \textbf{Cr(III) downstream fate not addressed.} This work models Cr(VI) $\rightarrow$ Cr(III) reduction but does not address the subsequent fate of the Cr(III) product. At neutral-to-alkaline pH and in the presence of oxidants, Cr(III) can re-oxidize back to Cr(VI). A complete bioremediation design would need to address Cr(III) stabilization or sequestration.
+\medskip
+\noindent\textbf{(4) Cr(III) downstream fate not addressed.}
+This work models Cr(VI)~$\rightarrow$~Cr(III) reduction but does not
+address the subsequent fate of the Cr(III) product. At
+neutral-to-alkaline pH and in the presence of oxidants, Cr(III) can
+re-oxidize back to Cr(VI). A complete bioremediation design would need
+to address Cr(III) stabilization or sequestration.
 
-(5) \textbf{Containment claim is not robust to joint-tail uncertainty.} The local Pillar 4b sensitivity sweep showed the headline $P_{\text{escape}} < 10^{-15}$ claim is robust to 10$\times$ errors in individual parameters, but the global Pillar 4c Latin Hypercube analysis (\S\ref{sec:lhs}) shows that \textbf{20.6\% of 10,000 LHS samples exceed the $10^{-15}$ threshold} under plausible joint-tail combinations of the 8 input parameters. The dominant drivers are the HGT intact-gene transfer probabilities ($\rho \approx 0.55$ for both $\Delta$thyA and $\Delta$dapA reversion), for which the published literature provides bracketing ranges (Dahlberg 1998 reports 2.3$\times$10$^{-6}$ to 2.2$\times$10$^{-4}$ transconjugants per recipient in marine bacterial communities; see \texttt{parameters.py} for the bracketing range used in the LHS). The literature on spontaneous \textit{E. coli} mutation rate is itself only constrained to within roughly one order of magnitude across studies, and the specific value for our chassis under our (closed-pond, burdened) growth conditions is not directly measured. The $10^{-15}$ risk threshold should be read as a model output at the assumed input parameters, not a deep safety margin.
+\medskip
+\noindent\textbf{(5) Containment claim is not robust to joint-tail
+uncertainty.}
+The local Pillar~4b sensitivity sweep showed the headline
+$P_{\text{escape}} < 10^{-15}$ claim is robust to $10\times$ errors in
+individual parameters, but the global Pillar~4c Latin Hypercube analysis
+(\S\ref{sec:lhs}) shows that \textbf{20.6\% of 10{,}000 LHS samples
+exceed the $10^{-15}$ threshold} under plausible joint-tail combinations
+of the 8~input parameters. The dominant drivers are the HGT
+intact-gene transfer probabilities ($\rho \approx 0.55$ for both
+$\Delta$thyA and $\Delta$dapA reversion), for which the published
+literature provides bracketing ranges. The $10^{-15}$ risk threshold
+should be read as a model output at the assumed input parameters, not a
+deep safety margin.
 
-(6) \textbf{Coordinate vs.\ stoichiometric regulation.} The three-plasmid design uses copy-number differentials (pUC19 $\sim$500, pET-28a $\sim$40, pACYC184 $\sim$15) as the \textit{coordinate} transcriptional lever for the three modules. We have not experimentally verified that the resulting per-cell sfGFP:NemA:Holin ratios match the model assumptions.
+\medskip
+\noindent\textbf{(6) Coordinate vs.\ stoichiometric regulation.}
+The three-plasmid design uses copy-number differentials (pUC19
+$\sim$500, pET-28a $\sim$40, pACYC184 $\sim$15) as the
+\textit{coordinate} transcriptional lever for the three modules. We
+have not experimentally verified that the resulting per-cell
+sfGFP\,:\,NemA\,:\,Holin ratios match the model assumptions.
 
-(7) \textbf{Structural evaluation scope.} The structural pipeline (\S\ref{sec:pillar2b}) uses (a) a dimensionless contact-disruption score, not a kcal/mol $\Delta\Delta G$ calculation; (b) a geometric placement of CrO$_4^{2-}$ via \texttt{scipy.optimize.minimize}, not a free-docking calculation (AutoDock Vina 1.2.5 was attempted but rejected with \texttt{Atom type Cr is not a valid AutoDock type} --- Vina's empirical scoring function does not parameterize Cr; see \texttt{results/structure\_provenance.json} for the full rationale); and (c) the static crystal structure (PDB 8BPQ chain A), not the dynamic NADH-bound holoenzyme. The pre-docking literature check (\S\ref{sec:pillar2b}, \texttt{results/literature\_check.md}) returned the decision \texttt{exploratory\_positioning}: 0 published papers were found that report docking chromate/Cr(VI) into an FMN-containing flavoprotein active site, and 2 abstracts mention ROS/Fenton-like mechanisms for Cr(VI) reduction. Under that decision, the structural analysis is framed as an \textit{exploratory structural-positioning} analysis, not a binding prediction; no Vina score is reported in the main text, and the geometric observables (Cr--FMN distance, H-bond donor counts, steric clash counts) are reported as facts about the optimized placement only. The contact-disruption scores for the 6 second-shell candidates place all 6 in the intermediate band (0.3--0.6) or, in one case, the costly band ($> 0.6$); the structural pipeline does not independently support the kinetic improvement hypothesized in the systems model.
+\medskip
+\noindent\textbf{(7) Structural evaluation scope.}
+The structural pipeline (\S\ref{sec:pillar2b}) uses (a)~a dimensionless
+contact-disruption score, not a kcal/mol $\Delta\Delta G$ calculation;
+(b)~a geometric placement of CrO$_4^{2-}$ via
+\texttt{scipy.optimize.minimize}, not a free-docking calculation
+(AutoDock Vina~1.2.5 was rejected with \texttt{Atom type Cr is not a
+valid AutoDock type}); and (c)~the static crystal structure (PDB~8BPQ
+chain~A), not the dynamic NADH-bound holoenzyme. The pre-docking
+literature check returned \texttt{exploratory\_positioning}: under that
+decision, the structural analysis is framed as an \textit{exploratory
+structural-positioning} analysis, not a binding prediction; no Vina
+score is reported in the main text, and geometric observables are
+reported as facts about the optimized placement only.
 
-(8) \textbf{Mechanism of Cr(VI) reduction not established.} The pre-docking literature check did not find published evidence that Cr(VI) reduction by NemA-class flavoprotein oxidoreductases proceeds via direct FMN hydride transfer. If the actual mechanism is flavin-mediated ROS generation or a Fenton-like pathway, the geometric positioning of CrO$_4^{2-}$ relative to FMN C4a is not the catalytically relevant step, and the geometric observables reported in \S\ref{sec:structresults} are not informative about the catalytic competence of the proposed NemA$^{*2+}$ variant. A direct experimental measurement of the Cr(VI) reduction mechanism in NemA (e.g., anaerobic stopped-flow kinetics with isotope-labeled Cr(VI) and FMN) is the single experiment that would resolve this.
+\medskip
+\noindent\textbf{(8) Mechanism of Cr(VI) reduction not established.}
+The pre-docking literature check did not find published evidence that
+Cr(VI) reduction by NemA-class flavoprotein oxidoreductases proceeds via
+direct FMN hydride transfer. If the actual mechanism is flavin-mediated
+ROS generation or a Fenton-like pathway, the geometric positioning of
+CrO$_4^{2-}$ relative to FMN~C4a is not the catalytically relevant
+step, and the geometric observables reported in
+\S\ref{sec:structresults} are not informative about the catalytic
+competence of the proposed NemA$^{*2+}$ variant. A direct experimental
+measurement of the Cr(VI) reduction mechanism in NemA (e.g., anaerobic
+stopped-flow kinetics with isotope-labeled Cr(VI) and FMN) is the
+single experiment that would resolve this.
 
+%% ============================================================
 \section{Conclusions}
+%% ============================================================
 
-We present a fully computational, multi-methodology biosafety-validated design of a tri-modular genetic circuit for Cr(VI) bioremediation in closed-system microcosms, with all parameters, assumptions, and provenance transparently documented in \texttt{simulations/parameters.py}. The key contributions are:
+We present a fully computational, multi-methodology biosafety-validated
+design of a tri-modular genetic circuit for Cr(VI) bioremediation in
+closed-system microcosms, with all parameters, assumptions, and
+provenance transparently documented in \texttt{simulations/parameters.py}.
+The key contributions are:
+
 \begin{enumerate}
-    \item A unified ChrB regulatory architecture that \textit{coordinately} regulates biosensing, enzymatic remediation, and kill switch suppression through a single regulatory protein.
-    \item A structural evaluation pipeline applied to the 2.30 \AA\ X-ray crystal structure of NemA (PDB 8BPQ) that uses a dimensionless contact-disruption score to rank 6 candidate second-shell mutations (none in the "tolerant" band; best candidate ILE 328 in the intermediate band) and a geometric placement of CrO$_4^{2-}$ (Cr-FMN C4a distance 2.89 \AA, 7 H-bond donor contacts, 1 steric clash) to evaluate substrate positioning. \textbf{The structural evaluation is a consistency check on the engineering hypothesis motivating NemA$^{*2+}$, not a kinetic prediction}; the kinetic parameters of NemA$^{*2+}$ remain scenario-analysis assumptions extrapolated from OYE-family active-site mutagenesis precedent \cite{mowafy2010}.
-    \item A ribosome-allocation metabolic model showing that, under its modeling assumptions, the $\sim$4.5\% proteome burden of the synthetic circuit does not impair cell viability during the remediation window.
-    \item A Luria-Delbr\"uck evolutionary biosafety analysis that, under the assumed input parameters, places the 30-day $P_{\text{escape}}$ of a viable escapee in a 1,000-liter closed system at $6 \times 10^{-17}$, below the $10^{-15}$ acceptable-risk threshold.
-    \item A Pillar 4b local sensitivity analysis demonstrating that the headline $P_{\text{escape}} < 10^{-15}$ claim is robust to a 10$\times$ error in any single input parameter.
-    \item A Pillar 4c \textbf{global Latin Hypercube Sampling analysis} ($N = 10{,}000$) over 8 input parameters drawn from literature-bounded ranges, finding a median $P_{\text{escape}} = 1.7 \times 10^{-17}$ (95\% CI $[2.1 \times 10^{-21}, 1.4 \times 10^{-13}]$) and a non-trivial \textbf{20.6\% of samples exceeding the $10^{-15}$ de-minimis threshold} under plausible joint-tail combinations. The dominant drivers are the HGT intact-gene transfer probabilities ($\rho \approx 0.55$).
+  \item A unified ChrB regulatory architecture that
+        \textit{coordinately} regulates biosensing, enzymatic
+        remediation, and kill-switch suppression through a single
+        regulatory protein.
+
+  \item A structural evaluation pipeline applied to the 2.30~\AA{}
+        X-ray crystal structure of NemA (PDB~8BPQ) that uses a
+        dimensionless contact-disruption score to rank 6~candidate
+        second-shell mutations (none in the ``tolerant'' band; best
+        candidate ILE~328 in the intermediate band) and a geometric
+        placement of CrO$_4^{2-}$ (Cr-FMN~C4a distance 2.89~\AA{},
+        7~H-bond donor contacts, 1~steric clash) to evaluate substrate
+        positioning. \textbf{The structural evaluation is a consistency
+        check on the engineering hypothesis motivating NemA$^{*2+}$,
+        not a kinetic prediction}; the kinetic parameters of
+        NemA$^{*2+}$ remain scenario-analysis assumptions extrapolated
+        from OYE-family active-site mutagenesis
+        precedent~\cite{mowafy2010}.
+
+  \item A ribosome-allocation metabolic model showing that, under its
+        modeling assumptions, the $\sim$4.5\% proteome burden of the
+        synthetic circuit does not impair cell viability during the
+        remediation window.
+
+  \item A Luria-Delbr\"{u}ck evolutionary biosafety analysis that,
+        under the assumed input parameters, places the 30-day
+        $P_{\text{escape}}$ of a viable escapee in a 1{,}000-liter
+        closed system at $6 \times 10^{-17}$, below the $10^{-15}$
+        acceptable-risk threshold.
+
+  \item A Pillar~4b local sensitivity analysis demonstrating that the
+        headline $P_{\text{escape}} < 10^{-15}$ claim is robust to a
+        $10\times$ error in any single input parameter.
+
+  \item A Pillar~4c \textbf{global Latin Hypercube Sampling analysis}
+        ($N = 10{,}000$) over 8~input parameters drawn from
+        literature-bounded ranges, finding a median
+        $P_{\text{escape}} = 1.7 \times 10^{-17}$ (95\% CI
+        $[2.1 \times 10^{-21},\; 1.4 \times 10^{-13}]$) and a
+        non-trivial \textbf{20.6\% of samples exceeding the $10^{-15}$
+        de-minimis threshold} under plausible joint-tail combinations.
+        The dominant drivers are the HGT intact-gene transfer
+        probabilities ($\rho \approx 0.55$).
 \end{enumerate}
 
-\textbf{One-paragraph bridge.} The relationship between the structural evaluation and the systems model is one-way: the systems model uses scenario-analysis kinetic parameters, and the structural evaluation can support, qualify, or contradict the engineering hypothesis behind those parameters. The two are not coupled numerically. The systems-model results for NemA$^{*2+}$ should therefore be read as a \textit{what-if} analysis of an enzyme variant that, according to the structural pipeline, is (or is not) a plausible engineering target --- not a prediction of how a real engineered NemA would behave. The contact-disruption score and the geometric placement are both screening tools, not kinetic predictors; the structural pipeline does not validate, derive, or predict catalytic constants.
+\medskip
+\textbf{One-paragraph bridge.} The relationship between the structural
+evaluation and the systems model is one-way: the systems model uses
+scenario-analysis kinetic parameters, and the structural evaluation can
+support, qualify, or contradict the engineering hypothesis behind those
+parameters. The two are not coupled numerically. The systems-model
+results for NemA$^{*2+}$ should therefore be read as a \textit{what-if}
+analysis of an enzyme variant that, according to the structural pipeline,
+is (or is not) a plausible engineering target -- not a prediction of how
+a real engineered NemA would behave. The contact-disruption score and
+the geometric placement are both screening tools, not kinetic predictors;
+the structural pipeline does not validate, derive, or predict catalytic
+constants.
 
-This computational framework does not merely describe what the system should do --- it provides a transparent mathematical foundation to evaluate both the design's expected performance and the sensitivity of its safety claim to its key input assumptions, and to identify the specific experiments (mutation-rate measurement under deployment conditions; HGT intact-gene transfer assay in freshwater; direct measurement of the Cr(VI) reduction mechanism in NemA; BSL-1 chassis co-transformation) that would convert it from a design study into a validated one. All such experimental validation is explicitly out of scope for this manuscript.
+This computational framework does not merely describe what the system
+should do -- it provides a transparent mathematical foundation to evaluate
+both the design's expected performance and the sensitivity of its safety
+claim to its key input assumptions, and to identify the specific
+experiments (mutation-rate measurement under deployment conditions; HGT
+intact-gene transfer assay in freshwater; direct measurement of the
+Cr(VI) reduction mechanism in NemA; BSL-1 chassis co-transformation)
+that would convert it from a design study into a validated one. All such
+experimental validation is explicitly out of scope for this manuscript.
 
+%% ============================================================
 \section{Code and Data Availability}
-All simulation code is contained in the public repository accompanying this manuscript. No experimental or wet-lab data were generated in this project --- all results are derived from the computational models in \texttt{simulations/}. The full set of numerical constants used by the models, with their provenance (literature-sourced vs.\ assumed/estimated), is centralized in \texttt{simulations/parameters.py}. This file is the single source of truth for every number in the project; each constant is tagged inline as \texttt{source: [N]}, \texttt{ASSUMED} (with justification), or \texttt{PREDICTED} (an output of one of our own models). The repository is archived at Zenodo: \textit{[DOI to be inserted after first Zenodo release]}.
+%% ============================================================
 
+All simulation code is contained in the public repository accompanying
+this manuscript. No experimental or wet-lab data were generated in this
+project -- all results are derived from the computational models in
+\texttt{simulations/}. The full set of numerical constants used by the
+models, with their provenance (literature-sourced vs.\
+assumed/estimated), is centralized in \texttt{simulations/parameters.py}.
+This file is the single source of truth for every number in the project;
+each constant is tagged inline as \texttt{source:~[N]},
+\texttt{ASSUMED} (with justification), or \texttt{PREDICTED} (an output
+of one of our own models). The repository is archived at Zenodo:
+\textit{[DOI to be inserted after first Zenodo release]}.
+
+%% ============================================================
+%% BIBLIOGRAPHY
+%% ============================================================
 \begin{thebibliography}{99}
-\bibitem{iarc1990} IARC Working Group. \textit{Chromium, Nickel and Welding}. IARC Monographs Vol. 49. (1990).
-\bibitem{eastmond2008} Eastmond DA, et al. \textit{Mutat Res.} 650(2):107--122 (2008).
-\bibitem{rahman2021} Rahman MM, et al. \textit{Environ Monit Assess.} 193(7):420 (2021).
-\bibitem{ahmed2022} Ahmed MF, et al. \textit{J Environ Sci.} 115:112--123 (2022).
-\bibitem{islam2020} Islam MS, et al. \textit{J Hazard Mater.} 399:123074 (2020).
-\bibitem{doem2022} DOEM. \textit{Annual Water Quality Monitoring Report: Narayanganj District}. (2022).
-\bibitem{sharma2017} Sharma SK, et al. \textit{Desalin Water Treat.} 59:1--12 (2017).
-\bibitem{heidmann2008} Heidmann I, Calmano W. \textit{J Hazard Mater.} 152(3):934--941 (2008).
-\bibitem{ali2013} Ali H, et al. \textit{Chemosphere.} 91(7):869--881 (2013).
-\bibitem{viti2003} Viti C, et al. \textit{Environ Microbiol.} 5(5):348--356 (2003).
-\bibitem{branco2013} Branco R, et al. \textit{J Bacteriol.} 195(10):2054--2065 (2013).
-\bibitem{williams2003} Williams RE, et al. \textit{Biochem Biophys Res Commun.} 290(1):249--254 (2003).
-\bibitem{chan2016} Chan CTY, et al. \textit{Nat Chem Biol.} 12(2):82--86 (2016).
-\bibitem{igem2013} iGEM Edinburgh 2013 Team. \textit{iGEM Parts Registry}. BBa\_K1149051. (2013).
-\bibitem{mowafy2010} Mowafy AM, et al. \textit{Protein Sci.} 19(7):1283--1296 (2010).
-\bibitem{lee2012} Lee JW, et al. Absolute quantitative analysis of the \textit{E. coli} spontaneous mutation rate per generation, per nucleotide, per cell. \textit{PNAS.} 109(41):E2774--E2783 (2012).
-\bibitem{velappan2021} Velappan N, et al. Plasmid incompatibility: a comprehensive review. \textit{Plasmid.} 114:102557 (2021).
-\bibitem{scott2010} Scott M, Gunderson CW, Mateescu EM, Zhang Z, Hwa T. Interdependence of cell growth and gene expression: origins and consequences. \textit{Science.} 330(6007):1099--1102 (2010).
-\bibitem{stirling2017} Stirling F, et al. Rational design of evolutionarily stable microbial kill switches. \textit{Mol Cell.} 68(4):686--697 (2017).
-\bibitem{rottinghaus2022} Rottinghaus AG, et al. Computational design of a biocontainment system for engineered microorganisms. \textit{ACS Synth Biol.} 11(1):134--145 (2022).
-\bibitem{drake1991} Drake JW. A constant rate of spontaneous mutation in DNA-based microbes. \textit{Proc Natl Acad Sci USA.} 88(16):7160--7164 (1991).
-\bibitem{dahlberg1998} Dahlberg C, Bergstr\"om M, Hermansson M. In situ detection of high levels of horizontal plasmid transfer in marine bacterial communities. \textit{Appl Environ Microbiol.} 64(7):2670--2675 (1998).
-\bibitem{muela1994} Muela A, Pocino M, Arana I, Justo JI, Iriberri J, Barcina I. Effect of growth phase and parental cell survival in river water on plasmid transfer between \textit{Escherichia coli} strains. \textit{Appl Environ Microbiol.} 60(12):4273--4278 (1994).
-\bibitem{licht1999} Licht TR. Plasmid transfer in the animal intestine and other dynamic bacterial populations: the role of community structure and environment. \textit{Microbiology (Reading).} 145(Pt 9):2615--2622 (1999).
-\bibitem{kannan1999} Kannan N, Vishveshwara S. Identification of side-chain clusters in protein structures by a graph spectral method. \textit{J Mol Biol.} 292(2):441--464 (1999).
-\bibitem{uniprotP77258} UniProt Consortium. \textit{UniProtKB P77258 (NEMA\_ECOLI)} --- N-ethylmaleimide reductase. \url{https://www.uniprot.org/uniprotkb/P77258}. Accessed 2026-07-01.
-\bibitem{hypothesis} The 30-day closed-system deployment window is a stated central hypothesis of this work (Sec.~1.4, ``Central hypothesis''). It is not a literature-sourced parameter.
+
+\bibitem{iarc1990}
+IARC Working Group. \textit{Chromium, Nickel and Welding}.
+IARC Monographs Vol.~49. (1990).
+
+\bibitem{eastmond2008}
+Eastmond DA, et al. \textit{Mutat Res.} 650(2):107--122 (2008).
+
+\bibitem{rahman2021}
+Rahman MM, et al. \textit{Environ Monit Assess.} 193(7):420 (2021).
+
+\bibitem{ahmed2022}
+Ahmed MF, et al. \textit{J Environ Sci.} 115:112--123 (2022).
+
+\bibitem{islam2020}
+Islam MS, et al. \textit{J Hazard Mater.} 399:123074 (2020).
+
+\bibitem{doem2022}
+DOEM. \textit{Annual Water Quality Monitoring Report: Narayanganj
+District}. (2022).
+
+\bibitem{sharma2017}
+Sharma SK, et al. \textit{Desalin Water Treat.} 59:1--12 (2017).
+
+\bibitem{heidmann2008}
+Heidmann I, Calmano W. \textit{J Hazard Mater.} 152(3):934--941
+(2008).
+
+\bibitem{ali2013}
+Ali H, et al. \textit{Chemosphere.} 91(7):869--881 (2013).
+
+\bibitem{viti2003}
+Viti C, et al. \textit{Environ Microbiol.} 5(5):348--356 (2003).
+
+\bibitem{branco2013}
+Branco R, et al. \textit{J Bacteriol.} 195(10):2054--2065 (2013).
+
+\bibitem{williams2003}
+Williams RE, et al. \textit{Biochem Biophys Res Commun.}
+290(1):249--254 (2003).
+
+\bibitem{chan2016}
+Chan CTY, et al. \textit{Nat Chem Biol.} 12(2):82--86 (2016).
+
+\bibitem{igem2013}
+iGEM Edinburgh 2013 Team. \textit{iGEM Parts Registry}. BBa\_K1149051.
+(2013).
+
+\bibitem{mowafy2010}
+Mowafy AM, et al. \textit{Protein Sci.} 19(7):1283--1296 (2010).
+
+\bibitem{lee2012}
+Lee JW, et al. Absolute quantitative analysis of the \textit{E.~coli}
+spontaneous mutation rate per generation, per nucleotide, per cell.
+\textit{PNAS.} 109(41):E2774--E2783 (2012).
+
+\bibitem{velappan2021}
+Velappan N, et al. Plasmid incompatibility: a comprehensive review.
+\textit{Plasmid.} 114:102557 (2021).
+
+\bibitem{scott2010}
+Scott M, Gunderson CW, Mateescu EM, Zhang Z, Hwa T. Interdependence
+of cell growth and gene expression: origins and consequences.
+\textit{Science.} 330(6007):1099--1102 (2010).
+
+\bibitem{stirling2017}
+Stirling F, et al. Rational design of evolutionarily stable microbial
+kill switches. \textit{Mol Cell.} 68(4):686--697 (2017).
+
+\bibitem{rottinghaus2022}
+Rottinghaus AG, et al. Computational design of a biocontainment
+system for engineered microorganisms. \textit{ACS Synth Biol.}
+11(1):134--145 (2022).
+
+\bibitem{drake1991}
+Drake JW. A constant rate of spontaneous mutation in DNA-based
+microbes. \textit{Proc Natl Acad Sci USA.} 88(16):7160--7164 (1991).
+
+\bibitem{dahlberg1998}
+Dahlberg C, Bergstr\"{o}m M, Hermansson M. In situ detection of high
+levels of horizontal plasmid transfer in marine bacterial communities.
+\textit{Appl Environ Microbiol.} 64(7):2670--2675 (1998).
+
+\bibitem{muela1994}
+Muela A, Pocino M, Arana I, Justo JI, Iriberri J, Barcina I. Effect
+of growth phase and parental cell survival in river water on plasmid
+transfer between \textit{Escherichia coli} strains. \textit{Appl
+Environ Microbiol.} 60(12):4273--4278 (1994).
+
+\bibitem{licht1999}
+Licht TR. Plasmid transfer in the animal intestine and other dynamic
+bacterial populations: the role of community structure and environment.
+\textit{Microbiology (Reading).} 145(Pt~9):2615--2622 (1999).
+
+\bibitem{kannan1999}
+Kannan N, Vishveshwara S. Identification of side-chain clusters in
+protein structures by a graph spectral method. \textit{J Mol Biol.}
+292(2):441--464 (1999).
+
+\bibitem{uniprotP77258}
+UniProt Consortium. \textit{UniProtKB P77258 (NEMA\_ECOLI)} -- \textit{N}-ethylmaleimide
+reductase. \url{https://www.uniprot.org/uniprotkb/P77258}. Accessed
+2026-07-01.
+
+\bibitem{hypothesis}
+The 30-day closed-system deployment window is a stated central
+hypothesis of this work (Sec.~1.4, ``Central hypothesis''). It is
+not a literature-sourced parameter.
+
 \end{thebibliography}
 
 \end{document}
