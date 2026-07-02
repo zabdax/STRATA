@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧬 SJWP 2026 — Chromium Bioremediation Genetic Circuit
+# 🧬 STRATA — Self-Terminating Remediation Architecture with Tri-modal Auxotrophy
 
 **A computational synthetic biology project modeling a tri-modular genetic circuit for hexavalent chromium [Cr(VI)] biosensing, enzymatic remediation, and autonomous self-termination in closed-system microcosms.**
 
@@ -63,7 +63,7 @@ All model constants — literature-sourced, assumed, or predicted — are centra
 ## 🏗️ Project Structure
 
 ```
-SJWP/
+project/
 ├── .python-version               # Pinned interpreter (3.11.x)
 ├── .gitignore                    # Keeps .venv/, __pycache__/, generated *.png, etc. out of git
 ├── LICENSE                       # CC BY 4.0
@@ -242,6 +242,6 @@ You are free to share (copy and redistribute in any medium or format) and adapt 
 
 <div align="center">
 
-<sub>Computational synthetic biology for resource-constrained bioremediation · SJWP 2026</sub>
+<sub>STRATA — Self-Terminating Remediation Architecture with Tri-modal Auxotrophy · Computational synthetic biology for resource-constrained bioremediation</sub>
 
 </div>
