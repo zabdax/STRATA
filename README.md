@@ -16,6 +16,25 @@
 
 ---
 
+## 🎬 How STRATA works, in 6 beats
+
+> A sleeping engineered *E. coli* is awakened by an incoming Cr(VI) ion, chases it, biosenses it (sfGFP glow), reduces it to Cr(III) via NemA, and finally triggers the holin–endolysin kill switch.
+
+<p align="center">
+  <img src="Diagrams/strata_story.svg" alt="STRATA story: sleeping BMO awakened by Cr(VI), chases it, glows green, reduces Cr(VI) to Cr(III), then triggers the kill switch" width="100%">
+</p>
+
+| Beat | What happens | Module in the project |
+|---|---|---|
+| 1 | BMO is dormant, sleeping | Baseline (no Cr(VI) → kill switch primed) |
+| 2 | Cr(VI) ion crashes in | **Module 1** — ChrB-sfGFP biosensor activated |
+| 3 | BMO chases the Cr(VI) | Activation cascade |
+| 4 | BMO catches it and **glows green** | **Module 1** — sfGFP reports intracellular Cr(VI) |
+| 5 | Cr(VI) → Cr(III), toxic → benign | **Module 2** — NemA chromate reductase |
+| 6 | BMO looks "wrong" and lyses | **Module 3** — Holin-Endolysin kill switch |
+
+---
+
 ## 📌 Project at a glance
 
 | | |

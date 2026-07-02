@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360" role="img" aria-label="STRATA story: sleeping BMO awakened by Cr(VI), chases it, glows green, reduces Cr(VI) to Cr(III), then activates the kill switch.">
+  <title>STRATA story animation</title>
+  <desc>An animated story: a sleeping engineered E. coli (BMO) is awakened by an incoming hexavalent chromium ion, chases it, catches and biosenses it (green sfGFP glow), reduces it to trivalent chromium (NemA), then triggers the holin-endolysin kill switch and lyses.</desc>
+
+  <!-- ===================== DEFINITIONS ===================== -->
+  <defs>
+    <!-- Pixel-art ground -->
+    <pattern id="ground" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="20" height="20" fill="#0e1a2b"/>
+      <rect x="0" y="14" width="20" height="6" fill="#13243d"/>
+      <rect x="0" y="17" width="20" height="3" fill="#1b3157"/>
+    </pattern>
+
+    <!-- Sky gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2a4a"/>
+      <stop offset="100%" stop-color="#0a1224"/>
+    </linearGradient>
+
+    <!-- GFP glow filter (sfGFP green) -->
+    <filter id="gfpGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Soft glow for Cr(VI) bug -->
+    <filter id="cr6Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Reusable: BMO cell (round friendly cartoon) -->
+    <g id="bmo">
+      <!-- Cell membrane -->
+      <circle cx="0" cy="0" r="46" fill="#7ec8ff" stroke="#1b3a6b" stroke-width="3"/>
+      <circle cx="0" cy="0" r="46" fill="url(#cellInner)" opacity="0.55"/>
+      <radialGradient id="cellInner" cx="0.35" cy="0.3" r="0.8">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="60%" stop-color="#bfe3ff" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#3a6ea8" stop-opacity="0.6"/>
+      </radialGradient>
+      <!-- Inner cell shading -->
+      <ellipse cx="-14" cy="-16" rx="16" ry="10" fill="#ffffff" opacity="0.35"/>
+      <!-- Plasmid dots -->
+      <circle cx="-22" cy="14" r="3" fill="#22456e"/>
+      <circle cx="20" cy="18" r="2.5" fill="#22456e"/>
+      <circle cx="0" cy="-26" r="2" fill="#22456e"/>
+      <!-- Eyes (closed by default, opened via animation) -->
+      <g id="bmoEyesClosed">
+        <path d="M -16 -2 q 6 6 12 0" stroke="#0b1a30" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M 4 -2 q 6 6 12 0" stroke="#0b1a30" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </g>
+      <g id="bmoEyesOpen" opacity="0">
+        <circle cx="-10" cy="2" r="5" fill="#ffffff"/>
+        <circle cx="10" cy="2" r="5" fill="#ffffff"/>
+        <circle cx="-10" cy="3" r="2.5" fill="#0b1a30"/>
+        <circle cx="10" cy="3" r="2.5" fill="#0b1a30"/>
+        <circle cx="-9" cy="2" r="0.8" fill="#ffffff"/>
+        <circle cx="11" cy="2" r="0.8" fill="#ffffff"/>
+      </g>
+      <!-- Mouth (small content) -->
+      <path id="bmoMouth" d="M -5 14 q 5 4 10 0" stroke="#0b1a30" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Reusable: Cr(VI) bug (spiky red-orange) -->
+    <g id="cr6">
+      <!-- Spikes (drawn behind body) -->
+      <g fill="#ff5a3c" stroke="#7a1a08" stroke-width="2" stroke-linejoin="round">
+        <polygon points="0,-22 -4,-12 4,-12"/>
+        <polygon points="15,-15 8,-10 14,-4"/>
+        <polygon points="22,0 12,-4 12,4"/>
+        <polygon points="15,15 14,4 8,10"/>
+        <polygon points="0,22 -4,12 4,12"/>
+        <polygon points="-15,15 -8,10 -14,4"/>
+        <polygon points="-22,0 -12,-4 -12,4"/>
+        <polygon points="-15,-15 -14,-4 -8,-10"/>
+      </g>
+      <!-- Body -->
+      <circle cx="0" cy="0" r="14" fill="#ff7a4a" stroke="#7a1a08" stroke-width="2.5"/>
+      <!-- Hexavalent label -->
+      <text x="0" y="3" text-anchor="middle" font-family="monospace" font-size="9" font-weight="bold" fill="#fff">Cr⁶⁺</text>
+      <!-- Evil eyes -->
+      <g>
+        <ellipse cx="-5" cy="-2" rx="2" ry="2.5" fill="#fff"/>
+        <ellipse cx="5" cy="-2" rx="2" ry="2.5" fill="#fff"/>
+        <circle cx="-5" cy="-1.5" r="1" fill="#000"/>
+        <circle cx="5" cy="-1.5" r="1" fill="#000"/>
+      </g>
+      <!-- Evil grin -->
+      <path d="M -5 4 q 5 4 10 0" stroke="#3a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- Eyebrows -->
+      <path d="M -8 -5 l 4 -2" stroke="#3a0a00" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 8 -5 l -4 -2" stroke="#3a0a00" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Reusable: Cr(III) safe form (small green sphere) -->
+    <g id="cr3">
+      <circle cx="0" cy="0" r="9" fill="#3ee08a" stroke="#0f5a32" stroke-width="2"/>
+      <text x="0" y="3" text-anchor="middle" font-family="monospace" font-size="7" font-weight="bold" fill="#0a2a14">Cr³⁺</text>
+    </g>
+
+    <!-- Reusable: Z (sleep) -->
+    <g id="zzz">
+      <text x="0" y="0" font-family="monospace" font-size="20" font-weight="bold" fill="#9fc8ff" text-anchor="middle">z</text>
+    </g>
+
+    <!-- Exclamation mark for "wake" beat -->
+    <g id="excl">
+      <text x="0" y="0" font-family="monospace" font-size="28" font-weight="bold" fill="#ffd23f" text-anchor="middle">!</text>
+    </g>
+  </defs>
+
+  <!-- ===================== SCENE ===================== -->
+  <rect width="800" height="360" fill="url(#sky)"/>
+
+  <!-- Stars (pixel-art style: 2x2 squares) -->
+  <g fill="#cfe0ff" opacity="0.6">
+    <rect x="50" y="40" width="2" height="2"/>
+    <rect x="120" y="80" width="2" height="2"/>
+    <rect x="200" y="30" width="2" height="2"/>
+    <rect x="280" y="60" width="2" height="2"/>
+    <rect x="360" y="40" width="2" height="2"/>
+    <rect x="450" y="80" width="2" height="2"/>
+    <rect x="540" y="30" width="2" height="2"/>
+    <rect x="620" y="60" width="2" height="2"/>
+    <rect x="700" y="40" width="2" height="2"/>
+    <rect x="760" y="80" width="2" height="2"/>
+    <rect x="80" y="120" width="2" height="2"/>
+    <rect x="170" y="100" width="2" height="2"/>
+    <rect x="320" y="120" width="2" height="2"/>
+    <rect x="500" y="110" width="2" height="2"/>
+    <rect x="650" y="120" width="2" height="2"/>
+  </g>
+
+  <!-- Title strip (top-left) -->
+  <g font-family="monospace" fill="#9fc8ff" opacity="0.85">
+    <text x="20" y="28" font-size="12">// STRATA — Tri-modular bioremediation, told in 6 beats</text>
+  </g>
+
+  <!-- Ground -->
+  <rect x="0" y="260" width="800" height="100" fill="url(#ground)"/>
+
+  <!-- Pixel-art grass tufts on the ground -->
+  <g fill="#1f3a66">
+    <rect x="40" y="258" width="2" height="6"/>
+    <rect x="42" y="260" width="2" height="4"/>
+    <rect x="150" y="258" width="2" height="6"/>
+    <rect x="152" y="260" width="2" height="4"/>
+    <rect x="260" y="258" width="2" height="6"/>
+    <rect x="262" y="260" width="2" height="4"/>
+    <rect x="380" y="258" width="2" height="6"/>
+    <rect x="382" y="260" width="2" height="4"/>
+    <rect x="500" y="258" width="2" height="6"/>
+    <rect x="502" y="260" width="2" height="4"/>
+    <rect x="620" y="258" width="2" height="6"/>
+    <rect x="622" y="260" width="2" height="4"/>
+    <rect x="740" y="258" width="2" height="6"/>
+    <rect x="742" y="260" width="2" height="4"/>
+  </g>
+
+  <!-- Moon (pixel-art crescent) -->
+  <g>
+    <rect x="690" y="50" width="6" height="6" fill="#e8efff"/>
+    <rect x="696" y="44" width="6" height="6" fill="#e8efff"/>
+    <rect x="702" y="50" width="6" height="6" fill="#e8efff"/>
+    <rect x="690" y="56" width="6" height="6" fill="#e8efff"/>
+    <rect x="696" y="62" width="6" height="6" fill="#e8efff"/>
+    <rect x="702" y="56" width="6" height="6" fill="#e8efff"/>
+    <rect x="708" y="50" width="6" height="6" fill="#1a2a4a"/>
+    <rect x="708" y="56" width="6" height="6" fill="#1a2a4a"/>
+    <rect x="702" y="62" width="6" height="6" fill="#1a2a4a"/>
+  </g>
+
+  <!-- Cr(VI) impact flash when it first lands near BMO (t=3s = keyTime 0.21) -->
+  <g stroke="#ff5a3c" stroke-width="3" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" values="0;0;0;1;0;0" keyTimes="0;0.20;0.215;0.225;0.27;1" dur="14s" repeatCount="indefinite"/>
+    <line x1="0" y1="0" x2="-14" y2="-14"/>
+    <line x1="0" y1="0" x2="14" y2="-14"/>
+    <line x1="0" y1="0" x2="-16" y2="0"/>
+    <line x1="0" y1="0" x2="16" y2="0"/>
+    <line x1="0" y1="0" x2="0" y2="-18"/>
+    <animateTransform attributeName="transform" type="translate" values="245,210;245,210" keyTimes="0;1" dur="14s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- ===================== BMO ===================== -->
+  <!-- Group: BMO movement.
+       Sleep at x=200. Wake jump at x=200. Chase x=200→620. Catch at x=620. Stay during reduction & kill. -->
+  <g id="bmoGroup">
+    <!-- translate via animateTransform on x -->
+    <animateTransform attributeName="transform" type="translate"
+      values="200,214; 200,214; 200,214; 200,214;
+              200,214; 200,208; 200,214;
+              240,214; 320,214; 420,214; 520,214; 600,214;
+              600,214; 600,214; 600,214; 600,214; 600,214; 600,214"
+      keyTimes="0; 0.05; 0.18; 0.21; 0.215; 0.225; 0.24; 0.32; 0.42; 0.50; 0.57; 0.60; 0.65; 0.70; 0.78; 0.85; 0.92; 1"
+      dur="14s" repeatCount="indefinite" calcMode="spline"
+      keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1;
+                  0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1;
+                  0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1;
+                  0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"/>
+
+    <!-- Body breathing scale while sleeping -->
+    <g>
+      <animateTransform attributeName="transform" type="scale" additive="sum"
+        values="1 1; 1.03 0.97; 1 1; 0.97 1.03; 1 1; 1 1; 1 1; 1 1; 1 1; 1 1"
+        keyTimes="0; 0.08; 0.16; 0.22; 0.28; 0.4; 0.6; 0.8; 0.9; 1"
+        dur="14s" repeatCount="indefinite"/>
+
+      <!-- The cell -->
+      <use href="#bmo"/>
+
+      <!-- Eyes: closed for sleep, open when awake, close at death -->
+      <use href="#bmoEyesClosed">
+        <animate attributeName="opacity"
+          values="1; 1; 0; 0; 0; 0; 0; 0"
+          keyTimes="0; 0.21; 0.225; 0.6; 0.85; 0.88; 0.9; 1"
+          dur="14s" repeatCount="indefinite"/>
+      </use>
+      <use href="#bmoEyesOpen">
+        <animate attributeName="opacity"
+          values="0; 0; 1; 1; 0; 0; 0"
+          keyTimes="0; 0.215; 0.225; 0.85; 0.88; 0.92; 1"
+          dur="14s" repeatCount="indefinite"/>
+      </use>
+    </g>
+
+    <!-- GFP glow ring around the cell when biosensing (catch) -->
+    <circle cx="0" cy="0" r="48" fill="none" stroke="#39ff7a" stroke-width="0" filter="url(#gfpGlow)">
+      <animate attributeName="stroke-width"
+        values="0; 0; 0; 0; 6; 10; 10; 6; 0; 0; 0; 0; 0"
+        keyTimes="0; 0.21; 0.55; 0.58; 0.60; 0.62; 0.65; 0.68; 0.72; 0.80; 0.85; 0.90; 1"
+        dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="stroke"
+        values="#39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a; #39ff7a"
+        dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity"
+        values="0; 0; 0; 0; 1; 1; 1; 1; 0.6; 0.3; 0; 0; 0"
+        keyTimes="0; 0.21; 0.55; 0.58; 0.60; 0.62; 0.68; 0.70; 0.78; 0.82; 0.85; 0.90; 1"
+        dur="14s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Cell-wall rupture lines (kill switch) -->
+    <g stroke="#1b3a6b" stroke-width="2" stroke-linecap="round" opacity="0">
+      <line x1="-30" y1="-20" x2="-46" y2="-30"/>
+      <line x1="28" y1="-22" x2="46" y2="-32"/>
+      <line x1="-32" y1="20" x2="-50" y2="30"/>
+      <line x1="30" y1="22" x2="48" y2="32"/>
+      <line x1="0" y1="-44" x2="0" y2="-58"/>
+      <animate attributeName="opacity"
+        values="0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 0"
+        keyTimes="0; 0.21; 0.55; 0.58; 0.60; 0.65; 0.70; 0.78; 0.82; 0.85; 0.88; 0.92; 1"
+        dur="14s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- ===================== Z's (sleep indicators) ===================== -->
+  <g>
+    <use href="#zzz" x="230" y="170">
+      <animate attributeName="opacity" values="0; 0.9; 0; 0" keyTimes="0; 0.05; 0.18; 0.22" dur="14s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0; 6,-30" keyTimes="0; 0.22" dur="14s" repeatCount="indefinite"/>
+    </use>
+    <use href="#zzz" x="250" y="160">
+      <animate attributeName="opacity" values="0; 0; 0.9; 0" keyTimes="0; 0.05; 0.13; 0.22" dur="14s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0; 10,-40" keyTimes="0; 0.22" dur="14s" repeatCount="indefinite"/>
+    </use>
+    <use href="#zzz" x="270" y="150">
+      <animate attributeName="opacity" values="0; 0; 0.9; 0" keyTimes="0; 0.10; 0.18; 0.22" dur="14s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0; 14,-50" keyTimes="0; 0.22" dur="14s" repeatCount="indefinite"/>
+    </use>
+  </g>
+
+  <!-- ===================== Exclamation on wake ===================== -->
+  <use href="#excl" x="215" y="160">
+    <animate attributeName="opacity" values="0; 0; 1; 1; 0; 0"
+      keyTimes="0; 0.21; 0.225; 0.24; 0.27; 1" dur="14s" repeatCount="indefinite"/>
+  </use>
+
+  <!-- ===================== Cr(VI) bug ===================== -->
+  <!-- Enters from right at t=3s, exits off-screen left during chase -->
+  <g id="cr6Group">
+    <use href="#cr6" x="700" y="220" filter="url(#cr6Glow)">
+      <animateTransform attributeName="transform" type="translate"
+        values="700,0; 700,0; 700,0; 700,0; 700,0;
+                540,0; 460,0; 360,0;
+                260,0; 220,0; 200,0;
+                200,0; 200,0; 200,0; 200,0; 200,0; 200,0; 200,0"
+        keyTimes="0; 0.18; 0.20; 0.21; 0.22; 0.24; 0.30; 0.40; 0.50; 0.55; 0.60; 0.65; 0.70; 0.78; 0.85; 0.92; 0.96; 1"
+        dur="14s" repeatCount="indefinite" calcMode="spline"
+        keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1;
+                    0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1;
+                    0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1;
+                    0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"/>
+    </use>
+  </g>
+
+  <!-- ===================== Cr(III) safe form appears after reduction ===================== -->
+  <g>
+    <use href="#cr3" x="200" y="220">
+      <animate attributeName="opacity"
+        values="0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0.4; 1; 1; 0.6; 0.3; 0"
+        keyTimes="0; 0.21; 0.55; 0.58; 0.60; 0.62; 0.65; 0.68; 0.70; 0.75; 0.78; 0.80; 0.82; 0.85; 0.88; 0.90; 0.93; 1"
+        dur="14s" repeatCount="indefinite"/>
+    </use>
+  </g>
+
+  <!-- ===================== Lysis debris (kill switch) ===================== -->
+  <g>
+    <!-- Small cell fragments that drift away when BMO lyses -->
+    <g fill="#7ec8ff" stroke="#1b3a6b" stroke-width="1.5">
+      <circle cx="0" cy="0" r="6">
+        <animate attributeName="cx" values="600; 560; 520" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+        <animate attributeName="cy" values="214; 200; 180" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+        <animate attributeName="opacity" values="1; 0.6; 0" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+      </circle>
+      <circle cx="0" cy="0" r="4">
+        <animate attributeName="cx" values="600; 640; 680" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+        <animate attributeName="cy" values="214; 220; 240" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+        <animate attributeName="opacity" values="1; 0.6; 0" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+      </circle>
+      <circle cx="0" cy="0" r="5">
+        <animate attributeName="cx" values="600; 580; 560" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+        <animate attributeName="cy" values="214; 240; 260" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+        <animate attributeName="opacity" values="1; 0.6; 0" keyTimes="0; 0.5; 1" dur="1.5s" begin="12.5s" repeatCount="indefinite" repeatDur="14s"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- ===================== Beat captions (right side, text fades per beat) ===================== -->
+  <g font-family="monospace" fill="#cfe0ff">
+    <!-- Beat 1: Sleep -->
+    <g opacity="0">
+      <animate attributeName="opacity"
+        values="0; 0.9; 0.9; 0; 0; 0; 0; 0; 0"
+        keyTimes="0; 0.02; 0.20; 0.22; 0.30; 0.60; 0.80; 0.90; 1"
+        dur="14s" repeatCount="indefinite"/>
+      <rect x="500" y="40" width="280" height="40" fill="#0a1224" stroke="#3a6ea8" stroke-width="1" rx="4"/>
+      <text x="640" y="58" text-anchor="middle" font-size="13" fill="#9fc8ff">Beat 1 — dormant BMO</text>
+      <text x="640" y="74" text-anchor="middle" font-size="10" fill="#7a98c0">no Cr(VI) → kill switch primed, biosensor off</text>
+    </g>
+    <!-- Beat 2: Cr(VI) arrives -->
+    <g opacity="0">
+      <animate attributeName="opacity"
+        values="0; 0; 0.9; 0.9; 0; 0; 0; 0; 0"
+        keyTimes="0; 0.20; 0.23; 0.28; 0.30; 0.60; 0.80; 0.90; 1"
+        dur="14s" repeatCount="indefinite"/>
+      <rect x="500" y="40" width="280" height="40" fill="#3a0a00" stroke="#ff5a3c" stroke-width="1" rx="4"/>
+      <text x="640" y="58" text-anchor="middle" font-size="13" fill="#ff7a4a">Beat 2 — Cr(VI) detected</text>
+      <text x="640" y="74" text-anchor="middle" font-size="10" fill="#ffb39a">ChrB sensor activated, holin repression engaged</text>
+    </g>
+    <!-- Beat 3: Chase -->
+    <g opacity="0">
+      <animate attributeName="opacity"
+        values="0; 0; 0.9; 0.9; 0; 0; 0; 0"
+        keyTimes="0; 0.28; 0.30; 0.55; 0.60; 0.80; 0.90; 1"
+        dur="14s" repeatCount="indefinite"/>
+      <rect x="500" y="40" width="280" height="40" fill="#1a2a4a" stroke="#ffd23f" stroke-width="1" rx="4"/>
+      <text x="640" y="58" text-anchor="middle" font-size="13" fill="#ffd23f">Beat 3 — capture &amp; biosense</text>
+      <text x="640" y="74" text-anchor="middle" font-size="10" fill="#cfe0ff">sfGFP reports intracellular Cr(VI)</text>
+    </g>
+    <!-- Beat 4/5: Reduce -->
+    <g opacity="0">
+      <animate attributeName="opacity"
+        values="0; 0; 0.9; 0.9; 0; 0; 0"
+        keyTimes="0; 0.60; 0.65; 0.83; 0.88; 0.95; 1"
+        dur="14s" repeatCount="indefinite"/>
+      <rect x="500" y="40" width="280" height="40" fill="#0a2a14" stroke="#3ee08a" stroke-width="1" rx="4"/>
+      <text x="640" y="58" text-anchor="middle" font-size="13" fill="#3ee08a">Beat 4 — NemA reduces Cr(VI) → Cr(III)</text>
+      <text x="640" y="74" text-anchor="middle" font-size="10" fill="#9fe8b8">chromate reductase converts toxic → benign</text>
+    </g>
+    <!-- Beat 6: Kill switch -->
+    <g opacity="0">
+      <animate attributeName="opacity"
+        values="0; 0; 0.9; 0.9; 0"
+        keyTimes="0; 0.88; 0.90; 0.97; 1"
+        dur="14s" repeatCount="indefinite"/>
+      <rect x="500" y="40" width="280" height="40" fill="#3a0a00" stroke="#ff5a3c" stroke-width="1" rx="4"/>
+      <text x="640" y="58" text-anchor="middle" font-size="13" fill="#ff7a4a">Beat 5 — holin–endolysin fires</text>
+      <text x="640" y="74" text-anchor="middle" font-size="10" fill="#ffb39a">post-remediation self-termination (kill switch)</text>
+    </g>
+  </g>
+
+  <!-- ===================== Module legend (bottom strip) ===================== -->
+  <g font-family="monospace" font-size="9" fill="#7a98c0">
+    <text x="20" y="340">M1 ChrB-sfGFP · M2 NemA chromate reductase · M3 Holin-Endolysin</text>
+    <text x="780" y="340" text-anchor="end">loop · 14s</text>
+  </g>
+</svg>
