@@ -18,7 +18,7 @@
 
 ## 🎬 How STRATA works:
 
-> A sleeping engineered *E. coli* BMO in a biotech lab detects incoming Cr(VI) ions, awakens and biosenses them, reduces Cr(VI) to benign Cr(III) via NemA enzyme, then triggers the holin–endolysin kill switch and dissolves. A new BMO hatches from the incubation chamber to resume monitoring.
+> A sleeping engineered *E. coli* GMO in a biotech lab detects incoming Cr(VI) ions, awakens and biosenses them, reduces Cr(VI) to benign Cr(III) via NemA enzyme, then triggers the holin–endolysin kill switch and dissolves. A new GMO hatches from the incubation chamber to resume monitoring.
 
 <p align="center">
   <img src="assets/strata_story.svg" alt="STRATA story: a sleeping engineered organism in a biotech lab detects incoming hexavalent chromium, wakes up, biosenses and reduces it to trivalent chromium via NemA, dissolves on kill-switch activation, and a new organism hatches to resume monitoring -- an 18-second seamless pixel-art loop." width="100%">
