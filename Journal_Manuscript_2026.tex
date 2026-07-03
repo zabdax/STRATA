@@ -61,15 +61,14 @@
 \setlength{\floatsep}{8pt plus 2pt minus 2pt}
 \setlength{\intextsep}{8pt plus 2pt minus 2pt}
 
-%% ---- Hyperref configuration (Overleaf auto-loads hyperref) ---
-%% Overleaf auto-prepends \usepackage{hyperref} with empty options,
-%% so we must NOT load it again. We configure it via \hypersetup
-%% (which works whether hyperref was loaded by Overleaf or by us).
-\hypersetup{colorlinks=true,
+%% ---- Hyperref configuration -----------------------------------
+%% Load hyperref (Overleaf does not auto-load it; we load it with
+%% the desired options here, then fine-tune via \hypersetup).
+\usepackage[colorlinks=true,
             linkcolor=blue!70!black,
             citecolor=blue!70!black,
-            urlcolor=blue!70!black,
-            pdfborder={0 0 0}}
+            urlcolor=blue!70!black]{hyperref}
+\hypersetup{pdfborder={0 0 0}}
 
 %% ORCID iD logo (depends on hyperref + tikz, so it must come after)
 \usepackage{orcidlink}
