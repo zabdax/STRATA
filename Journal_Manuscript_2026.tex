@@ -5,12 +5,7 @@
 %%  Author: Zubayer Hasan Shaad  |  July 2026
 %% ============================================================
 
-\documentclass[10pt,twocolumn,letterpaper,
-              colorlinks=true,
-              linkcolor=blue!70!black,
-              citecolor=blue!70!black,
-              urlcolor=blue!70!black,
-              pdfborder={0 0 0}]{article}
+\documentclass[10pt,twocolumn,letterpaper]{article}
 
 %% ---- Encoding & Fonts ----------------------------------------
 \usepackage[utf8]{inputenc}
@@ -26,7 +21,6 @@
 \graphicspath{{assets/}{./assets/}{../assets/}}   % locate ORCID logo
 \usepackage{booktabs}
 \usepackage{array}              % richer column types in tabular
-\usepackage{caption}
 \usepackage[labelfont=bf,
             font=small,
             skip=4pt]{caption}
@@ -62,12 +56,26 @@
 \setlength{\floatsep}{8pt plus 2pt minus 2pt}
 \setlength{\intextsep}{8pt plus 2pt minus 2pt}
 
-%% ---- Hyperref configuration (Overleaf auto-loads hyperref) ---
-%% Overleaf auto-prepends \usepackage{hyperref} with empty options,
-%% so we must NOT load it again. We configure it via \hypersetup
-%% (which works whether hyperref was loaded by Overleaf or by us).
+%% ---- Hyperref (loaded explicitly for portability) ---------------
+\usepackage[colorlinks=true,
+            linkcolor=blue!70!black,
+            citecolor=blue!70!black,
+            urlcolor=blue!70!black,
+            pdfborder={0 0 0}]{hyperref}
 
-            
+\hypersetup{
+  pdftitle={In Silico Design and Computational Validation of a
+            Tri-Modular Genetic Circuit for Autonomous Detection
+            and Bioremediation of Hexavalent Chromium in
+            Closed-System Microcosms},
+  pdfauthor={Zubayer Hasan Shaad},
+  pdfsubject={Synthetic biology; hexavalent chromium bioremediation;
+              kill switch; biosafety},
+  pdfkeywords={synthetic biology, hexavalent chromium, genetic kill
+               switch, ChrB biosensor, NemA reductase, bioremediation,
+               Luria-Delbrueck mutation model, plasmid architecture,
+               BMO biosafety, Bangladesh tannery pollution}
+}
 
 %% ORCID iD logo (depends on hyperref + tikz, so it must come after)
 \usepackage{orcidlink}
@@ -177,7 +185,7 @@
     Bangladesh tannery pollution
   \end{center}
   \vspace{1em}
-
+]
 
 %% ============================================================
 \section{Introduction}
@@ -1179,6 +1187,8 @@ concentrations. At $\phi_S = 4.5\%$, growth rate is reduced by
 approximately 33\% relative to the unstressed, unburdened baseline
 ($0.5\;\text{h}^{-1} \to 0.34\;\text{h}^{-1}$ at 0~$\mu$M Cr(VI)).
 Growth remains positive under all four stress conditions tested
+(0, 20, 50, 100~$\mu$M Cr(VI)), indicating that the chassis continues
+to replicate and remediate.
 
 \begin{figure*}[!t]
   \centering
@@ -1192,8 +1202,6 @@ Growth remains positive under all four stress conditions tested
     \texttt{metabolic\_burden\_model.py}.}
   \label{fig:burden}
 \end{figure*}
-(0, 20, 50, 100~$\mu$M Cr(VI)), indicating that the chassis continues
-to replicate and remediate.
 
 %% ----
 \subsection{Evolutionary Biosafety: Luria-Delbr\"{u}ck
