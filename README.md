@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧬 STRATA — Self-Terminating Remediation Architecture with Tri-modal Auxotrophy
+# STRATA — Self-Terminating Remediation Architecture with Tri-modal Auxotrophy
 
 **A computational framework paper and its supplementary artefacts: an in-silico tri-modular genetic circuit for hexavalent chromium [Cr(VI)] biosensing, enzymatic remediation, and autonomous self-termination in closed-system microcosms.**
 
@@ -8,15 +8,15 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg?style=for-the-badge)](https://creativecommons.org/licenses/by/4.0/)
 [![Python 3.11](https://img.shields.io/badge/python-3.11.x-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](.python-version)
-[![Status: Computational](https://img.shields.io/badge/status-computational%20only-orange?style=for-the-badge)](#-important-caveat)
-[![Code: documented](https://img.shields.io/badge/code-documented-brightgreen?style=for-the-badge)](#-code-and-data-availability)
+[![Status: Computational](https://img.shields.io/badge/status-computational%20only-orange?style=for-the-badge)](#important-caveat)
+[![Code: documented](https://img.shields.io/badge/code-documented-brightgreen?style=for-the-badge)](#code-and-data-availability)
 [![Repo: GitHub](https://img.shields.io/badge/repo-zabdax%2Fcr6--biocircuit--model-181717?style=for-the-badge&logo=github)](https://github.com/zabdax/cr6-biocircuit-model)
 
 </div>
 
 ---
 
-## 📄 About this repository
+## About this repository
 
 This repository accompanies the manuscript:
 
@@ -29,17 +29,13 @@ The work is **entirely computational**. No experimental or wet-lab data were gen
 
 ---
 
-## 🎬 How STRATA works:
+## How STRATA works
 
 > A sleeping engineered *E. coli* GMO in a biotech lab detects incoming Cr(VI) ions, awakens and biosenses them, reduces Cr(VI) to benign Cr(III) via NemA enzyme, then triggers the holin–endolysin kill switch and dissolves. A new GMO hatches from the incubation chamber to resume monitoring.
 
-<p align="center">
-  <img src="assets/strata_story.svg" alt="STRATA story: a sleeping engineered organism in a biotech lab detects incoming hexavalent chromium, wakes up, biosenses and reduces it to trivalent chromium via NemA, dissolves on kill-switch activation, and a new organism hatches to resume monitoring -- an 18-second seamless pixel-art loop." width="100%">
-</p>
-
 ---
 
-## 📌 Paper at a glance
+## Paper at a glance
 
 | | |
 |---|---|
@@ -54,13 +50,13 @@ The work is **entirely computational**. No experimental or wet-lab data were gen
 
 ---
 
-## ⚠️ Important caveat
+## Important caveat
 
 > **This work is entirely computational.** No experimental or wet-lab data were generated; all results are derived from the simulation models in `simulations/`. The deployment claim is contingent on a direct measurement of the per-bp mutation rate in the deployed strain under the deployed growth conditions, which has not yet been performed. See [`simulations/parameters.py`](simulations/parameters.py) for the provenance of every number in the manuscript. The structural-evaluation pipeline (NemA*2+) follows the literature-decision-gated reporting protocol in [`simulations/results/literature_check.md`](simulations/results/literature_check.md), which demotes Vina scores to [`simulations/results/nema_docking_results_supplementary.csv`](simulations/results/nema_docking_results_supplementary.csv) and reports only geometric observables in the main text.
 
 ---
 
-## 📖 Code and Data Availability
+## Code and Data Availability
 
 All simulation code supporting the manuscript is contained in this repository. No experimental or wet-lab data were generated — all results are derived from computational modeling. Parameter sources (literature-derived vs. assumed/estimated) are documented in [`simulations/parameters.py`](simulations/parameters.py), which is the single source of truth for every constant used in the paper.
 
@@ -68,7 +64,7 @@ This repository is archived at **Zenodo** *(DOI badge will be added after first 
 
 ---
 
-## 🧪 Parameters
+## Parameters
 
 All model constants — literature-sourced, assumed, or predicted — are centralized and individually cited/labeled in [`simulations/parameters.py`](simulations/parameters.py). Each constant is tagged as one of:
 
@@ -83,7 +79,7 @@ All model constants — literature-sourced, assumed, or predicted — are centra
 
 ---
 
-## 🗂️ Repository structure
+## Project Structure
 
 The repository is organised around the manuscript. The `simulations/` tree mirrors the five computational pillars of the paper; everything else is supporting infrastructure (LaTeX source, citation metadata, validator scripts, dependency pin).
 
@@ -95,11 +91,11 @@ The repository is organised around the manuscript. The `simulations/` tree mirro
 ├── README.md                     # This file
 ├── requirements.txt              # Pinned Python dependencies
 ├── CITATION.cff                  # Machine-readable citation metadata (CFF 1.2.0)
-├── Journal_Manuscript_2026.tex   # ⭐ LaTeX source of the manuscript (primary scholarly record)
+├── Journal_Manuscript_2026.tex   # LaTeX source of the manuscript (primary scholarly record)
 ├── scripts/
 │   └── scripts_check_tex.py      # Brace / environment-balance validator for the .tex
 └── simulations/
-    ├── parameters.py             # ⭐ Centralized, cited parameter set — read this first
+    ├── parameters.py             # Centralized, cited parameter set — read this first
     ├── circuit_ode_model.py      # Pillar 1: ODE systems biology simulation (96 h)
     ├── nemA_mutant_kinetics.py   # Pillar 2: WT vs. hypothesized NemA*²⁺ Michaelis–Menten kinetics
     ├── metabolic_burden_model.py # Pillar 3: Ribosome allocation / GSMM (Scott et al. 2010)
@@ -137,13 +133,13 @@ The repository is organised around the manuscript. The `simulations/` tree mirro
         └── plasmid_module{1,2,3}.png        # Plasmid module diagrams
 ```
 
-> Local-only paths (not in the tree above, gitignored): `assets/` (ORCID logo, figure SVGs) and `vina_binary/` (bundled AutoDock Vina 1.2.5 executable, used by Pillar 5 prep steps). The submitted manuscript and its PDF are both reproducible from the tracked source: `Journal_Manuscript_2026.tex` → `simulations/generate_pdf.py`.
+> Local-only paths (gitignored, not part of the submission): `assets/` (ORCID logo, figure SVGs) and `vina_binary/` (bundled AutoDock Vina 1.2.5 executable, used by Pillar 5 prep steps). The submitted manuscript and its PDF are both reproducible from the tracked source: `Journal_Manuscript_2026.tex` → `simulations/generate_pdf.py`.
 
 > [`scripts/scripts_check_tex.py`](scripts/scripts_check_tex.py) performs a structural sanity check on `Journal_Manuscript_2026.tex` (brace balance + LaTeX `\\begin`/`\\end` environment balance + citation ↔ bibliography cross-check) without invoking a full LaTeX toolchain. It resolves the manuscript path relative to itself, so it runs from any working directory.
 
 ---
 
-## 🚀 Reproducing the results
+## Reproducing the results
 
 ```powershell
 # Activate the virtual environment (Windows)
@@ -174,7 +170,7 @@ python scripts/scripts_check_tex.py
 
 ---
 
-## 🔬 Computational pillars
+## Computational pillars
 
 | Pillar | Script | Method | Headline output |
 |---|---|---|---|
@@ -188,7 +184,7 @@ python scripts/scripts_check_tex.py
 
 ---
 
-## 🧬 NemA*2+ Structural Evaluation (Pillar 5)
+## NemA*2+ Structural Evaluation (Pillar 5)
 
 A separate structural pipeline was run to evaluate the feasibility of the hypothesized NemA\*²⁺ variant at the protein level, independent of the ODE / biosafety work in Pillars 1–4. The full source lives in `simulations/structural_pipeline/` and runs as a six-stage pipeline:
 
@@ -241,7 +237,7 @@ Per the pipeline's decision rule, Vina scores are demoted to the supplementary C
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 All managed via the `.venv` virtual environment. See [`requirements.txt`](requirements.txt) for pinned versions.
 
@@ -251,15 +247,15 @@ Python version is pinned in [`.python-version`](.python-version) (3.11.x). The p
 
 ---
 
-## 👤 Author
+## Author
 
 **Zubayer Hasan Shaad** — Govt. Tolaram College, Narayanganj, Bangladesh
 
-📫 [mdzubayerhasanshaad99@gmail.com](mailto:mdzubayerhasanshaad99@gmail.com) · 🐙 [@zabdax](https://github.com/zabdax) · 🆔 [ORCID 0009-0002-2322-8553](https://orcid.org/0009-0002-2322-8553)
+Email: [mdzubayerhasanshaad99@gmail.com](mailto:mdzubayerhasanshaad99@gmail.com) · GitHub: [@zabdax](https://github.com/zabdax) · ORCID: [0009-0002-2322-8553](https://orcid.org/0009-0002-2322-8553)
 
 ---
 
-## 📚 How to cite
+## How to cite
 
 The **manuscript is the primary scholarly record**; please cite it (not just the repository) when referencing STRATA's design, methods, or results. The repository is the artefact bundle that supports the manuscript.
 
@@ -293,7 +289,7 @@ The canonical, machine-readable source is [`CITATION.cff`](CITATION.cff) (CFF 1.
 
 ---
 
-## 📄 License
+## License
 
 The manuscript, code, and supplementary artefacts in this repository are licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 
