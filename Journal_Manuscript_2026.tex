@@ -1470,15 +1470,35 @@ Pb, Cd, As, Cu, Zn), high salinity, sulfate, sulfide, ammonia,
 dissolved organic loads, and variable pH. Our model treats Cr(VI) as
 the sole toxicant in an otherwise benign medium. The actual toxicity,
 growth rate, and biosensor response in real effluent will differ from
-the model prediction.
+the model prediction. In particular, the high-salinity osmotic stress
+typical of tannery effluent and the well-documented toxicity of
+sulfide (which can inhibit cytochrome- and flavoprotein-dependent
+respiration) are unmodeled factors that could plausibly reduce the
+baseline translational elongation capacity $\kappa_t$ below the
+3.5~h$^{-1}$ value assumed in Pillar~3; the magnitude of that
+reduction in real effluent is not quantified here. A lower effective
+$\kappa_t$ would shift the viability-vs.\ remediation-time balance
+unfavorably and could compress the engineering margin before the
+48-hour remediation endpoint reported in the Pillar~3 simulations.
 
 \medskip
 \noindent\textbf{(4) Cr(III) downstream fate not addressed.}
 This work models Cr(VI)~$\rightarrow$~Cr(III) reduction but does not
 address the subsequent fate of the Cr(III) product. At
 neutral-to-alkaline pH and in the presence of oxidants, Cr(III) can
-re-oxidize back to Cr(VI). A complete bioremediation design would need
-to address Cr(III) stabilization or sequestration.
+re-oxidize back to Cr(VI). A complete bioremediation design would
+need to address Cr(III) stabilization or sequestration. Two concrete
+future-work directions for physically sequestering Cr(III) within a
+closed microcosm are: \textbf{(a)}~a metallothionein or
+metallothionein-like peptide surface-display system, an established
+synthetic-biology pattern for metal binding at the cell envelope; and
+\textbf{(b)}~a phosphate-driven bioprecipitation loop, in which
+exogenous phosphate is dosed into the closed system to drive
+Cr(III) phosphate (CrPO$_4$) precipitation, which is chemically
+straightforward but adds a reagent-dosing requirement to the closed
+system. Both directions are explicitly out of scope for the present
+computational validation and are named here as future-work
+directions, not as components of this study's results.
 
 \medskip
 \noindent\textbf{(5) Containment claim is not robust to joint-tail
@@ -1531,6 +1551,32 @@ competence of the proposed NemA$^{*2+}$ variant. A direct experimental
 measurement of the Cr(VI) reduction mechanism in NemA (e.g., anaerobic
 stopped-flow kinetics with isotope-labeled Cr(VI) and FMN) is the
 single experiment that would resolve this.
+
+\medskip
+\noindent\textbf{(9) Homologous recombination between plasmids sharing
+the \textit{P}\textsubscript{chrB} promoter.}
+The identical \textit{P}\textsubscript{chrB} promoter sequence is
+present in all three plasmids of the tri-modular design (pUC19,
+pET-28a, pACYC184), which creates a substrate for RecA-dependent
+homologous recombination between plasmids in the same cell. This
+recombination failure mode is independent of, and in addition to, the
+point-mutation process modeled in Pillar~4 (Luria-Delbr\"{u}ck), and
+\textbf{is not captured} by $\mu_{bp}$ or by the Pillar~4 / Pillar~4c
+models, which treat point mutation only. It is therefore an
+additional, currently unquantified risk. The DH5$\alpha$ chassis
+carries the \textit{recA1} allele, originally isolated and
+characterized as a recombination-deficient mutation in
+\textit{E.~coli} K-12~\cite{clark1965}, which is widely reported to
+substantially reduce RecA-dependent homologous recombination
+relative to a \textit{recA$^+$} strain in cloning contexts; the
+exact per-plasmid-pair suppression factor for this specific
+three-plasmid construct is not quantified in the present study, and
+no citable per-plasmid-pair recombination rate exists for it. A
+future design direction is to replace the shared
+\textit{P}\textsubscript{chrB} with pseudo-orthogonal or degenerate
+variants that retain the same operator affinity but minimize
+sequence homology; the design of specific variant sequences is
+explicitly out of scope for the present study.
 
 %% ============================================================
 \section{Conclusions}
@@ -1740,6 +1786,11 @@ reductase. \url{https://www.uniprot.org/uniprotkb/P77258}. Accessed
 The 30-day closed-system deployment window is a stated central
 hypothesis of this work (Sec.~1.4, ``Central hypothesis''). It is
 not a literature-sourced parameter.
+
+\bibitem{clark1965}
+Clark AJ, Margulies AD. Isolation and characterization of
+recombination-deficient mutants of \textit{Escherichia coli} K-12.
+\textit{Proc Natl Acad Sci USA.} 53(2):451--459 (1965).
 
 \end{thebibliography}
 
