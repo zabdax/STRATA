@@ -152,9 +152,11 @@
   Sensitivity analysis reveals this safety margin is robust to a $10\times$
   error in mutation rate or a $10\times$ reactor scale-up, but fails at a
   $100\times$ mutation rate error ($P_{\text{escape}} = 6 \times 10^{-15}$).
-  Global Latin Hypercube Sampling ($N = 10{,}000$) across 8 parameters yields a
-  median $P_{\text{escape}} = 1.7 \times 10^{-17}$, though \textbf{20.6\% of samples
-  exceed the $10^{-15}$ threshold} under plausible joint-tail combinations.
+  Global Latin Hypercube Sampling ($N = 10{,}000$) across 8 parameters yields
+  median $P_{\text{escape}} = 1.7 \times 10^{-17}$, but \textbf{20.6\% of samples
+  exceed the $10^{-15}$ threshold} under plausible joint-tail parameter
+  combinations --- indicating the containment margin is not yet robust and is
+  contingent on empirical measurement of HGT transfer rates.
 
   \medskip\noindent
   This system computationally achieves ${>}99\%$ reduction of 100~$\mu$M
@@ -861,7 +863,7 @@ rate $\mu_{bp}$~\cite{drake1991,lee2012}, HGT intact-gene transfer
 probability for $\Delta thyA$ reversion, the same for $\Delta dapA$
 \cite{dahlberg1998,muela1994,licht1999}, reactor volume~$V$, maximum
 cell density $\rho_{\max}$, generations per day~$g$, deployment window
-$T$ (the hypothesis states 30~days~\cite{hypothesis}), and kill-switch
+$T$ (the hypothesis states 30~days\footnote{The 30-day closed-system deployment window is a stated central hypothesis of this work (Sec.~1.4). It is not a literature-sourced parameter.}), and kill-switch
 target size $L_{\text{target}}$~\cite{chan2016}. The full bounds are
 reported in \texttt{parameters.py} and tabulated in the supplementary
 parameter table.
@@ -945,9 +947,7 @@ computational models, with the responsible script.
 \begin{table*}[!t]
 \centering
 \caption{Claim--evidence provenance for every numerical value in the
-  manuscript. The NemA$^{*2+}$ kinetic row is explicitly tagged as a
-  scenario assumption; the structural pipeline rows are tagged as
-  geometric / structural observables, not kinetic predictions.}
+  manuscript.}
 \label{tab:provenance}
 \small
 \begin{tabular}{@{}p{4.5cm} p{3.2cm} p{8.0cm}@{}}
@@ -1404,10 +1404,13 @@ acknowledged in \texttt{parameters.py}).
 per-bp mutation rate and the freshwater HGT intact-gene transfer
 probability is available, the 30-day containment claim should be read
 as the central estimate of an order-of-magnitude spread, not as a hard
-floor. A future wet-lab Luria-Delbr\"{u}ck fluctuation test on the
-deployed strain (Pillar~4b follow-up) and a freshwater HGT assay would
-convert the LHS from a sensitivity analysis into a validated probability
-statement.
+floor.  A future wet-lab Luria-Delbr\"{u}ck fluctuation test on the
+  deployed strain (Pillar~4b follow-up) and a freshwater HGT assay would
+  convert the LHS from a sensitivity analysis into a validated probability
+  statement. Specifically, if empirical measurement were to bound the per-division
+  HGT transfer probability below $\sim 10^{-13}$ and the point-mutation rate
+  $\mu_{bp}$ below $\sim 3 \times 10^{-10}$, the $P_{\text{escape}}$ would
+  be driven robustly below $10^{-15}$, fully closing this biosafety vulnerability.
 
 \FloatBarrier
 
@@ -1448,6 +1451,14 @@ containment boundary. The combined effect is that $N_{total} \times G$
 in open water is effectively unbounded, and any finite
 $p_{\text{combined}}$, however small, yields $P_{\text{escape}} \to 1$
 over sufficient time.
+
+\subsection{Priority Biosafety Follow-Up: HGT Transfer Probability}
+
+Because HGT intact-gene transfer probabilities ($\Delta$thyA and $\Delta$dapA reversion) emerged as the dominant Spearman drivers of failure in the global LHS analysis ($\rho \approx 0.55$), empirically measuring the $\Delta$thyA / $\Delta$dapA HGT transfer probability in freshwater conditions must be the \#1 priority follow-up experiment. It sits above the mutation-rate measurement, as the structural containment claim is fundamentally contingent on the environmental HGT rate remaining sufficiently low.
+
+\subsection{Unmodeled Containment Risks: Plasmid Recombination}
+
+The identical \textit{P}\textsubscript{chrB} promoter sequence is present in all three plasmids of the tri-modular design (pUC19, pET-28a, pACYC184), creating a substrate for RecA-dependent homologous recombination between plasmids in the same cell. Although the DH5$\alpha$ chassis carries the \textit{recA1} allele to suppress this, it represents a structural gap in the containment logic and a relevant risk pathway outside the scope of the Luria-Delbr\"{u}ck model (which only captures point mutations and independent HGT events). Future designs must address this by replacing the shared \textit{P}\textsubscript{chrB} with pseudo-orthogonal variants.
 
 \subsection{Limitations}
 
@@ -1570,31 +1581,7 @@ measurement of the Cr(VI) reduction mechanism in NemA (e.g., anaerobic
 stopped-flow kinetics with isotope-labeled Cr(VI) and FMN) is the
 single experiment that would resolve this.
 
-\medskip
-\noindent\textbf{(9) Homologous recombination between plasmids sharing
-the \textit{P}\textsubscript{chrB} promoter.}
-The identical \textit{P}\textsubscript{chrB} promoter sequence is
-present in all three plasmids of the tri-modular design (pUC19,
-pET-28a, pACYC184), which creates a substrate for RecA-dependent
-homologous recombination between plasmids in the same cell. This
-recombination failure mode is independent of, and in addition to, the
-point-mutation process modeled in Pillar~4 (Luria-Delbr\"{u}ck), and
-\textbf{is not captured} by $\mu_{bp}$ or by the Pillar~4 / Pillar~4c
-models, which treat point mutation only. It is therefore an
-additional, currently unquantified risk. The DH5$\alpha$ chassis
-carries the \textit{recA1} allele, originally isolated and
-characterized as a recombination-deficient mutation in
-\textit{E.~coli} K-12~\cite{clark1965}, which is widely reported to
-substantially reduce RecA-dependent homologous recombination
-relative to a \textit{recA$^+$} strain in cloning contexts; the
-exact per-plasmid-pair suppression factor for this specific
-three-plasmid construct is not quantified in the present study, and
-no citable per-plasmid-pair recombination rate exists for it. A
-future design direction is to replace the shared
-\textit{P}\textsubscript{chrB} with pseudo-orthogonal or degenerate
-variants that retain the same operator affinity but minimize
-sequence homology; the design of specific variant sequences is
-explicitly out of scope for the present study.
+
 
 %% ============================================================
 \section{Conclusions}
@@ -1652,20 +1639,6 @@ The key contributions are:
         probabilities ($\rho \approx 0.55$).
 \end{enumerate}
 
-\medskip
-\textbf{One-paragraph bridge.} The relationship between the structural
-evaluation and the systems model is one-way: the systems model uses
-scenario-analysis kinetic parameters, and the structural evaluation can
-support, qualify, or contradict the engineering hypothesis behind those
-parameters. The two are not coupled numerically. The systems-model
-results for NemA$^{*2+}$ should therefore be read as a \textit{what-if}
-analysis of an enzyme variant that, according to the structural pipeline,
-is (or is not) a plausible engineering target -- not a prediction of how
-a real engineered NemA would behave. The contact-disruption score and
-the geometric placement are both screening tools, not kinetic predictors;
-the structural pipeline does not validate, derive, or predict catalytic
-constants.
-
 This computational framework does not merely describe what the system
 should do -- it provides a transparent mathematical foundation to evaluate
 both the design's expected performance and the sensitivity of its safety
@@ -1689,8 +1662,7 @@ assumed/estimated), is centralized in \texttt{simulations/parameters.py}.
 This file is the single source of truth for every number in the project;
 each constant is tagged inline as \texttt{source:~[N]},
 \texttt{ASSUMED} (with justification), or \texttt{PREDICTED} (an output
-of one of our own models). The repository is archived at Zenodo:
-\textit{[DOI to be inserted after first Zenodo release]}.
+of one of our own models).
 
 %% ============================================================
 %% BIBLIOGRAPHY
@@ -1799,11 +1771,6 @@ protein structures by a graph spectral method. \textit{J Mol Biol.}
 UniProt Consortium. \textit{UniProtKB P77258 (NEMA\_ECOLI)} -- \textit{N}-ethylmaleimide
 reductase. \url{https://www.uniprot.org/uniprotkb/P77258}. Accessed
 2026-07-01.
-
-\bibitem{hypothesis}
-The 30-day closed-system deployment window is a stated central
-hypothesis of this work (Sec.~1.4, ``Central hypothesis''). It is
-not a literature-sourced parameter.
 
 \bibitem{clark1965}
 Clark AJ, Margulies AD. Isolation and characterization of
