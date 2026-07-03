@@ -109,7 +109,7 @@
 {\small\texttt{zubayerislost@gmail.com}}
 
 {\small
-GitHub: \url{https://github.com/zabdax/cr6-biocircuit-model}
+GitHub: \url{https://github.com/zabdax/STRATA}
 }
 \vspace{0.35em}
 }
@@ -1671,16 +1671,27 @@ experimental validation is explicitly out of scope for this manuscript.
 \section{Code and Data Availability}
 %% ============================================================
 
-All simulation code is contained in the public repository accompanying
-this manuscript. No experimental or wet-lab data were generated in this
-project -- all results are derived from the computational models in
-\texttt{simulations/}. The full set of numerical constants used by the
-models, with their provenance (literature-sourced vs.\
-assumed/estimated), is centralized in \texttt{simulations/parameters.py}.
-This file is the single source of truth for every number in the project;
-each constant is tagged inline as \texttt{source:~[N]},
-\texttt{ASSUMED} (with justification), or \texttt{PREDICTED} (an output
-of one of our own models).
+All source code, simulation scripts, structural-analysis pipeline,
+generated figures, and supporting materials associated with this study
+are publicly available in the STRATA GitHub repository:
+
+\begin{center}
+\url{https://github.com/zabdax/STRATA}
+\end{center}
+
+No experimental or wet-lab data were generated in this study. All
+results reported in this manuscript are derived from the computational
+models contained in the \texttt{simulations/} directory.
+
+The complete set of numerical constants used throughout the models,
+together with their provenance (literature-sourced, assumed, or
+model-predicted), is centralized in
+\texttt{simulations/parameters.py}. This file serves as the project's
+single source of truth, where every parameter is explicitly annotated as
+\texttt{source:[N]}, \texttt{ASSUMED}, or \texttt{PREDICTED}.
+
+The repository contains all code required to reproduce the numerical
+results and figures presented in this manuscript.
 
 
 %% ============================================================
