@@ -40,6 +40,7 @@
 
 %% ---- References & Hyperlinks ---------------------------------
 \usepackage{cite}
+\usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,
             linkcolor=blue!70!black,
             citecolor=blue!70!black,
@@ -157,7 +158,7 @@
     Bangladesh tannery pollution
   \end{center}
   \vspace{1em}
-]
+
 
 %% ============================================================
 \section{Introduction}
@@ -617,11 +618,13 @@ The right-hand side is given by the following coupled ODEs.
 \noindent\textbf{Cell population dynamics}
 (logistic growth + lysis):
 \begin{equation}
-  \frac{d[\text{Cells}]}{dt}
-  = \mu_{max} \cdot [\text{Cells}]
-    \cdot \!\left(1 - \frac{[\text{Cells}]}{K_{carry}}\right)
-  - k_{lysis} \cdot [\text{Cells}]
-    \cdot \mathbb{1}_{[\text{Holin}] > \theta_{lysis}}
+\begin{aligned}
+\frac{d[\text{Cells}]}{dt}
+&= \mu_{max} \cdot [\text{Cells}]
+\cdot \left(1 - \frac{[\text{Cells}]}{K_{carry}}\right) \\
+&\quad - k_{lysis} \cdot [\text{Cells}]
+\cdot \mathbb{1}_{[\text{Holin}] > \theta_{lysis}}
+\end{aligned}
 \end{equation}
 
 \medskip
