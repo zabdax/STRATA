@@ -12,7 +12,8 @@
 [![Status: Computational](https://img.shields.io/badge/status-computational%20only-orange?style=for-the-badge)](#important-caveat)
 [![Code: documented](https://img.shields.io/badge/code-documented-brightgreen?style=for-the-badge)](#code-and-data-availability)
 [![Repo: GitHub](https://img.shields.io/badge/repo-zabdax%2FSTRATA-181717?style=for-the-badge&logo=github)](https://github.com/zabdax/STRATA)
-[![DOI](https://zenodo.org/badge/1286220707.svg)](https://doi.org/10.5281/zenodo.21168207)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21168208.svg)](https://doi.org/10.5281/zenodo.21168208)
+
 
 </div>
 
